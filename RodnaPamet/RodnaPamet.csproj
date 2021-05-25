@@ -1,0 +1,92 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AppShell.xaml.cs" />
+    <Compile Remove="Views\CameraView.cs" />
+    <Compile Remove="Views\NewItemPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="AppShell.xaml" />
+    <EmbeddedResource Remove="Views\NewItemPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
+    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xam.Plugin.TabView" Version="1.1.1" />
+    <PackageReference Include="Xamarin.Controls.TabView" Version="1.0.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\AdvisorStoryPage.xaml.cs">
+      <DependentUpon>AdvisorStoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AdvisorValuesPage.xaml.cs">
+      <DependentUpon>AdvisorValuesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AdvisorPage.xaml.cs">
+      <DependentUpon>AdvisorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CameraChooserPage.xaml.cs">
+      <DependentUpon>CameraChooserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TermsPage.xaml.cs">
+      <DependentUpon>TermsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BeliefsPage.xaml.cs">
+      <DependentUpon>BeliefsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemPreviewPage.xaml.cs">
+      <DependentUpon>ItemPreviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RecordingsPage.xaml.cs">
+      <DependentUpon>RecordingsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mesta.json" />
+    <EmbeddedResource Include="Oblasti.json" />
+    <EmbeddedResource Include="Obstini.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\CameraChooser - Copy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CameraChooserPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CameraPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\RecorderPage - Copy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\RecordingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\VillagePicker.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Mesta.json" />
+    <None Remove="Oblasti.json" />
+    <None Remove="Obstini.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

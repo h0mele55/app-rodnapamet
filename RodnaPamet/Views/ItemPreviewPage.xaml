@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:RodnaPamet.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
+             xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer" xmlns:rp="clr-namespace:RodnaPamet"
+             x:Class="RodnaPamet.Views.ItemPreviewPage"
+             BackgroundImageSource="background.jpg"
+             Title="{Binding Subject}">
+    <ContentPage.Resources>
+        <views:FilenameConverter x:Key="FilenameConverter"/>
+        <views:BinaryInvertConverter x:Key="BinaryInvertConverter"/>
+        <views:VisibilityConverter x:Key="VisibilityConverter"/>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <StackLayout 
+            x:Name="ContentStack"
+            Spacing="10" 
+            Padding="15">
+        <videoplayer:VideoPlayer
+            DisplayControls="True"
+            AutoPlay="True"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Fill"
+            FillMode="ResizeAspectFill"
+            BackgroundColor="Black"
+            Source="{Binding Filename}"></videoplayer:VideoPlayer>
+            <Label Text="{Binding Description}" 
+                                LineBreakMode="NoWrap"
+                                StyleClass="ListDescription">
+                <Label.Effects>
+                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                </Label.Effects>
+            </Label>
+            <Label Text="{Binding TypeDescription}" 
+                                LineBreakMode="NoWrap"
+                                StyleClass="ListDescription">
+                <Label.Effects>
+                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                </Label.Effects>
+            </Label>
+            <StackLayout
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Vertical"
+                            Spacing="0">
+                <Label Text="{Binding Subject}" 
+                   StyleClass="ListSubject"
+                                   HorizontalOptions="FillAndExpand"
+                                LineBreakMode="NoWrap" 
+                                FontSize="16">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                    <Label 
+                                LineBreakMode="NoWrap"
+                                StyleClass="ListOperator"
+                                FontSize="Small">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="Оператор: " TextColor="Gray"></Span>
+                            <Span Text="{Binding CameraMan}"></Span>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+
+        <StackLayout
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Vertical"
+                            Spacing="0">
+            <Label Text="{Binding Created}" 
+                                HorizontalOptions="FillAndExpand"
+                                LineBreakMode="NoWrap" 
+                                StyleClass="ListCreated" 
+                                FontSize="Small" />
+            <Label Text="{Binding Village}" 
+                                HorizontalOptions="End"
+                                LineBreakMode="NoWrap" 
+                                StyleClass="ListVillage" 
+                                FontSize="Small" />
+        </StackLayout>
+        <StackLayout
+                            IsVisible="{Binding Uploading, Converter={StaticResource BinaryInvertConverter}}"
+                            Spacing="0">
+            <Label
+                                IsVisible="{Binding Uploaded}"
+                StyleClass="ListStatus"
+                                Text="Записът е успешно изпратен на Родна памет!" 
+                            ></Label>
+            <Label
+                                IsVisible="{Binding Uploaded, Converter={StaticResource BinaryInvertConverter}}"
+                StyleClass="ListStatus"
+                                Text="Записът не е изпратен на Родна памет! Когато имате наличен достъп до internet, приложението ще изпрати само записа."
+                            ></Label>
+        </StackLayout>
+        <Label
+                            IsVisible="{Binding Uploading}"
+            StyleClass="ListStatus"
+                            Text="Записът се изпраща на Родна памет!" 
+                            ></Label>
+    </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Прегледъ">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                <ImageButton
+                    Clicked="Back_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

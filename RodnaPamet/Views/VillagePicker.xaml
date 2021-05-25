@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:behaviors="clr-namespace:RodnaPamet" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="RodnaPamet.Views.VillagePicker">
+  <ContentView.Content>
+        <Frame
+            BackgroundColor="{StaticResource HoverBackground}"
+            CornerRadius="0"
+            HasShadow="True"
+            Margin="0">
+          <StackLayout>
+                <Label
+                    Style="{StaticResource PageInnerSubTitle}"
+                    Text="Избор на населено място."></Label>
+                <Label
+                    Text="Започнете да въвеждате името на Вашето населено място. Изберете от списъка за да потвърдите."></Label>
+                <Entry
+                    Text="{Binding SearchText, Mode=TwoWay}"
+                  x:Name="SearchField">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior 
+                                        EventName="TextChanged"
+                                        Command="{Binding TextChangedCommand}" />
+                    </Entry.Behaviors>
+                </Entry>
+                <ListView
+                    ItemsSource="{Binding ShownVillages}"
+                    BackgroundColor="{StaticResource HoverBackground}"
+                    SeparatorVisibility="None"
+                    x:Name="SearchList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell 
+                                ios:Cell.DefaultBackgroundColor="{StaticResource HoverBackground}"
+                                Tapped="ViewCell_Tapped">
+                                <StackLayout
+                                    Spacing="0"
+                                    Padding="0, 0, 0, 10">
+                                <Label
+                                    Padding="0"
+                                    Margin="0"
+                                    StyleClass="VillageListTitle">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="{Binding Type}"></Span>
+                                                    <Span Text=" "></Span>
+                                                    <Span Text="{Binding Name}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Padding="0"
+                                    Margin="0"
+                                    StyleClass="VillageListDetails">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="Област "></Span>
+                                                    <Span Text="{Binding Oblast}"></Span>
+                                                    <Span Text=", община "></Span>
+                                                    <Span Text="{Binding Obstina}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                </Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+              </ListView>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:rp="clr-namespace:RodnaPamet"
+             x:Class="RodnaPamet.Views.ItemDetailPage"
+             BackgroundImageSource="background.jpg"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+    <ScrollView
+        AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+        AbsoluteLayout.LayoutFlags="All">
+            <ScrollView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+            </ScrollView.GestureRecognizers>
+        <StackLayout 
+            x:Name="ContentStack"
+            Spacing="0" 
+            Padding="0">
+                <StackLayout Spacing="0" Padding="15">
+                    <Label 
+                Text="Вие успешно завършихтѣ записа."
+                HorizontalOptions="Start"
+                HorizontalTextAlignment="Start"
+                Style="{StaticResource PageInnerSubTitle}"
+                VerticalTextAlignment="End"
+                Margin="0, 0, 10, 10" />
+                    <Label 
+                        Text="Отговорилъ на въпроситѣ:" 
+                        StyleClass="EntryLabel"
+                        Margin="10, 0, 10, 0" />
+                    <Entry Text="{Binding Subject}" FontSize="Medium" Focused="TapGestureRecognizer_Tapped">
+                    </Entry>
+                    <Label 
+                        Text="Възрасть:" 
+                        StyleClass="EntryLabel"
+                        Margin="10, 0, 10, 0" />
+                    <Entry Text="{Binding Age}" FontSize="Medium" Keyboard="Numeric" Focused="TapGestureRecognizer_Tapped">
+                    </Entry>
+                    <Label 
+                        Text="Описание:" 
+                        StyleClass="EntryLabel"
+                        Margin="10, 0, 10, 0" />
+                    <Entry Text="{Binding Description}" FontSize="Medium" Focused="TapGestureRecognizer_Tapped">
+                    </Entry>
+                    <Label 
+                        Text="Вид:" 
+                        IsVisible="{Binding IsStory}"
+                        StyleClass="EntryLabel"
+                        Margin="10, 0, 10, 0" />
+                    <Picker 
+                        SelectedItem="{Binding TypeDescription}"
+                        IsVisible="{Binding IsStory}"
+                        FontSize="Medium">
+                        <Picker.Items>
+                            <x:String>История на рода</x:String>
+                            <x:String>Предание</x:String>
+                            <x:String>Местен празник или обичай</x:String>
+                            <x:String>Пътеводител на красиви местности</x:String>
+                            <x:String>Любим спомен от детството</x:String>
+                            <x:String>Любим спомен от живота</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label 
+                        Text="Населено мѣсто:" 
+                        Margin="10, 0, 10, 0"
+                        StyleClass="EntryLabel" />
+                    <Entry Text="{Binding Village}" x:Name="VillageField"  FontSize="Medium" Focused="TapGestureRecognizer_Tapped_1">
+                    </Entry>
+                    <Label 
+                        Text="Операторъ:" 
+                        Margin="10, 0, 10, 0"
+                        StyleClass="EntryLabel" />
+                    <Entry Text="{Binding CameraMan}" FontSize="Medium" Focused="TapGestureRecognizer_Tapped">
+                    </Entry>
+                </StackLayout>
+                <Grid
+                    Margin="0, 10, 0, 15"
+                        VerticalOptions="FillAndExpand">
+                    <Image Source="redbuttonback.png"></Image>
+                    <Button StyleClass="BigButton" Text="Запись" Command="{Binding SaveCommand}"/>
+                </Grid>
+            </StackLayout>
+    </ScrollView>
+        <views:VillagePicker
+            x:Name="VillageSelect"
+            IsVisible="False"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"></views:VillagePicker>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Новъ записъ">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

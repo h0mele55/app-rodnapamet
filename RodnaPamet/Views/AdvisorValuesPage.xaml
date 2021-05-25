@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RodnaPamet.Views.AdvisorValuesPage"
+             xmlns:vm="clr-namespace:RodnaPamet.ViewModels" xmlns:rp="clr-namespace:RodnaPamet"
+             BackgroundImageSource="background.jpg"
+             Title="Ценности">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <ScrollView
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+        <StackLayout 
+            x:Name="ContentStack"
+            Padding="0,24,0,24" 
+            Spacing="10">
+            <Label StyleClass="Text" Text="Довършетѣ изречението:"/>
+            <Label StyleClass="Text" Text="1. Тайната за здравото семейство е в…"/>
+
+            <Label StyleClass="Text" Text="2. Тайната за истинската любовь е в…"/>
+
+            <Label StyleClass="Text" Text="3. Тайната за силното приятелство е в…"/>
+
+            <Label StyleClass="Text" Text="4. Тайната за личното щастие е в…"/>
+
+            <Label StyleClass="Text" Text="5. Тайната за народното обѣдинение е в…"/>
+
+            <Label StyleClass="Text" Text="6. Тайната за успеха въ работата е в…"/>
+
+            <Label StyleClass="Text" Text="7. Тайната за дългия животъ е в…"/>
+
+            <Label StyleClass="Text" Text="8. Любима билка…"/>
+
+            <Label StyleClass="Text" Text="9. Любима мисъль/поговорка…"/>
+
+            <Label StyleClass="Text" Text="10. Любимо Българско стихотворение…"/>
+
+            <Label StyleClass="Text" Text="11. Запей любимата си Българска песен…"/>
+
+            <Label StyleClass="Text" Text="12. Единъ съвѣтъ къмъ младото поколѣние…"/>
+
+            <Label StyleClass="Text" Text="13. Какъ искашъ да бѫдешъ запоменъ?"/>
+<!--
+                <Grid>
+                    <Image Source="redbuttonback.png" Opacity="0.8"></Image>
+                    <Button Text="Запись" StyleClass="BigButton"
+                                Command="{Binding OpenWebCommand}" />
+                </Grid>
+-->
+        </StackLayout>
+    </ScrollView>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Ценности">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                <ImageButton
+                    Clicked="Back_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

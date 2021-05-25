@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RodnaPamet.Views.AboutPage"
+             xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
+             xmlns:rp="clr-namespace:RodnaPamet"
+             BackgroundImageSource="background.jpg"
+             Title="{Binding Title}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+<!--
+        <ScrollView
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+        -->
+            <StackLayout 
+                x:Name="ContentStack"
+                Margin="0" 
+                Spacing="0" 
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                AbsoluteLayout.LayoutFlags="All">
+                <StackLayout
+                    Padding="30,24,30,24"
+                    Spacing="10"
+                    VerticalOptions="Start">
+                    <Label IsVisible="false" StyleClass="SmallTitleText" Text="Наследство от мъдри слова!"/>
+                    <Label IsVisible="false" StyleClass="SubTitleText" Text="Съхрани го като следваш стъпките за улеснение."/>
+                    <Label IsVisible="false" StyleClass="StrongText" Text="За да направите нов запис"/>
+                </StackLayout>
+                <Grid
+                    VerticalOptions="FillAndExpand">
+                    <Image Source="redbuttonback.png" Opacity="0.8"></Image>
+                    <Label
+                        Text="Запись"
+                        StyleClass="BigButton">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenWebCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                </Grid>
+                <Label
+                    IsVisible="false"
+                    Margin="0,20,0,0"
+                    StyleClass="Text"
+                    VerticalOptions="FillAndExpand"
+                    Text="За да почерпите мъдрост"/>
+                <Grid
+                    VerticalOptions="FillAndExpand">
+                    <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
+                    <Label
+                        Text="Архивъ"
+                        StyleClass="Button">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenRecordsCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                </Grid>
+                <Label
+                    IsVisible="false"
+                    Margin="0,20,0,0"
+                    StyleClass="Text"
+                    Text="За да разберете смисъла"
+                    VerticalOptions="FillAndExpand"/>
+                <Grid>
+                    <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
+                    <Label
+                        Text="Верую"
+                        StyleClass="Button">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenBeliefsCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                </Grid>
+                <Label
+                    IsVisible="false"
+                    Margin="0,20,0,0"
+                    StyleClass="Text"
+                    Text="За да получите просветление"
+                    VerticalOptions="FillAndExpand"/>
+                <Grid
+                    VerticalOptions="FillAndExpand">
+                    <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
+                    <Label
+                        Text="Съветник"
+                        StyleClass="Button">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAdvisorCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                </Grid>
+            </StackLayout>
+    <!--    
+    </ScrollView>
+        -->
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Родна паметъ">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        StyleClass="Selected"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+
+</ContentPage>

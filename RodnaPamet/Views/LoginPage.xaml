@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:rp="clr-namespace:RodnaPamet" xmlns:views="clr-namespace:RodnaPamet.Views"
+             mc:Ignorable="d"
+             BackgroundImageSource="background.jpg"
+             x:Class="RodnaPamet.Views.LoginPage">
+
+    <ContentPage.Resources>
+        <views:BinaryInvertConverter x:Key="BinaryInvertConverter"/>
+        <views:VisibilityConverter x:Key="VisibilityConverter"/>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <StackLayout
+            x:Name="ContentStack"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+            <ScrollView 
+                VerticalOptions="FillAndExpand"
+                Padding="0, 45, 0, 20">
+                <StackLayout 
+                VerticalOptions="StartAndExpand"
+                Spacing="0" 
+                Padding="0">
+                <StackLayout Spacing="0" Padding="15">
+                    <Label 
+                Text="Вход"
+                HorizontalOptions="Start"
+                HorizontalTextAlignment="Start"
+                Style="{StaticResource PageInnerSubTitle}"
+                VerticalTextAlignment="End"
+                Margin="0, 0, 10, 10" >
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                        <StackLayout
+                            Spacing="0"
+                            Padding="0"
+                            IsVisible="{Binding ShowPassword, Converter={StaticResource BinaryInvertConverter}}">
+                    <Label 
+                        Text="e-mail" 
+                        StyleClass="EntryLabel"
+                        Margin="10, 0, 10, 0" />
+                    <Entry 
+                        Text="{Binding EMail}" 
+                        FontSize="Medium"
+                        Keyboard="Email">
+                    </Entry>
+                        </StackLayout>
+                        <Label 
+                        Text="Тайна дума" 
+                        StyleClass="EntryLabel"
+                        IsVisible="{Binding ShowPassword}"
+                        Margin="10, 0, 10, 0" />
+                    <Entry 
+                        Text="{Binding Password}" 
+                        FontSize="Medium" 
+                        IsVisible="{Binding ShowPassword}"
+                        IsPassword="True">
+                    </Entry>
+
+                    </StackLayout>
+                    <Grid
+                        IsVisible="{Binding ShowPassword}"
+                        Margin="0, 10, 0, 15"
+                            VerticalOptions="FillAndExpand">
+                        <Image Source="redbuttonback.png"></Image>
+                        <Button VerticalOptions="Center" Text="Напредъ" Command="{Binding LoginCommand}"/>
+                    </Grid>
+                    
+                    <StackLayout
+                        IsVisible="{Binding ShowRegister}">
+                        <Label
+                        Margin="10"
+                        StyleClass="TermsAndConditions"
+                        Text="Изпратихме писмо за проверка на e-mail адреса. Използвайте копчето отдолу, за да продължите."></Label>
+                        <Grid
+                            Margin="0, 10, 0, 15"
+                            VerticalOptions="FillAndExpand">
+                            <Image Source="greenbuttonback.png"></Image>
+                            <Button VerticalOptions="Center" Text="Напредъ" Command="{Binding EMailConfirmCommand}"/>
+                        </Grid>
+                    </StackLayout>
+                    
+                    <Label
+                        Margin="10"
+                        StyleClass="TermsAndConditions"
+                        IsVisible="{Binding ShowPassword, Converter={StaticResource BinaryInvertConverter}}"
+                        Text="Натиснете тук, за да отворите Правила за използване на приложението Родна паметъ"></Label>
+                    
+                    <StackLayout
+                        IsVisible="{Binding ShowPassword, Converter={StaticResource BinaryInvertConverter}}"
+                        Orientation="Horizontal">
+                        <Switch
+                            OnColor="{StaticResource Secondary}"
+                            Toggled="Switch_Toggled"></Switch>
+                        <Label
+                            StyleClass="Text"
+                            HorizontalTextAlignment="Start"
+                            Text="Съгласявам се с правилата за употреба"></Label>
+                    </StackLayout>
+                    
+                    <Grid
+                        IsVisible="{Binding ShowPassword, Converter={StaticResource BinaryInvertConverter}}"
+                        Margin="0, 10, 0, 15"
+                            VerticalOptions="FillAndExpand">
+                        <Image Source="redbuttonback.png"></Image>
+                        <Button VerticalOptions="Center" Text="Напредъ" Command="{Binding RegisterCommand}"/>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        
+        <StackLayout
+            IsVisible="{Binding IsBusy}"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+            <Grid
+                Margin="0"
+                VerticalOptions="FillAndExpand">
+                <Frame
+                    BackgroundColor="{StaticResource LoaderBackground}"></Frame>
+                <Image
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    MeasureInvalidated="Image_MeasureInvalidated"
+                    Aspect="AspectFit"
+                    WidthRequest="200"
+                    Scale="{Binding BusyScale}"
+                    Opacity="{Binding BusyOpacity}"
+                    Source="shevica.png"></Image>
+            </Grid>
+        </StackLayout>
+
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Родна паметъ">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <Image
+                Aspect="AspectFill"
+                TranslationY="0.1"
+                Source="bottombackfix.png"
+                AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"></Image>
+    </AbsoluteLayout>
+</ContentPage>

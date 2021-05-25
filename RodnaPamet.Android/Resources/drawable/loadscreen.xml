@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:drawable="@drawable/splash3"
+  android:gravity="fill">
+      <bitmap
+          android:id="@+id/background_layout"
+          android:gravity="start"
+          android:scaleGravity=""
+          android:antialias="true"
+          android:src="@drawable/home"
+          android:tileMode="disabled" />
+    </item>
+</layer-list>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="MainTheme" parent="MainTheme.Base">
+    <!-- As of Xamarin.Forms 4.6 the theme has moved into the Forms binary -->
+    <!-- If you want to override anything you can do that here. -->
+    <!-- Underneath are a couple of entries to get you started. -->
+
+    <!-- Set theme colors from https://aka.ms/material-colors -->
+    <!-- colorPrimary is used for the default action bar background -->
+    <!--<item name="colorPrimary">#2196F3</item>-->
+    <!-- colorPrimaryDark is used for the status bar -->
+    <!-- item name="colorPrimaryDark">@android:color/transparent</item-->
+    <!-- colorAccent is used as the default value for colorControlActivated
+         which is used to tint widgets -->
+    <!--<item name="colorAccent">#FF4081</item>-->
+
+    <!-- 
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="windowActionModeOverlay">true</item>
+    -->
+    
+    <item name="android:colorPrimary">@color/colorPrimary</item>
+    <item name="android:colorPrimaryDark">@color/launcher_background</item>
+    <item name="android:colorAccent">@color/colorAccent</item>
+    <item name="android:statusBarColor">@color/launcher_background</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    <item name="android:windowTranslucentStatus">true</item>
+
+    <!--item name="android:actionBarStyle">@style/ThemeActionBar</item-->
+  </style>
+  <style name="Theme.Loader" parent="MainTheme">
+    <!-- <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    -->
+    <item name="android:windowBackground">@drawable/loadscreen</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="android:windowTranslucentStatus">true</item>
+  </style>
+  <style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
+    <item name="android:background"> @null </item>
+    <!-- Support library compatibility -->
+    <item name="background">@null</item>
+    <item name="android:displayOptions"> showHome | useLogo</item>
+    <item name="displayOptions">showHome|useLogo</item>
+  </style>
+</resources>

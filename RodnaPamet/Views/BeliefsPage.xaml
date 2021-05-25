@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RodnaPamet.Views.BeliefsPage"
+             xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
+             xmlns:rp="clr-namespace:RodnaPamet"
+             BackgroundImageSource="background.jpg"
+             Title="Родна паметъ">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <ScrollView
+            x:Name="ContentStack"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+            <StackLayout
+                Padding="30,24,30,24"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <Label Text="Вѣрую" Style="{StaticResource PageInnerTitle}">
+                    <Label.Effects>
+				        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			        </Label.Effects>
+                </Label>
+
+                <Label
+                    IsVisible="False"
+                    Style="{StaticResource PageInnerSubTitle}" 
+                    Text="РоднаПаметь.бг">
+                    <Label.Effects>
+				        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			        </Label.Effects>
+                </Label>
+
+                <Label
+                    StyleClass="Text"
+                    HorizontalTextAlignment="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="и"></Span>
+                                <Span Text="ма за цѣль да обѣдини и запази за бѫдещитѣ поколения на България:"></Span>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="1"
+                        TextColor="{StaticResource Primary}"
+                        FontSize="51"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalTextAlignment="Start"
+                        VerticalOptions="Start">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                                <On Platform="iOS" Value="Ponomar Unicode TT" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="Основни ценности на Българитѣ надъ 70 годишна вѫзрасть (минимумъ единъ човѣкъ отъ едно населено мѣсто)."
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalOptions="CenterAndExpand"></Label>
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="2"
+                        TextColor="{StaticResource Primary}"
+                        FontSize="51"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalTextAlignment="Start"
+                        VerticalOptions="CenterAndExpand">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                                <On Platform="iOS" Value="Ponomar Unicode TT" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="Истории и легенди отъ/за малкитѣ населени места въ България."
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalOptions="CenterAndExpand"></Label>
+
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="3"
+                        TextColor="{StaticResource Primary}"
+                        FontSize="51"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalTextAlignment="Start"
+                        VerticalOptions="CenterAndExpand">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                                <On Platform="iOS" Value="Ponomar Unicode TT" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                        <Label.Effects>
+				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			            </Label.Effects>
+                    </Label>
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="История на родове, водещи началото си отъ малки населени места въ България."
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalOptions="CenterAndExpand"></Label>
+                </Grid>
+
+
+
+            <Label StyleClass="Text" Text="1. Родна Паметь"/>
+            <Label StyleClass="Text" Text="РоднаПаметъ.бг отправя послание до всѣки единъ житель на България съ живи и здрави роднини надъ 70 годишна вѫзрасть, живѣещи/родени въ малко населено мѣсто:"/>
+            <Label StyleClass="Text" Text="Първа опция:"/>
+            <Label StyleClass="Text" Text="Запишетѣ видео (по вѫзможность срѣдъ природата, въ красива местность отъ селото), съ дължина от около 5 минути, въ което задаватѣ слѣднитѣ въпроси:"/>
+
+            <Label StyleClass="Text" Text="Втора опция:"/>
+
+            <Label StyleClass="Text" Text="Запишетѣ видео съ дължина отъ 1-5 минъ. на тема история/легенда отъ/на селото."/>
+
+            <Label StyleClass="Text" Text="2. Родова паметь"/>
+
+            <Label StyleClass="Text" Text="Освѣнъ роднитѣ ценности, платформата дава вѫзможность на Българитѣ да запазятъ за бѫдещитѣ поколения и родословието си. Подкрепетѣ каузата като порѫчатѣ знаме, съ напечатано родословното Ви дърво. Допълнително, всѣки отъ Васъ има вѫзможность да създаде за рода си семѣенъ гербъ, който да бѫде извезанъ върху родословното Ви знаме."/>
+
+            <Label StyleClass="Text" Text="3. Исторически правописъ"/>
+
+            <Label StyleClass="Text" Text="РоднаПаметь.бгъ подкрепя инициативата за опазването на историческия правописъ. Колкото по-често се връщатѣ тукъ за да почететѣ прѣдцитѣ си, толкова повече ще свикнетѣ и съ типично Българскитѣ букви ѣ и ѫ :)."/>
+
+            <Label StyleClass="Text" Text="Приятно пѫтуване въ врѣмето на  прѣдцитѣ!"/>
+
+
+            <!--Label
+                IsVisible="False"
+                FontSize="16" 
+                Padding="0,24,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="RodnaPametLink_Tapped"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="Научете повече на "/>
+                            <Span Text="https://rodnapamet.bg/">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="Android" Value="courier" />
+                                        <On Platform="iOS" Value="courier" />
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </-->
+        </StackLayout>
+    </ScrollView>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Родна паметъ">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                <ImageButton
+                    Clicked="Back_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

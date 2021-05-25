@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RodnaPamet.ViewModels"
+             xmlns:model="clr-namespace:RodnaPamet.Models"
+             xmlns:cameraView="clr-namespace:RodnaPamet.Views"
+             xmlns:rp="clr-namespace:RodnaPamet"
+             Title="{Binding Title}"
+             BackgroundImageSource="background.jpg"
+             x:Class="RodnaPamet.Views.RecordingsPage">
+
+    <ContentPage.Resources>
+        <cameraView:BinaryInvertConverter x:Key="BinaryInvertConverter"/>
+        <cameraView:VisibilityConverter x:Key="VisibilityConverter"/>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <ScrollView
+            x:Name="ContentStack"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+            <StackLayout
+            x:DataType="local:ItemsViewModel"
+            Spacing="0"
+            Padding="0, 0, 0, 10">
+                <StackLayout
+                    x:Name="ItemsListView"
+                    Spacing="0"
+                    BackgroundColor="Transparent"
+                    BindableLayout.ItemsSource="{Binding Items}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView
+                            BackgroundColor="Transparent">
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
+                                        BackgroundColor="{StaticResource Secondary}"
+                                        StyleClass="DeleteButton"
+                                        Invoked="SwipeItem_Invoked" />
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <Grid
+                                    x:DataType="model:Item"
+                                    BackgroundColor="Transparent">
+                                    <Frame
+                                        HasShadow="False"
+                                        BackgroundColor="{StaticResource HoverBackground}"
+                                        Opacity="{StaticResource HoverOpacity}"></Frame>
+                                    <StackLayout 
+                                Margin="5"
+                                Padding="5"
+                                        Spacing="0"
+                                        BackgroundColor="Transparent"
+                                HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Description}" 
+                                    LineBreakMode="NoWrap"
+                                               StyleClass="ListDescription">
+                                            <Label.Effects>
+                                                <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                                            </Label.Effects>
+                                        </Label>
+                                        <Label Text="от" 
+                                    LineBreakMode="NoWrap" />
+                                        <StackLayout
+                                    HorizontalOptions="FillAndExpand"
+                                    Orientation="Horizontal"
+                                    IsVisible="{Binding InfoComplete}"
+                                    Spacing="0">
+                                            <Label Text="{Binding Subject}" 
+                                        HorizontalOptions="FillAndExpand"
+                                                   VerticalOptions="Start"
+                                        StyleClass="ListSubject"
+                                        LineBreakMode="NoWrap">
+                                                <Label.Effects>
+                                                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                                                </Label.Effects>
+                                            </Label>
+                                            <Label 
+                                        LineBreakMode="NoWrap"
+                                                   VerticalOptions="End"
+                                                StyleClass="ListOperator"
+                                        FontSize="Small">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <FormattedString.Spans>
+                                                            <Span Text="Оператор: " TextColor="Gray"></Span>
+                                                            <Span Text="{Binding Cameraman}"></Span>
+                                                        </FormattedString.Spans>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+
+                                        <StackLayout
+                                HorizontalOptions="FillAndExpand"
+                                Orientation="Horizontal"
+                                Spacing="0">
+                                            <Label Text="{Binding Created}" 
+                                    HorizontalOptions="FillAndExpand"
+                                    LineBreakMode="NoWrap" 
+                                    StyleClass="ListCreated" 
+                                    FontSize="Small" />
+                                            <Label Text="{Binding Village}" 
+                                    HorizontalOptions="End"
+                                    LineBreakMode="NoWrap" 
+                                    StyleClass="ListVillage" 
+                                    FontSize="Small" />
+                                        </StackLayout>
+                                        <StackLayout
+                                IsVisible="{Binding Uploading, Converter={StaticResource BinaryInvertConverter}}"
+                                Spacing="0">
+                                            <StackLayout
+                                        IsVisible="{Binding InfoComplete}">
+                                                <Label
+                                                    StyleClass="ListStatus"
+                                            IsVisible="{Binding Uploaded}"
+                                            Text="Записът е успешно изпратен на Родна памет!"></Label>
+                                                <Label
+                                                    StyleClass="ListStatus"
+                                            IsVisible="{Binding Uploaded, Converter={StaticResource BinaryInvertConverter}}"
+                                            Text="Записът не е изпратен на Родна памет! Когато имате наличен достъп до internet, приложението ще изпрати само записа."></Label>
+                                            </StackLayout>
+                                            <Label
+                                                    StyleClass="ListStatus"
+                                        IsVisible="{Binding InfoComplete, Converter={StaticResource BinaryInvertConverter}}"
+                                        Text="Не сте попълнили подробности за записа! Натиснете тук..."></Label>
+                                        </StackLayout>
+                                        <Label
+                                                    StyleClass="ListStatus"
+                                IsVisible="{Binding Uploading}"
+                                Text="Записът се изпраща на Родна памет!" 
+                                ></Label>
+                                    </StackLayout>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                    CommandParameter="{Binding }">
+                                        </TapGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <Grid
+                    x:Name="NoRecordsLabel"
+                    BackgroundColor="Transparent">
+                    <Frame
+                        HasShadow="False"
+                    BackgroundColor="{StaticResource HoverBackground}"
+                    Opacity="{StaticResource HoverOpacity}"></Frame>
+                    <StackLayout
+                        Margin="10, 20, 10, 0">
+                        <Label
+                            StyleClass="WarningMessageTitle"
+                            Text="Нямате направени записи"></Label>
+                    </StackLayout>
+                </Grid>
+
+                <Image
+                Aspect="AspectFill"
+                Source="whitetop.png"></Image>
+            </StackLayout>
+        </ScrollView>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="{Binding Title}">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

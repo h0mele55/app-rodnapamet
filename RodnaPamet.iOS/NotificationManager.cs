@@ -1,0 +1,120 @@
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Foundation;
+using UserNotifications;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using static RodnaPamet.App;
+
+[assembly: Dependency(typeof(RodnaPamet.iOS.iOSNotificationManager))]
+namespace RodnaPamet.iOS
+{
+    public class iOSNotificationManager : INotificationManager
+    {
+        int messageId = 102;
+        bool hasNotificationsPermission;
+        public event EventHandler NotificationReceived;
+
+        private string lastTitle = "";
+        private string lastContent = "";
+        private DateTime? sendWhen;
+        private bool? isProgress = false;
+
+        public void Initialize()
+        {
+            // request the permission to use local notifications
+            UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (approved, err) =>
+            {
+                hasNotificationsPermission = approved;
+            });
+        }
+
+        public void SendNotification(string title, string message, DateTime? notifyTime = null, bool? hasProgress = false, float? progress = 0)
+        {
+            // EARLY OUT: app doesn't have permissions
+            if (!hasNotificationsPermission)
+            {
+                return;
+            }
+
+            //messageId++;
+            // Create category
+            var categoryID = "myNotificationCategory";
+            var actions = new UNNotificationAction[] {  };
+            var intentIDs = new string[] { };
+            //var categoryOptions = new UNNotificationCategoryOptions[] { };
+            var category = UNNotificationCategory.FromIdentifier(categoryID, actions, intentIDs, UNNotificationCategoryOptions.None);
+
+            // Register category
+            var categories = new UNNotificationCategory[] { category };
+            //UNUserNotificationCenter.Current.SetNotificationCategories(new NSSet<UNNotificationCategory>(categories));
+
+
+            var content = new UNMutableNotificationContent()
+            {
+                Title = title,
+                Subtitle = "",
+                Body = message,
+                Badge = 1,
+                //CategoryIdentifier = "myNotificationCategory",
+                UserInfo = new NSDictionary(new NSString("Progress"), new NSNumber((float) progress))
+            };
+            lastTitle = title;
+            lastContent = message;
+            sendWhen = notifyTime;
+            isProgress = hasProgress;
+
+            UNNotificationTrigger trigger;
+            if (notifyTime != null)
+            {
+                // Create a calendar-based trigger.
+                trigger = UNCalendarNotificationTrigger.CreateTrigger(GetNSDateComponents(notifyTime.Value), false);
+            }
+            else
+            {
+                // Create a time-based trigger, interval is in seconds and must be greater than 0.
+                trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(0.25, false);
+            }
+
+            var request = UNNotificationRequest.FromIdentifier("notification.rodna", content, trigger);
+            UNUserNotificationCenter.Current.AddNotificationRequest(request, (err) =>
+            {
+                if (err != null)
+                {
+                    throw new Exception($"Failed to schedule notification: {err}");
+                }
+            });
+        }
+
+        public void ReceiveNotification(string title, string message)
+        {
+            var args = new NotificationEventArgs()
+            {
+                Title = title,
+                Message = message
+            };
+            NotificationReceived?.Invoke(null, args);
+        }
+
+        public void UpdateNotification(long max, long progress)
+        {
+            SendNotification(lastTitle, lastContent, sendWhen, isProgress, (float) progress / (float) max);
+            //NSNotificationCenter.DefaultCenter.PostNotificationName("Progress", new NSNumber(progress));
+            //manager.Notify(messageId, builder.SetProgress(max, progress, false).Build());
+        }
+
+        NSDateComponents GetNSDateComponents(DateTime dateTime)
+        {
+            return new NSDateComponents
+            {
+                Month = dateTime.Month,
+                Day = dateTime.Day,
+                Year = dateTime.Year,
+                Hour = dateTime.Hour,
+                Minute = dateTime.Minute,
+                Second = dateTime.Second
+            };
+        }
+    }
+}

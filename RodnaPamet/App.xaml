@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:rp="clr-namespace:RodnaPamet"
+             x:Class="RodnaPamet.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="LegacyFont">
+                <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                <On Platform="iOS" Value="Ponomar-Unicode" />
+            </OnPlatform>
+
+            <Color x:Key="Primary">#3d6e30</Color>
+            <Color x:Key="Secondary">#760010</Color>
+            <!--
+            <Color x:Key="HoverBackground">#e6931c</Color>
+            -->
+            <Color x:Key="HoverBackground">#ffffff</Color>
+            <Color x:Key="LoaderBackground">#77777777</Color>
+            <x:Double x:Key="HoverOpacity">0.5</x:Double>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Regular.ttf#Alegreya-Regular" />
+                            <On Platform="iOS" Value="Alegreya-Regular" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="FontAttributes" Value="Italic"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Italic.ttf#Alegreya-Italic" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="FontAttributes" Value="Italic"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Italic.ttf#Alegreya-Italic" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="EnglishText">
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Regular.ttf#Alegreya-Regular" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="ImageButton" Class="Selected">
+                <Setter Property="Opacity" Value="0.5"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="SmallTitleText">
+                <Setter Property="FontAttributes" Value="Bold Italic"></Setter>
+                <Setter Property="FontSize" Value="24"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-BoldItalic.ttf#Alegreya-BoldItalic" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="SubTitleText">
+                <Setter Property="FontAttributes" Value="Italic"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Italic.ttf#Alegreya-Italic" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="StrongText">
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Bold.ttf#Alegreya-Bold" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="Timer">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Roboto-Medium.ttf#Roboto-Medium" />
+                            <On Platform="iOS" Value="Roboto Medium" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="Title">
+                <Setter Property="FontSize" Value="Title"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="Expired">
+                <Setter Property="TextColor" Value="Gray"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="Current">
+                <Setter Property="FontSize" Value="21"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="PageTitle">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="32"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="0, 20, 0, 20" />
+                            <On Platform="iOS" Value="0" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="VillageListTitle">
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontSize" Value="19"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Bold.ttf#Alegreya-Bold" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="VillageListDetails">
+                <Setter Property="FontSize" Value="16"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="PageInnerTitle" x:Key="PageInnerTitle">
+                <Setter Property="TextColor" Value="{StaticResource Secondary}"></Setter>
+                <Setter Property="FontSize" Value="30"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="PageInnerSubTitle" x:Key="PageInnerSubTitle">
+                <Setter Property="TextColor" Value="{StaticResource Primary}"></Setter>
+                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="WarningMessageTitle" BasedOn="{StaticResource PageInnerSubTitle}">
+                <Setter Property="TextColor" Value="{StaticResource Secondary}"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="EntryLabel">
+                <Setter Property="TextColor" Value="{StaticResource Secondary}"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Alegreya-Medium.ttf#Alegreya-Medium" />
+                            <On Platform="iOS" Value="Alegreya" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="BigButton">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="45"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="Padding" Value="20, 0, 20, 0"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" Class="Button">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="Padding" Value="20, 0, 20, 0"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="Padding" Value="20, 0, 20, 0"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="BorderColor" Value="Transparent" />
+                                    <Setter Property="BorderWidth" Value="2" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" Class="BottomMenu">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="TextTransform" Value="Uppercase"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="Margin" Value="0"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
+                            <On Platform="iOS" Value="Ponomar Unicode TT" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" Class="Back">
+                <Setter Property="FontSize" Value="21"></Setter>
+            </Style>
+            <Style TargetType="Button" Class="BigButton">
+                <Setter Property="FontSize" Value="45"></Setter>
+            </Style>
+            <Style TargetType="StackLayout" Class="ItemList">
+                <Setter Property="Background" Value="Transparent"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="ListDescription" BasedOn="{StaticResource PageInnerTitle}">
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="Margin" Value="0, 10, 0, 0"></Setter>
+                <Setter Property="FontSize" Value="21"></Setter>
+            </Style>
+            <Style TargetType="Label" Class="ListSubject" BasedOn="{StaticResource PageInnerSubTitle}">
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="Margin" Value="0"></Setter>
+                <Setter Property="FontSize" Value="19"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

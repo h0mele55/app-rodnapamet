@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RodnaPamet.Views.TermsPage"
+             xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
+             xmlns:rp="clr-namespace:RodnaPamet"
+             BackgroundImageSource="background.jpg"
+             Title="Родна паметъ">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <ScrollView
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+            <StackLayout
+                x:Name="ContentStack"
+                Padding="30,24,30,24"
+                HorizontalOptions="FillAndExpand">
+                <Label Text="Вѣрую" Style="{StaticResource PageInnerTitle}">
+                    <Label.Effects>
+				        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			        </Label.Effects>
+                </Label>
+
+                <Label Style="{StaticResource PageInnerSubTitle}" Text="РоднаПаметь.бг">
+                    <Label.Effects>
+				        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+			        </Label.Effects>
+                </Label>
+
+                <Label
+                        StyleClass="TermsAndConditions"
+                        Text="Правила за използване на сайта
+Добре дошли в RodnaPamet.bg !
+ 
+
+С използването на нашите Услуги приемате тези условия. Моля, прочетете ги внимателно.
+
+Съдържанието на уеб страниците на RodnaPamet.bg е със защитени авторски права. Всички права, дори и които не са изрично упоменати тук, са запазени.
+Забранено е копирането, предаването, разпространението и съхраняването на част или на цялото съдържание в каквато и да е форма без предварителното писмено съгласие на Chess Academy BG освен в случаите, когато това не противоречи на изложените тук условия.
+Вие имате право да разглеждате уеб страниците RodnaPamet.bg на своя компютър, както и да отпечатвате извадки от тези страници само за Ваша лична употреба, а не за разпространяване, освен ако нямате писменото съгласие на RodnaPamet.bg за това.
+Някои индивидуални документи в нашите World Wide уеб страници могат да бъдат предмет на допълнителни условия, посочени в съответните документи. Позволено е използването на този сайт и на съдържанието в него за лични, нетърговски цели.
+RodnaPamet.bg не гарантира, че уеб страниците й не съдържат грешки и че достъпът до тях е непрекъсваем.
+
+RodnaPamet си запазва правото да редактира страниците си и да прекратява достъпа до тях по всяко време.
+НИКАКВА ГАРАНЦИЯ ОТ КАКЪВТО И ДА Е ВИД, ПРЯКА ИЛИ КОСВЕНА, ВКЛЮЧВАЩА, НО НЕ ОГРАНИЧЕНА ДО ГАРАНЦИИ ЗА ПРАВАТА ИЛИ ТЯХНАТА НЕНАРУШИМОСТ, КАКТО И КОСВЕНИ ГАРАНЦИИ ЗА КОМЕРСИАЛНОСТ ИЛИ ПРИГОДНОСТ ЗА ОПРЕДЕЛЕНА ЦЕЛ, НЕ СЕ ДАВА ВЪВ ВРЪЗКА С ДОСТЪПНОСТТА, АКУРАТНОСТТА, НАДЕЖДНОСТТА ИЛИ СЪДЪРЖАНИЕТО НА ТЕЗИ СТРАНИЦИ.
+RodnaPamet НЕ Е ОТГОВОРEН ЗА КАКВИТО И ДА БИЛО ПРЕКИ, КОСВЕНИ, СЛУЧАЙНИ, СПЕЦИАЛНИ ИЛИ ПРЕДИЗВИКАНИ ЩЕТИ И ЗАГУБИ ИЛИ ЗА ПРЕКЪСВАНЕ НА ДЕЛОВАТА ДЕЙНОСТ, ПРИЧИНЕНИ ОТ УПОТРЕБАТА ИЛИ НЕВЪЗМОЖНОСТТА ЗА УПОТРЕБА НА ТАЗИ УСЛУГА, ДОРИ АКО RodnaPamet Е БИЛ ПРЕДУПРЕДЕН ЗА ВЕРОЯТНОСТТА ЗА ТАКИВА ВРЕДИ. В НЯКОИ ЗАКОНОДАТЕЛСТВА ИЗКЛЮЧВАНЕТО НА ОПРЕДЕЛЕНИ ГАРАНЦИИ ИЛИ ОГРАНИЧЕНИЯТА НА ОТГОВОРНОСТТА НЕ СА РАЗРЕШЕНИ, ТАКА ЧЕ ИЗЛОЖЕНИТЕ ПО-ГОРЕ ОГРАНИЧЕНИЯ И ИЗКЛЮЧЕНИЯ МОЖЕ ДА НЕ СЕ ОТНАСЯТ ДО ВАС. ОТГОВОРНОСТТА НA RodnaPamet В ТАКЪВ СЛУЧАЙ СЛЕДВА ДА БЪДЕ ОГРАНИЧЕНА ДО МАКСИМАЛНО ПОЗВОЛЕНОТО ОТ ЗАКОНА.
+С цел да улесни достъпа Ви RodnaPamet може да изгради връзки към сайтове в Интернет, които са притежание или се оперират от трети страни. При свързването си с такъв сайт, Вие трябва да приемете неговите изисквания за ползване, както условието, че RodnaPamet няма контрол върху съдържанието на този сайт и не може да поеме отговорност за материали, създадени или публикувани от такива сайтове на трети страни. Освен това връзката към сайт, който не е на RodnaPamet, не предполага, че RodnaPamet одобрява сайта или продуктите и услугите, за които се отнася той.
+Изпращайки материали до който и да е от нашите сървъри чрез e-mail или през уеб страницата RodnaPamet World Wide например, Вие приемате следните условия:
+а) материалите не трябва да съдържат нищо, което е извън рамките на закона или по някакъв начин е неподходящо за публикуване;
+б) Вие трябва да използвате всички подходящи средства, за да откриете и отстраните вирусите, както и всякакви вредни или деструктивни характеристики от този тип, преди да изпратите материалите;
+в) Вие притежавате материалите или имате неограничени права да ни ги предоставите -RodnaPamet може да ги публикува безплатно и/или да използва тях или идеите, описани в тях, в своите продукти, без да носи за това финансова или друга отговорност;
+г) Вие приемате условието да не предприемате действия срещу нас във връзка с материал, който сте предоставили, и да ни освободите от отговорност, ако трета страна предприеме действия срещу нас във връзка с материал, който сте предоставили.
+RodnaPamet не преглежда съдържанието на материали, предоставени от потребители на нейния сайт, и не носи отговорност за такова съдържание. RodnaPamet може по всяко време по свое усмотрение да премахне всеки материал, изпратен от потребители.
+Политиката на RodnaPamet е да не преглежда и цензурира каквато и да е информация или комуникации, но си запазва правото и отговорността за отстраняване на информация или реплики, които RodnaPamet прецени като вредни, обидни, аморални, неетични или нарушаващи по някакъв начин валидните в съответния момент правила на RodnaPamet.
+
+RodnaPamet не носи отговорност ако изтече информация в резултат на техническа повреда или човешка грешка.
+
+ЧЛЕНСКИ АКАУНТ, ПАРОЛА, СИГУРНОСТ
+Потребителят е съгласен RodnaPamet да съхранява паролата му в базата данни в шифрован вид, така че, никой, дори и RodnaPamet да не може да я прочете. В случай, че потребителят забрави паролата си, автоматично ще му бъде изготвена нова и ще му бъде изпратена на потребителския е-майл.
+
+Вие носите цялата отговорност, ако не опазите в тайна Вашите парола или акаунт. Освен това носите пълната отговорност за всички дейности протичащи на Вашия акаунт.
+Можете да смените паролата си по всяко време, следвайки инструкциите.
+
+RodnaPamet има право да събира и съхранява доброволно получени от потребителите лични данни. За избягване на всяко съмнение, лични данни на потребителите се събират, обработват и съхраняват съгласно изискванията на действащото законодателство.
+
+С приемането на настоящите Общи Условия, потребител, доброволно предоставил личните си данни през страниците на RodnaPamet, изрично се съгласява RodnaPamet да показва, изпраща, зарежда и др. всякакви адресирани до потребителя рекламни материали."></Label>
+
+
+            <Label FontSize="16" Padding="0,24,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="RodnaPametLink_Tapped"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="Научете повече на "/>
+                            <Span Text="https://rodnapamet.bg/">
+                                <Span.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="Android" Value="courier" />
+                                        <On Platform="iOS" Value="courier" />
+                                    </OnPlatform>
+                                </Span.FontFamily>
+                            </Span>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </ScrollView>
+        <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Grid
+                x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                <Label
+                    StyleClass="PageTitle"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Условия за употреба">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+            <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+        </StackLayout>
+        <StackLayout
+            x:Name="BottomNav"
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+            <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+            <Grid
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                    <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="35"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>
