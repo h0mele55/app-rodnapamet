@@ -37,15 +37,6 @@ namespace RodnaPamet
         public static double HeaderSizeNoFix = 30;
         public static double HeaderSizeFix = 30;
 
-        private static List<ScreenInfo> _screenSizes = new List<ScreenInfo>
-        {
-            { new ScreenInfo(480,800, EScreenSizes.ExtraSmall)}, //Samsung Galaxy S,
-            { new ScreenInfo(720,1280, EScreenSizes.Small)}, //Nesus S
-            { new ScreenInfo(828,1792, EScreenSizes.Medium)}, //iphone 11
-            { new ScreenInfo(1284,2778, EScreenSizes.Large)}, //Apple iPhone 12 Pro Max
-            { new ScreenInfo(1440,3200, EScreenSizes.ExtraLarge)}, //Samsung Galaxy S20+	
-            { new ScreenInfo(2732,2048, EScreenSizes.ExtraLarge)}, //Apple iPad Pro 12.9
-        };
         public enum AppLifecycle
         { 
             Sleep,

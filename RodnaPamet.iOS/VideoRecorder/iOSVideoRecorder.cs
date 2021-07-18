@@ -157,8 +157,8 @@ namespace RodnaPamet.iOS
 			{
 				throw new Exception("Preview has already started.");
 			}
-
-			session.StartRunning();
+			if(session != null	)
+				session.StartRunning();
 
 			XamRecorder.IsPreviewing = true;
 		}
@@ -239,7 +239,6 @@ namespace RodnaPamet.iOS
 				System.Diagnostics.Debug.WriteLine("Video Recorded: {0} ({1} bytes)", FileName, fileSize);
 				UIVideo.SaveToPhotosAlbum(FileName, (fileName, saveStatus) => {
 					System.Diagnostics.Debug.WriteLine("Video Copied to Photos: {0}", fileName, fileSize);
-					File.Delete(FileName);
 					XamRecorder.VideoTaken(fileName);
 				});
 			}
@@ -261,7 +260,8 @@ namespace RodnaPamet.iOS
 			//remove rotation notifications
 			NSNotificationCenter.DefaultCenter.RemoveObserver(rotationNotifation);
 
-			session.Dispose();
+			if(session != null)
+				session.Dispose();
 			base.Dispose(disposing);
 
 		}

@@ -76,7 +76,6 @@
     <Compile Include="Camera2\CameraViewServiceRenderer.cs" />
     <Compile Include="Camera2\CameraCaptureStateSessionListener.cs" />
     <Compile Include="Camera2\ImageAvailableListener.cs" />
-    <Compile Include="CustomEntryRenderer.cs" />
     <Compile Include="ImageResource.cs" />
     <Compile Include="LabelShadowEffect.cs" />
     <Compile Include="MainActivity.cs" />

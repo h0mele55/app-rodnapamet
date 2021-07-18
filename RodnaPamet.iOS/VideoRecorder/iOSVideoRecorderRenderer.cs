@@ -15,6 +15,9 @@ namespace RodnaPamet.iOS
 		{
 			base.OnElementChanged(e);
 
+			if (e.NewElement == null)
+				return;
+
 			if (Control == null)
 			{
 				recorder = new iOSVideoRecorder( e.NewElement, e.NewElement.Camera, OrientationOptions.Portrait);//e.NewElement.Orientation
