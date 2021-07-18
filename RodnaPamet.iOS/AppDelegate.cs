@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FFImageLoading.Forms.Platform;
 using Foundation;
 using Octane.Xamarin.Forms.VideoPlayer.iOS;
 using UIKit;
 using UserNotifications;
+using Xamarin.Forms;
 
 namespace RodnaPamet.iOS
 {
@@ -24,11 +25,12 @@ namespace RodnaPamet.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
-            global::Xamarin.Forms.Forms.SetFlags("CarouselView_Experimental");
-            global::Xamarin.Forms.Forms.SetFlags("Swipe-View_Experimental");
-            global::Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
-            global::Xamarin.Forms.Forms.Init();
+            Forms.SetFlags("CarouselView_Experimental");
+            Forms.SetFlags("Shell_Experimental");
+            Forms.SetFlags("SwipeView_Experimental");
+            Forms.Init();
+
+            CachedImageRenderer.Init();
 
             try
             {
@@ -37,8 +39,10 @@ namespace RodnaPamet.iOS
 
                 UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
 
-                LoadApplication(new App());
-
+                var ap = new App();
+                LoadApplication(ap);
+//                App.HeaderSize -= UIKit.UIApplication.SharedApplication.StatusBarFrame.Height;
+                App.HeaderSizeNoFix -= UIKit.UIApplication.SharedApplication.StatusBarFrame.Height;
             }
             catch (Exception ex)
             {

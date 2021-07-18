@@ -4,12 +4,12 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(Picker), typeof(CustomPickerRenderer))]
 namespace RodnaPamet.iOS
 {
-    public class CustomEntryRenderer : EntryRenderer
+    public class CustomPickerRenderer : PickerRenderer
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
             base.OnElementChanged(e);
 
