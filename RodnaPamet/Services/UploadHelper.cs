@@ -2,6 +2,7 @@
 using RodnaPamet.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace RodnaPamet.Services
 		private static long uploadFileSize;
 		private static Item lastItem;
 		private static IDataStore<Item> store = DependencyService.Get<IDataStore<Item>>();
+
+		private static WebClient client = new WebClient();
+
 		public async static void AddFileToUpload(Page page, Item item)
 		{
 			var access = Connectivity.NetworkAccess;
@@ -40,29 +44,120 @@ namespace RodnaPamet.Services
 				}
 			}
 
-			//MainThread.BeginInvokeOnMainThread(() =>
-			//{
-				NotificationManager = DependencyService.Get<INotificationManager>();
-				NotificationManager.Initialize();
-				NotificationManager.SendNotification("Видео файл", "Записва се...", null, true, 0.1f);
-			//});
+			NotificationManager = DependencyService.Get<INotificationManager>();
+			NotificationManager.Initialize();
+			NotificationManager.SendNotification("Видео файл", "Записва се...", null, true, 0.1f);
 
-			string fileName = item.Filename;
-			string uploadUrl = Constants.UploadUrl;
-
-			//var progress = new Progress<UploadBytesProgress>();
-			//progress.ProgressChanged += Progress_ProgressChanged;
 			item.Uploading = true;
 			await store.UpdateItemAsync(item);
 			lastItem = item;
 
-			Task.Run(async () =>
-			{
-				var ut = await UploadHelper.CreateUploadTask(fileName, uploadUrl);//, progress
-			});
+			var multipart = new MultipartFormBuilder();
+
+			multipart.AddField("UserID", App.UserService.SubscribersList[0].Id);
+			multipart.AddField("VideoType", item.Type.ToString());
+			multipart.AddField("Subject", item.Subject);
+			multipart.AddField("Age", item.Age.ToString());
+			multipart.AddField("Description", item.Description);
+			multipart.AddField("Village", item.Village);
+			multipart.AddField("Operator", item.Cameraman);
+			multipart.AddField("SubType", item.TypeDescription);
+
+			var finfo = new FileInfo(item.Filename);
+			uploadFileSize = finfo.Length;
+			multipart.AddFile("file", finfo);
+
+			client.UploadProgressChanged += Client_UploadProgressChanged;
+            client.UploadDataCompleted += Client_UploadDataCompleted;
+			//client.UploadFileCompleted += Client_UploadFileCompleted;
+
+			client.UploadMultipartAsync(new Uri(Constants.UploadUrl), "POST", multipart);
+
+			/*
+
+
+						if (!await SaveVideoMetadata(item))
+						{
+							await page.DisplayAlert("Родна памет - достъп до internet", "Няма засечена WIFi връзка на Вашето устройство! Качването на видео файлове през мобилната мрежа може да доведе до увеличение на сметката Ви за мобилни услуги!", "Използвай мобилни данни", "Изчакай WiFi достъп");
+						}
+						//MainThread.BeginInvokeOnMainThread(() =>
+						//{
+							NotificationManager = DependencyService.Get<INotificationManager>();
+							NotificationManager.Initialize();
+							NotificationManager.SendNotification("Видео файл", "Записва се...", null, true, 0.1f);
+						//});
+
+						string fileName = item.Filename;
+						string uploadUrl = Constants.UploadUrl;
+
+						//var progress = new Progress<UploadBytesProgress>();
+						//progress.ProgressChanged += Progress_ProgressChanged;
+						item.Uploading = true;
+						await store.UpdateItemAsync(item);
+						lastItem = item;
+
+						Task.Run(async () =>
+						{
+							var ut = await UploadHelper.CreateUploadTask(fileName, uploadUrl);//, progress
+						});
+			*/
 		}
 
-		private static void Progress_ProgressChanged(object sender, UploadBytesProgress e)
+        private static void Client_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
+        {
+			try
+			{
+				string res = System.Text.Encoding.Default.GetString(e.Result);
+
+				ServerResponse resp = JsonConvert.DeserializeObject<ServerResponse>(res);
+
+				if (resp.Success == 1)
+				{
+					NotificationManager.SendNotification("Видео файл", "Вашият запис е успешно качен!");
+
+					lastItem.Uploading = false;
+					lastItem.Uploaded = true;
+					//await
+					store.UpdateItemAsync(lastItem);
+				}
+				else
+				{
+					NotificationManager.SendNotification("Видео файл", "Качването е неуспешно. Приложението ще опита отново...");
+
+					lastItem.Uploading = false;
+					lastItem.Uploaded = true;
+					//await
+					store.UpdateItemAsync(lastItem);
+				}
+			}
+			catch (Exception ex)
+			{
+				NotificationManager.SendNotification("Видео файл", "Качването е неуспешно. Приложението ще опита отново...");
+
+				lastItem.Uploading = false;
+				lastItem.Uploaded = false;
+				//await
+				store.UpdateItemAsync(lastItem);
+			}
+		}
+
+        /*
+private async static Task<bool> SaveVideoMetadata(Item item)
+{
+    NameValueCollection data = new NameValueCollection();
+    data.Add("UserID", "0");
+    data.Add("VideoType", item.Type.ToString());
+    data.Add("Subject", item.Subject);
+    data.Add("Age", item.Age.ToString());
+    data.Add("Description", item.Description);
+    data.Add("Village", item.Village);
+    data.Add("Operator", item.Cameraman);
+    data.Add("SubType", item.SubDescription);
+    var responseMessage = await client.UploadValuesTaskAsync(new Uri(Constants.UploadUrl), data);
+    return true;
+}
+*/
+        private static void Progress_ProgressChanged(object sender, UploadBytesProgress e)
 		{
 			Task.Run(() => {
 				if (e.TotalBytes > e.BytesSent)
@@ -74,15 +169,25 @@ namespace RodnaPamet.Services
 
 		public static async Task<int> CreateUploadTask(string fileName, string urlToUpload)//, IProgress<UploadBytesProgress> progessReporter
 		{
-			WebClient client = new WebClient();
-
 			uploadFileSize = new FileInfo(fileName).Length;
 
 			//client.UploadFileTaskAsync()
 			client.UploadProgressChanged += Client_UploadProgressChanged;
-            client.UploadFileCompleted += Client_UploadFileCompleted;
+			client.UploadFileCompleted += Client_UploadFileCompleted;
+
+			var content = new MultipartFormDataContent();
+			content.Add(new StreamContent(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)), "VideoFile", "FileName");
+
 			// Option - get the uploaded file key and add it as an values....
-			client.UploadFileAsync(new Uri(urlToUpload), fileName);
+		try
+			{
+				var responseMessage = await client.UploadFileTaskAsync(urlToUpload, fileName);
+				//var response = await responseMessage.Content.ReadAsStringAsync();
+			}
+			catch (Exception ex)
+			{
+				return 0;
+			}
 
 			//urlToUpload
 			return 1;
@@ -145,8 +250,8 @@ namespace RodnaPamet.Services
 			*/
 		}
 
-        private static async void Client_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
-        {
+		private static void Client_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+		{
 			try
 			{
 				string res = System.Text.Encoding.Default.GetString(e.Result);
@@ -159,7 +264,8 @@ namespace RodnaPamet.Services
 
 					lastItem.Uploading = false;
 					lastItem.Uploaded = true;
-					await store.UpdateItemAsync(lastItem);
+					//await
+						store.UpdateItemAsync(lastItem);
 				}
 				else
 				{
@@ -167,7 +273,8 @@ namespace RodnaPamet.Services
 
 					lastItem.Uploading = false;
 					lastItem.Uploaded = true;
-					await store.UpdateItemAsync(lastItem);
+					//await
+					store.UpdateItemAsync(lastItem);
 				}
 			}
 			catch (Exception ex)
@@ -176,7 +283,8 @@ namespace RodnaPamet.Services
 
 				lastItem.Uploading = false;
 				lastItem.Uploaded = false;
-				await store.UpdateItemAsync(lastItem);
+				//await
+				store.UpdateItemAsync(lastItem);
 			}
 		}
 

@@ -12,5 +12,10 @@ namespace RodnaPamet
         public static string AuthUrl = BaseAddress + "/auth";
 
         public static string UploadUrl = BaseAddress + "/fileUpload";
+
+        public static string CheckUrl = BaseAddress + "/check";
+        public static string ConfirmUrl = BaseAddress + "/confirm";
+
+        public static string ErrorUrl = BaseAddress + "/errors";
     }
 }

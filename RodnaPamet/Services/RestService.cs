@@ -38,9 +38,9 @@ namespace RodnaPamet.Services
         {
             lastError = "";
             var uri = new Uri(string.Format(apiEndPoint, string.Empty));
-            Console.WriteLine(uri.ToString());
+            Console.WriteLine("Calling " + uri.ToString());
 
-                string json = "{}";
+            string json = "{}";
                 using (var stream = new MemoryStream())
                 {
                     DataContractJsonSerializerSettings Settings = new DataContractJsonSerializerSettings
@@ -54,12 +54,14 @@ namespace RodnaPamet.Services
                 }
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    //if (!Guid.Empty.Equals(item.Guid))
-                    //{
-                    //    response = await _client.PostAsync(uri, content); // Existing
-                    //}
-                    //else
-                    //{
+            Console.WriteLine("Writing " + content.ToString());
+
+            //if (!Guid.Empty.Equals(item.Guid))
+            //{
+            //    response = await _client.PostAsync(uri, content); // Existing
+            //}
+            //else
+            //{
 
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client.DefaultRequestHeaders.Add("User-Agent", "RodnaPamet Mobile App");
@@ -70,31 +72,34 @@ namespace RodnaPamet.Services
 
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, uri);
             requestMessage.Content = content;
-            HttpResponseMessage response = _client.SendAsync(requestMessage).Result;
+            HttpResponseMessage response = await _client.SendAsync(requestMessage);
             //}
+
 
             if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadAsStringAsync();
-                if (resp == "")
-                    return false;
-                        ServerResponse r = JsonConvert.DeserializeObject<ServerResponse>(resp);
+                    Console.WriteLine("Response: " + resp);
+                    if (resp == "")
+                        return false;
+                            ServerResponse r = JsonConvert.DeserializeObject<ServerResponse>(resp);
 
-                if (r.Error != null && r.Error == 1)
-                {
-                    lastError = r.Message;
-                }
+                    if (r.Error != null && r.Error == 1)
+                    {
+                        lastError = r.Message;
+                    }
 
-                items = r.Data;
-                        lastItems = items;
-                        typedItems = new List<RestItem>((RestItem[])JsonConvert.DeserializeObject<RestItem[]>(r.Data.ToString()));
+                    items = r.Data;
+                            lastItems = items;
+                            typedItems = new List<RestItem>((RestItem[])JsonConvert.DeserializeObject<RestItem[]>(r.Data.ToString()));
 
                     return await Task.FromResult(true);
                 }
                 else
                 {
                     string resp = await response.Content.ReadAsStringAsync();
-                    ServerResponse respo = JsonConvert.DeserializeObject<ServerResponse>(resp);
+                Console.WriteLine("Failed response: " + content.ToString());
+                ServerResponse respo = JsonConvert.DeserializeObject<ServerResponse>(resp);
                 if(respo != null)
                 { 
                     lastError = respo.Message;
@@ -144,19 +149,24 @@ namespace RodnaPamet.Services
 
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, uri);
             requestMessage.Content = content;
-            HttpResponseMessage response = _client.SendAsync(requestMessage).Result;
+            HttpResponseMessage response = await _client.SendAsync(requestMessage);
 
             if (response.IsSuccessStatusCode)
                 {
                 ServerResponse resp = JsonConvert.DeserializeObject<ServerResponse>(response.Content.ReadAsStringAsync().Result);
                 if (resp.Success == 1)
+                {
                     lastError = "";
+                    items = resp.Data;
+                    lastItems = items;
+                    typedItems = new List<RestItem>((RestItem[])JsonConvert.DeserializeObject<RestItem[]>(resp.Data.ToString()));
+                }
                 else
                     lastError = resp.Message;
-                    return resp.Success == 1;
+                return resp.Success == 1;
                 }
 
-            return await Task.FromResult(true);
+            return await Task.FromResult(false);
         }
 
         public async Task<bool> DeleteItemAsync(string id)

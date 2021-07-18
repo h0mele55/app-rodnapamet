@@ -1,8 +1,10 @@
 ﻿using Octane.Xamarin.Forms.VideoPlayer;
 using RodnaPamet.Models;
+using RodnaPamet.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -22,6 +24,7 @@ namespace RodnaPamet.ViewModels
         private bool uploading;
         private bool uploaded;
         private Item item;
+        public ICommand VillageTapped { get; set; }
 
         public event EventHandler<string> Error;
 
@@ -166,6 +169,7 @@ namespace RodnaPamet.ViewModels
         public async void SaveItemToDB()
         {
             item.Id = Id;
+            item.Age = Age;
             item.Created = Created;
             item.Subject = Subject;
             item.Filename = Filename;
@@ -186,6 +190,7 @@ namespace RodnaPamet.ViewModels
                 item = await DataStore.GetItemAsync(itemId);
                 Id = item.Id.ToString();
                 Created = item.Created;
+                Age = item.Age;
                 Subject = item.Subject;
                 Filename = item.Filename;
                 VideoSource = VideoSource.FromFile(item.Filename);

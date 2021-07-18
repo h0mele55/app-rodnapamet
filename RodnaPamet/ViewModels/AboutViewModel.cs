@@ -15,7 +15,13 @@ namespace RodnaPamet.ViewModels
             OpenWebCommand = new Command(async () => App.Current.MainPage = new CameraChooserPage());
             OpenRecordsCommand = new Command(async () => App.Current.MainPage = new RecordingsPage());
             OpenBeliefsCommand = new Command(async () => App.Current.MainPage = new BeliefsPage());
-            OpenAdvisorCommand = new Command(async () => App.Current.MainPage = new AdvisorPage());
+            OpenAdvisorCommand = new Command(async () =>
+            {
+                Device.BeginInvokeOnMainThread(() => {
+                    IsBusy = true;
+                });
+                App.Current.MainPage = new AdvisorPage();
+            });
             VersionCode = VersionTracking.CurrentVersion;
         }
 

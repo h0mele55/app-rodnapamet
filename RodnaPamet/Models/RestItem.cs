@@ -9,7 +9,6 @@ namespace RodnaPamet.Models
     public class RestItem
     {
         [DataMember]
-        [JsonProperty("Success")]
         public string Id { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
     }

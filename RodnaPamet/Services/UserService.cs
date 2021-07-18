@@ -51,6 +51,30 @@ namespace RodnaPamet.Services
             return res;
         }
 
+        public async Task<bool> ConfirmEMailAsync(string mail, string code)
+        {
+            RestService arest = new RestService(Constants.ConfirmUrl);
+            User item = new User();
+            item.EMail = mail;
+            item.VerificationCode = code;
+            bool res = await arest.UpdateItemAsync(item);
+            return res;
+        }
+
+        public async Task<bool> CheckUserAsync(string mail)
+        {
+            RestService arest = new RestService(Constants.CheckUrl);
+            User item = new User();
+            item.EMail = mail;
+            bool res = await arest.UpdateItemAsync(item);
+            SubscribersList.Clear();
+            if (res)
+            { 
+                SubscribersList.Add(new List<User>((User[])JsonConvert.DeserializeObject<User[]>(arest.LastItems.ToString()))[0]);
+            }
+            return res;
+        }
+
         public bool Persist()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -74,6 +98,7 @@ namespace RodnaPamet.Services
         {
             return rest.SetCredentials(c1, c2);
         }
+
         public async Task<bool> AddItemAsync(User item)
         {
             if (await rest.AddItemAsync(item))
