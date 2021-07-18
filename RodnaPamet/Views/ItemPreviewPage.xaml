@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:RodnaPamet.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
              xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer" xmlns:rp="clr-namespace:RodnaPamet"
              x:Class="RodnaPamet.Views.ItemPreviewPage"
-             BackgroundImageSource="background.jpg"
              Title="{Binding Subject}">
     <ContentPage.Resources>
         <views:FilenameConverter x:Key="FilenameConverter"/>
@@ -12,95 +11,117 @@
     </ContentPage.Resources>
 
     <AbsoluteLayout>
-        <StackLayout 
-            x:Name="ContentStack"
-            Spacing="10" 
-            Padding="15">
-        <videoplayer:VideoPlayer
-            DisplayControls="True"
-            AutoPlay="True"
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="Fill"
-            FillMode="ResizeAspectFill"
-            BackgroundColor="Black"
-            Source="{Binding Filename}"></videoplayer:VideoPlayer>
-            <Label Text="{Binding Description}" 
-                                LineBreakMode="NoWrap"
-                                StyleClass="ListDescription">
-                <Label.Effects>
-                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
-                </Label.Effects>
-            </Label>
-            <Label Text="{Binding TypeDescription}" 
-                                LineBreakMode="NoWrap"
-                                StyleClass="ListDescription">
-                <Label.Effects>
-                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
-                </Label.Effects>
-            </Label>
-            <StackLayout
-                            HorizontalOptions="FillAndExpand"
-                            Orientation="Vertical"
-                            Spacing="0">
-                <Label Text="{Binding Subject}" 
-                   StyleClass="ListSubject"
-                                   HorizontalOptions="FillAndExpand"
-                                LineBreakMode="NoWrap" 
-                                FontSize="16">
+            VerticalOptions="FillAndExpand"
+            x:Name="BackgroundGrid">
+            <Image
+                Aspect="AspectFill"
+                Source="background.jpg"></Image>
+        </Grid>
+        <ScrollView
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            Padding="0"
+            Margin="0">
+            <StackLayout 
+                x:Name="ContentStack"
+                Spacing="0" 
+                Padding="0">
+
+                <videoplayer:VideoPlayer
+                    DisplayControls="True"
+                    AutoPlay="True"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Fill"
+                    FillMode="ResizeAspectFill"
+                    BackgroundColor="Black"
+                    Margin="15"
+                    Source="{Binding Filename}"></videoplayer:VideoPlayer>
+                <Label Text="{Binding Description}" 
+                    LineBreakMode="NoWrap"
+                    StyleClass="ListDescription">
                     <Label.Effects>
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
-                    <Label 
-                                LineBreakMode="NoWrap"
-                                StyleClass="ListOperator"
-                                FontSize="Small">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <FormattedString.Spans>
-                            <Span Text="Оператор: " TextColor="Gray"></Span>
-                            <Span Text="{Binding CameraMan}"></Span>
-                        </FormattedString.Spans>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </StackLayout>
+                <Label Text="{Binding TypeDescription}" 
+                    LineBreakMode="NoWrap"
+                    StyleClass="ListDescription">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                <Label Text="{Binding Subject}" 
+                    StyleClass="ListSubject"
+                    HorizontalOptions="FillAndExpand"
+                    LineBreakMode="NoWrap" 
+                    FontSize="16">
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+                <Label 
+                    LineBreakMode="NoWrap"
+                    StyleClass="ListOperator"
+                    FontSize="Small">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="Оператор: " TextColor="Gray"></Span>
+                                <Span Text="{Binding CameraMan}"></Span>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
-        <StackLayout
-                            HorizontalOptions="FillAndExpand"
-                            Orientation="Vertical"
-                            Spacing="0">
-            <Label Text="{Binding Created}" 
-                                HorizontalOptions="FillAndExpand"
-                                LineBreakMode="NoWrap" 
-                                StyleClass="ListCreated" 
-                                FontSize="Small" />
-            <Label Text="{Binding Village}" 
-                                HorizontalOptions="End"
-                                LineBreakMode="NoWrap" 
-                                StyleClass="ListVillage" 
-                                FontSize="Small" />
-        </StackLayout>
-        <StackLayout
-                            IsVisible="{Binding Uploading, Converter={StaticResource BinaryInvertConverter}}"
-                            Spacing="0">
-            <Label
-                                IsVisible="{Binding Uploaded}"
-                StyleClass="ListStatus"
-                                Text="Записът е успешно изпратен на Родна памет!" 
-                            ></Label>
-            <Label
-                                IsVisible="{Binding Uploaded, Converter={StaticResource BinaryInvertConverter}}"
-                StyleClass="ListStatus"
-                                Text="Записът не е изпратен на Родна памет! Когато имате наличен достъп до internet, приложението ще изпрати само записа."
-                            ></Label>
-        </StackLayout>
-        <Label
-                            IsVisible="{Binding Uploading}"
-            StyleClass="ListStatus"
-                            Text="Записът се изпраща на Родна памет!" 
-                            ></Label>
-    </StackLayout>
+                <Label Text="{Binding Created}" 
+                    HorizontalOptions="FillAndExpand"
+                    LineBreakMode="NoWrap" 
+                    StyleClass="ListCreated" 
+                    FontSize="Small" />
+                <Label Text="{Binding Village}" 
+                    HorizontalOptions="End"
+                    LineBreakMode="NoWrap" 
+                    StyleClass="ListVillage" 
+                    FontSize="Small" />
+                <StackLayout
+                    IsVisible="{Binding Uploading, Converter={StaticResource BinaryInvertConverter}}"
+                    Spacing="0">
+                    <Label
+                        IsVisible="{Binding Uploaded}"
+                        StyleClass="ListStatus"
+                        Text="Записът е успешно изпратен на Родна памет!"></Label>
+                    <Label
+                        IsVisible="{Binding Uploaded, Converter={StaticResource BinaryInvertConverter}}"
+                        StyleClass="ListStatus"
+                        Text="Записът не е изпратен на Родна памет! Когато имате наличен достъп до internet, приложението ще изпрати само записа."></Label>
+                </StackLayout>
+                <Label
+                    IsVisible="{Binding Uploading}"
+                    StyleClass="ListStatus"
+                    Text="Записът се изпраща на Родна памет!"></Label>
+                <StackLayout>
+                <Grid
+                    Margin="10, 0, 10, 0"
+                    VerticalOptions="FillAndExpand">
+                    <Image Source="redbuttonback.png"></Image>
+                    <Label
+                        Text="Изтрий"
+                        Style="{DynamicResource DBigButton}">
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
         <StackLayout
             Spacing="0"
             Margin="0"
@@ -119,7 +140,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -172,14 +193,14 @@
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
@@ -187,7 +208,7 @@
                         StyleClass="Selected"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

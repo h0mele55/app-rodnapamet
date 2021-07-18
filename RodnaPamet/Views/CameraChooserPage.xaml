@@ -35,8 +35,8 @@
                         VerticalOptions="FillAndExpand">
                     <Image Source="redbuttonback.png"></Image>
                     <Label
-                            Text="Цѣнности"
-                            StyleClass="BigButton">
+                        Text="Цѣнности"
+                        Style="{DynamicResource DBigButton}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SelectValuesCommand}"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
@@ -49,8 +49,8 @@
                         VerticalOptions="FillAndExpand">
                     <Image Source="redbuttonback.png"></Image>
                     <Label
-                            Text="Приказка"
-                            StyleClass="BigButton">
+                        Text="Приказка"
+                        Style="{DynamicResource DBigButton}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SelectStoryCommand}"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
@@ -120,7 +120,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                     <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -165,7 +165,7 @@
                         <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
@@ -173,14 +173,14 @@
                         StyleClass="Selected"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
                         <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

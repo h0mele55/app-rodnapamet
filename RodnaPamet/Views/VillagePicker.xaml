@@ -10,13 +10,17 @@
             CornerRadius="0"
             HasShadow="True"
             Margin="0">
-          <StackLayout>
+          <StackLayout
+              x:Name="ContentStack">
                 <Label
+                    VerticalOptions="Start"
                     Style="{StaticResource PageInnerSubTitle}"
                     Text="Избор на населено място."></Label>
                 <Label
+                    VerticalOptions="Start"
                     Text="Започнете да въвеждате името на Вашето населено място. Изберете от списъка за да потвърдите."></Label>
                 <Entry
+                    VerticalOptions="Start"
                     Text="{Binding SearchText, Mode=TwoWay}"
                   x:Name="SearchField">
                     <Entry.Behaviors>
@@ -25,19 +29,18 @@
                                         Command="{Binding TextChangedCommand}" />
                     </Entry.Behaviors>
                 </Entry>
-                <ListView
-                    ItemsSource="{Binding ShownVillages}"
+              <ScrollView
+                VerticalOptions="FillAndExpand">
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding ShownVillages}"
                     BackgroundColor="{StaticResource HoverBackground}"
-                    SeparatorVisibility="None"
                     x:Name="SearchList">
-                    <ListView.ItemTemplate>
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell 
-                                ios:Cell.DefaultBackgroundColor="{StaticResource HoverBackground}"
-                                Tapped="ViewCell_Tapped">
-                                <StackLayout
-                                    Spacing="0"
-                                    Padding="0, 0, 0, 10">
+                            <StackLayout
+                                InputTransparent="False"    
+                                Spacing="0"
+                                Padding="0, 0, 0, 10">
                                 <Label
                                     Padding="0"
                                     Margin="0"
@@ -67,11 +70,14 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                 </Label>
-                                </StackLayout>
-                            </ViewCell>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ViewCell_Tapped"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-              </ListView>
+                    </BindableLayout.ItemTemplate>
+              </StackLayout>
+                  </ScrollView>
             </StackLayout>
         </Frame>
     </ContentView.Content>

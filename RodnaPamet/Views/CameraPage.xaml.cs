@@ -19,6 +19,7 @@ namespace RodnaPamet.Views
 
             BindingContext = viewModel = new RecorderViewModel(this, CameraPreview);
 
+			ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
 			//QuestionsCarousel.ItemSelected += QuestionCarousel_ItemSelected;
 			viewModel.ItemHeightChanged = QuestionCarouselItemSizeChanged;
 
@@ -44,7 +45,8 @@ namespace RodnaPamet.Views
 				viewModel.SelectedValuesType = false;
 			}
 
-			//QuestionsCarousel.ItemSelected += QuestionCarousel_ItemSelected;
+			ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
+			RecNotification.Padding = new Thickness(RecNotification.Padding.Left, App.HeaderSize + 5, RecNotification.Padding.Right, RecNotification.Padding.Bottom);
 			viewModel.ItemHeightChanged = QuestionCarouselItemSizeChanged;
 
 			CameraPreview.VideoFinished += OnVideoFinished;
@@ -77,7 +79,6 @@ namespace RodnaPamet.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-			ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
 		}
 
 		private void TapGestureRecognizer_Tapped(object sender, EventArgs e)

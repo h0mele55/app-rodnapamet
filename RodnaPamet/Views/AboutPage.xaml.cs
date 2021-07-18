@@ -25,21 +25,13 @@ namespace RodnaPamet.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new AboutViewModel(this);
+            ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         async protected override void OnAppearing()
         {
             base.OnAppearing();
-            //            Task.Run(() => {
-            //                NotificationManager = DependencyService.Get<INotificationManager>();
-            //                NotificationManager.Initialize();
-            //                NotificationManager.SendNotification("Видео файл", "Записва се...", null, true);
-            //                Thread.Sleep(3000);
-            //                NotificationManager.UpdateNotification(10, 7);
-            //            });
-            // MessagingCenter.Send<string>("TabBarRendered", "Yes");
 
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
 
             var current = Connectivity.NetworkAccess;
             if (current != NetworkAccess.Internet)
@@ -62,19 +54,6 @@ namespace RodnaPamet.Views
 //            foreach (String family in UIFont.FamilyNames)
 //                foreach (String font in UIFont.FontNamesForFamilyName(family))
 //                    Debug.WriteLine(font);
-            
-
-            const string errorFileName = "Fatal.log";
-            var libraryPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
-            var errorFilePath = Path.Combine(libraryPath, errorFileName);
-            if (File.Exists(errorFilePath))
-            {
-                var errorMessage = File.ReadAllText(errorFilePath);
-                DisplayAlert("ГРЕШКА", errorMessage, "Добре");
-
-                File.Delete(errorFilePath);
-            }
-
         }
 
         private void RodnaPametLink_Tapped(object sender, EventArgs e)

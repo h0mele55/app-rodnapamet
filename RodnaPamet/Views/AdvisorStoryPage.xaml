@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RodnaPamet.Views.AdvisorStoryPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels" xmlns:rp="clr-namespace:RodnaPamet"
-             BackgroundImageSource="background.jpg"
+
              Title="Приказка">
     
     <ContentPage.Resources>
@@ -13,7 +13,16 @@
     </ContentPage.Resources>
 
     <AbsoluteLayout>
-    <ScrollView>
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>    <ScrollView>
         <StackLayout
             x:Name="ContentStack"
             HorizontalOptions="FillAndExpand"
@@ -50,7 +59,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -101,24 +110,23 @@
                     VerticalOptions="CenterAndExpand"
                     Orientation="Horizontal">
                     <ImageButton
-                        StyleClass="Selected"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
                     <ImageButton
+                        Style="{DynamicResource DBottomMenuButton}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
                     <ImageButton
+                        Style="{DynamicResource DBottomMenuButton}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

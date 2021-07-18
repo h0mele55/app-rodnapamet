@@ -22,6 +22,8 @@ namespace RodnaPamet.Views
 
             BindingContext = _viewModel = new ItemsViewModel(this);
             NoRecordsLabel.IsVisible = false;
+
+            ListContainer.Padding = new Thickness(0, App.HeaderSizeNoFix, 0, App.FooterSize);
         }
 
         protected override void OnAppearing()
@@ -33,17 +35,11 @@ namespace RodnaPamet.Views
             base.OnAppearing();
             _viewModel.OnAppearing();
             NoRecordsLabel.IsVisible = _viewModel.Items.Count == 0;
-
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
+            ItemsListView.IsVisible = _viewModel.Items.Count != 0;
         }
 
-        private async void SwipeItem_Invoked(object sender, EventArgs e)
+        private void SwipeItem_Invoked(object sender, EventArgs e)
         {
-            if(File.Exists(((Item)((SwipeItem)sender).BindingContext).Filename))
-                File.Delete(((Item)((SwipeItem)sender).BindingContext).Filename);
-            _viewModel.Items.Remove((Item) ((SwipeItem)sender).BindingContext);
-            _viewModel.DataStore.DeleteItemAsync(((Item)((SwipeItem)sender).BindingContext).Id);
-            NoRecordsLabel.IsVisible = _viewModel.Items.Count == 0;
         }
         private void Home_Clicked(object sender, EventArgs e)
         {

@@ -2,6 +2,7 @@
 using RodnaPamet.ViewModels;
 using System;
 using System.ComponentModel;
+using System.IO;
 using Xamarin.Forms;
 
 namespace RodnaPamet.Views
@@ -15,11 +16,11 @@ namespace RodnaPamet.Views
             context = new ItemDetailViewModel(this);
             context.ItemId = newGuid.ToString();
             BindingContext = context;
+            ContentStack.Padding = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
         }
         private void Home_Clicked(object sender, EventArgs e)
         {
@@ -37,6 +38,14 @@ namespace RodnaPamet.Views
         }
         private void Back_Clicked(object sender, EventArgs e)
         {
+            App.Current.MainPage = new RecordingsPage();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            if (File.Exists(context.Filename))
+                File.Delete(context.Filename);
+            await context.DataStore.DeleteItemAsync(context.Id);
             App.Current.MainPage = new RecordingsPage();
         }
     }

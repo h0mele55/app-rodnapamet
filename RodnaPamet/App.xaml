@@ -7,7 +7,7 @@
         Define global resources and styles here, that apply to all pages in your app.
     -->
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary x:Name="ResDict">
             <OnPlatform x:TypeArguments="x:String" x:Key="LegacyFont">
                 <On Platform="Android" Value="PonomarUnicode.ttf#PonomarUnicode" />
                 <On Platform="iOS" Value="Ponomar-Unicode" />
@@ -68,12 +68,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style TargetType="ImageButton" Class="Selected">
-                <Setter Property="Opacity" Value="0.5"></Setter>
-            </Style>
             <Style TargetType="Label" Class="SmallTitleText">
                 <Setter Property="FontAttributes" Value="Bold Italic"></Setter>
-                <Setter Property="FontSize" Value="24"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -85,6 +82,7 @@
             </Style>
             <Style TargetType="Label" Class="SubTitleText">
                 <Setter Property="FontAttributes" Value="Italic"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -96,6 +94,7 @@
             </Style>
             <Style TargetType="Label" Class="StrongText">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -117,21 +116,19 @@
                 </Setter>
             </Style>
             <Style TargetType="Label" Class="Title">
-                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
             </Style>
             <Style TargetType="Label" Class="Expired">
                 <Setter Property="TextColor" Value="Gray"></Setter>
             </Style>
             <Style TargetType="Label" Class="Current">
-                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
             </Style>
-            <Style TargetType="Label" Class="PageTitle">
+            <Style TargetType="Label" Class="PageTitle" x:Name="PageTitle">
                 <Setter Property="TextColor" Value="White"></Setter>
-                <Setter Property="FontSize" Value="32"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -151,7 +148,7 @@
             </Style>
             <Style TargetType="Label" Class="VillageListTitle">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
-                <Setter Property="FontSize" Value="19"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
@@ -165,18 +162,17 @@
                 </Setter>
             </Style>
             <Style TargetType="Label" Class="VillageListDetails">
-                <Setter Property="FontSize" Value="16"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
             </Style>
             <Style TargetType="Label" Class="PageInnerTitle" x:Key="PageInnerTitle">
                 <Setter Property="TextColor" Value="{StaticResource Secondary}"></Setter>
-                <Setter Property="FontSize" Value="30"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -188,12 +184,10 @@
             </Style>
             <Style TargetType="Label" Class="PageInnerSubTitle" x:Key="PageInnerSubTitle">
                 <Setter Property="TextColor" Value="{StaticResource Primary}"></Setter>
-                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
-
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -208,10 +202,9 @@
             </Style>
             <Style TargetType="Label" Class="EntryLabel">
                 <Setter Property="TextColor" Value="{StaticResource Secondary}"></Setter>
-                <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -221,12 +214,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style TargetType="Label" Class="BigButton">
+            <Style TargetType="Label" Class="BigButton" x:Name="BigButton">
                 <Setter Property="TextColor" Value="White"></Setter>
-                <Setter Property="FontSize" Value="45"></Setter>
                 <Setter Property="Margin" Value="5"></Setter>
                 <Setter Property="Padding" Value="20, 0, 20, 0"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="FontFamily">
@@ -240,10 +231,8 @@
             </Style>
             <Style TargetType="Label" Class="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
-                <Setter Property="FontSize" Value="21"></Setter>
                 <Setter Property="Margin" Value="5"></Setter>
                 <Setter Property="Padding" Value="20, 0, 20, 0"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="FontFamily">
@@ -257,12 +246,9 @@
             </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
-                <Setter Property="Background" Value="Transparent"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
                 <Setter Property="Margin" Value="5"></Setter>
                 <Setter Property="Padding" Value="20, 0, 20, 0"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
-                <Setter Property="FontSize" Value="21"></Setter>
                 <Setter Property="FontFamily">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:String">
@@ -292,8 +278,6 @@
             </Style>
             <Style TargetType="Button" Class="BottomMenu">
                 <Setter Property="TextColor" Value="White"></Setter>
-                <Setter Property="FontSize" Value="21"></Setter>
-                <Setter Property="TextTransform" Value="Uppercase"></Setter>
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="Margin" Value="0"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
@@ -307,23 +291,19 @@
                 </Setter>
             </Style>
             <Style TargetType="Button" Class="Back">
-                <Setter Property="FontSize" Value="21"></Setter>
-            </Style>
-            <Style TargetType="Button" Class="BigButton">
-                <Setter Property="FontSize" Value="45"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
             </Style>
             <Style TargetType="StackLayout" Class="ItemList">
-                <Setter Property="Background" Value="Transparent"></Setter>
             </Style>
             <Style TargetType="Label" Class="ListDescription" BasedOn="{StaticResource PageInnerTitle}">
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="Margin" Value="0, 10, 0, 0"></Setter>
-                <Setter Property="FontSize" Value="21"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
             </Style>
             <Style TargetType="Label" Class="ListSubject" BasedOn="{StaticResource PageInnerSubTitle}">
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="Margin" Value="0"></Setter>
-                <Setter Property="FontSize" Value="19"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -4,7 +4,6 @@
              x:Class="RodnaPamet.Views.AboutPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
              xmlns:rp="clr-namespace:RodnaPamet"
-             BackgroundImageSource="background.jpg"
              Title="{Binding Title}">
     
     <ContentPage.Resources>
@@ -16,13 +15,16 @@
     <AbsoluteLayout
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
-<!--
-        <ScrollView
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All">
-        -->
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>
             <StackLayout 
                 x:Name="ContentStack"
                 Margin="0" 
@@ -45,7 +47,7 @@
                     <Image Source="redbuttonback.png" Opacity="0.8"></Image>
                     <Label
                         Text="Запись"
-                        StyleClass="BigButton">
+                        Style="{DynamicResource DBigButton}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenWebCommand}"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
@@ -65,19 +67,19 @@
                     <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
                     <Label
                         Text="Архивъ"
-                        StyleClass="Button">
+                        Style="{DynamicResource DSmallButton}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenRecordsCommand}"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
                         <Label.Effects>
-				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
-			            </Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
                     </Label>
                 </Grid>
                 <Label
                     IsVisible="false"
                     Margin="0,20,0,0"
-                    StyleClass="Text"
+                    Style="{DynamicResource DSmallButton}"
                     Text="За да разберете смисъла"
                     VerticalOptions="FillAndExpand"/>
                 <Grid>
@@ -96,7 +98,7 @@
                 <Label
                     IsVisible="false"
                     Margin="0,20,0,0"
-                    StyleClass="Text"
+                    Style="{DynamicResource DSmallButton}"
                     Text="За да получите просветление"
                     VerticalOptions="FillAndExpand"/>
                 <Grid
@@ -135,7 +137,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -180,22 +182,21 @@
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
-                        StyleClass="Selected"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         Source="home.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

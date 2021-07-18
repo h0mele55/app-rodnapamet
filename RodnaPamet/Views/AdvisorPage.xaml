@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RodnaPamet.Views.AdvisorPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels" xmlns:rp="clr-namespace:RodnaPamet"
-             BackgroundImageSource="background.jpg"
+
              Title="{Binding Title}">
     
     <ContentPage.Resources>
@@ -15,7 +15,16 @@
     <AbsoluteLayout
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
-        <ScrollView
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>        <ScrollView
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
@@ -27,15 +36,31 @@
             <Label StyleClass="Text" Text="Запишетѣ видео (по вѫзможность срѣдъ природата, въ красива местность отъ селото), съ дължина от около 5 минути, въ което задаватѣ слѣднитѣ въпроси:"/>
                 <Grid>
                     <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
-                    <Button Text="Ценности"
-                                Command="{Binding OpenAdvisorValuesCommand}" />
+                    <Label
+                        Style="{DynamicResource DSmallButton}"
+                        Text="Ценности">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAdvisorValuesCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
             <Label StyleClass="Text" Text="Използвайте дадените въпроси за видео съ дължина от около 5 минути"/>
 
                             <Grid>
                     <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
-                    <Button Text="Приказка"
-                                Command="{Binding OpenAdvisorStoryCommand}" />
+                    <Label 
+                        Style="{DynamicResource DSmallButton}"
+                        Text="Приказка">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAdvisorStoryCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
             <Label StyleClass="Text" Text="Запишете приказка от 1 - 5 минути"/>
 
@@ -59,7 +84,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -113,21 +138,21 @@
                         StyleClass="Selected"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

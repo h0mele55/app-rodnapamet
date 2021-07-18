@@ -2,6 +2,7 @@
 using RodnaPamet.ViewModels;
 using System;
 using System.ComponentModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RodnaPamet.Views
@@ -9,6 +10,7 @@ namespace RodnaPamet.Views
     public partial class ItemDetailPage : ContentPage
     {
         ItemDetailViewModel context;
+        ICommand VillageTapped;
 
         public ItemDetailPage(Guid newGuid)
         {
@@ -18,6 +20,7 @@ namespace RodnaPamet.Views
 
             context = new ItemDetailViewModel(this);
             context.ItemId = newGuid.ToString();
+            context.VillageTapped = new Command(() => TapGestureRecognizer_Tapped_1(this, null));
             context.SaveCommand = new Command(execute: async () => {
                 if (context.CameraMan != null &&
                         context.Description != null &&
@@ -46,12 +49,12 @@ namespace RodnaPamet.Views
             }*/);
 
             BindingContext = context;
+            ContentStack.Padding = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
         }
 
         private void VillageSelect_VillageSelected(object sender, EventArgs e)
@@ -69,7 +72,7 @@ namespace RodnaPamet.Views
         private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
             VillageSelect.IsVisible = true;
-            //VillageSelect.FocusInput();
+            VillageSelect.FocusInput();
         }
         private void Home_Clicked(object sender, EventArgs e)
         {

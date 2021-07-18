@@ -4,7 +4,6 @@
              x:Class="RodnaPamet.Views.BeliefsPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
              xmlns:rp="clr-namespace:RodnaPamet"
-             BackgroundImageSource="background.jpg"
              Title="Родна паметъ">
     
     <ContentPage.Resources>
@@ -19,20 +18,29 @@
     <AbsoluteLayout
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
-        <ScrollView
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>        <ScrollView
             x:Name="ContentStack"
             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             AbsoluteLayout.LayoutFlags="All">
             <StackLayout
                 Padding="30,24,30,24"
-                VerticalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand"
                 HorizontalOptions="FillAndExpand">
                 <Label Text="Вѣрую" Style="{StaticResource PageInnerTitle}">
                     <Label.Effects>
 				        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
 			        </Label.Effects>
                 </Label>
-
+                <!--
                 <Label
                     IsVisible="False"
                     Style="{StaticResource PageInnerSubTitle}" 
@@ -48,6 +56,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
+                                <Span Text="Родна Паметъ "></Span>
                                 <Span Text="и"></Span>
                                 <Span Text="ма за цѣль да обѣдини и запази за бѫдещитѣ поколения на България:"></Span>
                             </FormattedString.Spans>
@@ -150,29 +159,24 @@
                         HorizontalTextAlignment="Start"
                         VerticalOptions="CenterAndExpand"></Label>
                 </Grid>
+                -->
 
 
+            <Label StyleClass="Text" Text="Храмъ на безцѣннитѣ спомѣни, наслѣдство отъ мѫдри слова, архивъ на изконни Български цѣнности - родната паметь има много имена и лица."/>
+            <Label StyleClass="Text" Text="Прѣди всичко, за насъ отъ роднапаметь.бгъ тя символизира любовьта, безъ която не можемъ. Любовьта, безъ която Българскиятъ родъ не би оцѣлялъ безброй изпитания и неволи прѣзъ вѣковетѣ."/>
+            <Label StyleClass="Text" Text="Послѣднитѣ 30 години изправиха Българскятъ духъ прѣдъ поредното чутовно изпитание - да запазимъ човѣшкото въ себе си и да останемъ добри хора въ лицето на остри материални липси и неправди."/>
+            <Label StyleClass="Text" Text="Въ роднапаметь.бгъ вѣрваме, че любовьта къмъ собствениятъ родъ е разковничето, което винаги ни е обединявало и въплъщава силата на духа, така нужна за вѣрата въ бѫдещето на България."/>
 
-            <Label StyleClass="Text" Text="1. Родна Паметь"/>
-            <Label StyleClass="Text" Text="РоднаПаметъ.бг отправя послание до всѣки единъ житель на България съ живи и здрави роднини надъ 70 годишна вѫзрасть, живѣещи/родени въ малко населено мѣсто:"/>
-            <Label StyleClass="Text" Text="Първа опция:"/>
-            <Label StyleClass="Text" Text="Запишетѣ видео (по вѫзможность срѣдъ природата, въ красива местность отъ селото), съ дължина от около 5 минути, въ което задаватѣ слѣднитѣ въпроси:"/>
+            <Label StyleClass="Text" Text="Прѣдизвикателство - запознайте се съ коренитѣ на рода си. Изслѣдвай Българската природа, докато разслѣдвашъ коренитѣ си."/>
+            <Label StyleClass="Text" Text="Разкажи поне на единъ човѣкъ за родната си паметь."/>
 
-            <Label StyleClass="Text" Text="Втора опция:"/>
-
-            <Label StyleClass="Text" Text="Запишетѣ видео съ дължина отъ 1-5 минъ. на тема история/легенда отъ/на селото."/>
-
-            <Label StyleClass="Text" Text="2. Родова паметь"/>
-
-            <Label StyleClass="Text" Text="Освѣнъ роднитѣ ценности, платформата дава вѫзможность на Българитѣ да запазятъ за бѫдещитѣ поколения и родословието си. Подкрепетѣ каузата като порѫчатѣ знаме, съ напечатано родословното Ви дърво. Допълнително, всѣки отъ Васъ има вѫзможность да създаде за рода си семѣенъ гербъ, който да бѫде извезанъ върху родословното Ви знаме."/>
-
-            <Label StyleClass="Text" Text="3. Исторически правописъ"/>
-
-            <Label StyleClass="Text" Text="РоднаПаметь.бгъ подкрепя инициативата за опазването на историческия правописъ. Колкото по-често се връщатѣ тукъ за да почететѣ прѣдцитѣ си, толкова повече ще свикнетѣ и съ типично Българскитѣ букви ѣ и ѫ :)."/>
-
-            <Label StyleClass="Text" Text="Приятно пѫтуване въ врѣмето на  прѣдцитѣ!"/>
-
-
+            <Label StyleClass="Text" Text="До 2024 България може да загуби до 20% отъ населението си (quote url)."/>
+            <Label StyleClass="Text" Text="Това сѫ около единъ милионъ сѫдби, най-вече водещи началото на рода си отъ малки населени мѣста, които могатъ да останатъ неразказани."/>
+            <Label StyleClass="Text" Text="Или единъ милионъ звѣзди на вечния небосклонъ отъ Български родове."/>
+            <Label StyleClass="Text" Text="Съ твоя помощь можемъ да запазимъ съкровени спомѣни отъ своите прѣдци - за да могатъ правнуцитѣ ни сѫщо да ги помнятъ."/>
+            <Label StyleClass="Text" Text="Такива каквито сѫ - скромни, житейско мѫдри, красиви, съ загрубѣли отъ трудъ рѫцѣ и голѣмо сърдце, туптящо за България."/>
+            <Label StyleClass="Text" Text="Или сѫ други? Покажи на всички - гордѣй се съ рода си - изворътъ на любовьта, безъ която не можемъ."/>
+                
             <!--Label
                 IsVisible="False"
                 FontSize="16" 
@@ -216,7 +220,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -270,21 +274,21 @@
                         StyleClass="Selected"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

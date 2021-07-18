@@ -13,17 +13,6 @@
         <AbsoluteLayout
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
-            <Grid
-                AbsoluteLayout.LayoutFlags="All"
-                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
-                IsVisible="{Binding IsPreviewing, Converter={StaticResource BinaryInvertConverter}}"
-                x:Name="BackgroundGrid">
-                <Image
-                    Aspect="AspectFill"
-                    Source="background.jpg"></Image>
-            </Grid>
             <cameraView:CameraPreview  
                     x:Name="CameraPreview"           
                     BackgroundColor="Black"
@@ -36,7 +25,7 @@
             <StackLayout
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 AbsoluteLayout.LayoutBounds="1, 0, -1, -1"
-                IsVisible="{Binding IsPreviewing}"
+                x:Name="RecNotification"
                 Padding="5, 15, 10, 5">
                     <Image 
                         Source="rec.png"
@@ -65,11 +54,11 @@
                 
             </StackLayout>
             <StackLayout
-                x:Name="ContentStack"
                 IsVisible="{Binding InTransition, Converter={StaticResource BinaryInvertConverter}}"
                 AbsoluteLayout.LayoutFlags="All"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
                 <StackLayout
+                    x:Name="ContentStack"
                     IsVisible="{Binding SelectedVideoType}"
                     VerticalOptions="EndAndExpand"
                     Spacing="0">
@@ -92,6 +81,7 @@
                                     BackgroundColor="{StaticResource HoverBackground}"
                                     HasShadow="False"
                                     Opacity="{StaticResource HoverOpacity}"
+                                    CornerRadius="0"
                                     Padding="0">
                                 </Frame>
                                 <Label
@@ -116,6 +106,7 @@
                             IsClippedToBounds="True"
                             VerticalOptions="EndAndExpand">
                                 <Frame
+                                        CornerRadius="0"
                                         BackgroundColor="{StaticResource HoverBackground}"
                                         HasShadow="False"
                                         Opacity="{StaticResource HoverOpacity}"
@@ -237,6 +228,7 @@
                                 Source="whitebottom.png"></Image>
                             <Grid>
                                 <Frame
+                                    CornerRadius="0"
                                     BackgroundColor="{StaticResource HoverBackground}"
                                     Opacity="{StaticResource HoverOpacity}"
                                     HasShadow="False"
@@ -261,6 +253,7 @@
                                 Source="whitebottom.png"></Image>
                             <Grid VerticalOptions="FillAndExpand">
                                 <Frame
+                                    CornerRadius="0"
                                     BackgroundColor="{StaticResource HoverBackground}"
                                     Opacity="{StaticResource HoverOpacity}"
                                     HasShadow="False"
@@ -273,6 +266,7 @@
                             </Grid>
                             <Grid>
                                 <Frame
+                                    CornerRadius="0"
                                     BackgroundColor="{StaticResource HoverBackground}"
                                     Opacity="{StaticResource HoverOpacity}"
                                     HasShadow="False"
@@ -286,6 +280,7 @@
                     </StackLayout>
                     <Grid VerticalOptions="FillAndExpand">
                         <Frame
+                                    CornerRadius="0"
                                     BackgroundColor="{StaticResource HoverBackground}"
                                     Opacity="{StaticResource HoverOpacity}"
                                     HasShadow="False"
@@ -298,7 +293,7 @@
                             <Label
                                 Text="{Binding RecordControlLabel}"
                                 IsVisible="{Binding IsRecording, Converter={StaticResource BinaryInvertConverter}}"
-                                StyleClass="BigButton">
+                                Style="{DynamicResource DBigButton}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding RecordCommand}"></TapGestureRecognizer>
                                 </Label.GestureRecognizers>
@@ -309,7 +304,7 @@
                             <Label
                                 Text="{Binding RecordStopLabel}"
                                 IsVisible="{Binding IsRecording}"
-                                StyleClass="BigButton">
+                                Style="{DynamicResource DBigButton}">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding StopCommand}"></TapGestureRecognizer>
                                 </Label.GestureRecognizers>
@@ -346,7 +341,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                     <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -381,7 +376,7 @@
                 Source="bottombackfix.png"
                 Margin="0"
                 VerticalOptions="EndAndExpand"
-                TranslationY="0.1"></Image>
+                TranslationY="0.2"></Image>
                 <Grid
                     x:Name="BottomNav"
                 VerticalOptions="Start"
@@ -399,7 +394,7 @@
                         <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
@@ -407,14 +402,14 @@
                         StyleClass="Selected"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
                         <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>

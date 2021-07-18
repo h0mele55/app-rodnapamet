@@ -24,12 +24,12 @@ namespace RodnaPamet.Views
             InitializeComponent();
             BindingContext = viewModel = new AboutViewModel(this);
             viewModel.OpenWebCommand = new Command(async () => App.Current.MainPage = new CameraChooserPage("story"));
+            ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         async protected override void OnAppearing()
         {
             base.OnAppearing();
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
         }
         private void Home_Clicked(object sender, EventArgs e)
         {

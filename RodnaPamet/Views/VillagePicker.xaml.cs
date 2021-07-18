@@ -22,6 +22,8 @@ namespace RodnaPamet.Views
         {
             InitializeComponent();
             BindingContext = _viewModel = new VillagePickerViewModel(this);
+
+            ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         private void SearchField_TextChanged(object sender, TextChangedEventArgs e)
@@ -33,18 +35,23 @@ namespace RodnaPamet.Views
         {
             if (lastCell != null)
                 lastCell.View.BackgroundColor = Color.Transparent;
-            var viewCell = (ViewCell)sender;
-            if (viewCell.View != null)
-            {
-                object color = new Color();
-                Application.Current.Resources.TryGetValue("Primary", out color);
-                //viewCell.View.BackgroundColor = (Color) color;
-                viewCell.View.BackgroundColor = Color.Transparent; 
-                lastCell = viewCell;
-                Village selected = (Village) ((ViewCell)sender).BindingContext;
-                SelectedVillage = selected.Type + " " + selected.Name + ", " + selected.Obstina + ", " + selected.Oblast;
-                VillageSelected?.Invoke(this, null);
-            }
+            var viewCell = (StackLayout)sender;
+
+            Village selected = (Village)((StackLayout)sender).BindingContext;
+            SelectedVillage = selected.Type + " " + selected.Name + ", " + selected.Obstina + ", " + selected.Oblast;
+            VillageSelected?.Invoke(this, null);
+            /*            if (viewCell.View != null)
+                        {
+                            object color = new Color();
+                            Application.Current.Resources.TryGetValue("Primary", out color);
+                            //viewCell.View.BackgroundColor = (Color) color;
+                            viewCell.View.BackgroundColor = Color.Transparent; 
+                            lastCell = viewCell;
+                            Village selected = (Village) ((ViewCell)sender).BindingContext;
+                            SelectedVillage = selected.Type + " " + selected.Name + ", " + selected.Obstina + ", " + selected.Oblast;
+                            VillageSelected?.Invoke(this, null);
+                        }
+              */
         }
 
         public void ClearInterface()

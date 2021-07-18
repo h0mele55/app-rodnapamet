@@ -65,16 +65,7 @@ namespace RodnaPamet.Views
             if (trigger.HasValue && trigger.Value.HasFlag(InvalidationTrigger.RendererReady))
             {
                 if (App.UserService.SubscribersList.Count == 1)
-                {
-                    if (App.UserService.SubscribersList[0].EMailVerified == "1")
-                        MessagingCenter.Send<LoginPage>(this, "login_success");
-                    else
-                    {
-                        viewModel.ShowInitial = false;
-                        viewModel.ShowRegistered = true;
-                        viewModel.IsBusy = false;
-                    }
-                }
+                    MessagingCenter.Send<LoginPage>(this, "login_success");
                 else
                     viewModel.IsBusy = false;
             }

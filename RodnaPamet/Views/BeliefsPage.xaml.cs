@@ -12,12 +12,12 @@ namespace RodnaPamet.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new AboutViewModel(this);
+            ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
         }
         private void Home_Clicked(object sender, EventArgs e)
         {

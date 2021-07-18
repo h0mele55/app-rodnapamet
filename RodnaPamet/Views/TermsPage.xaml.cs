@@ -23,12 +23,13 @@ namespace RodnaPamet.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new AboutViewModel(this);
+
+            ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         async protected override void OnAppearing()
         {
             base.OnAppearing();
-            ContentStack.Margin = new Thickness(0, StatusBar.Height, 0, BottomNav.Height);
         }
 
         private void RodnaPametLink_Tapped(object sender, EventArgs e)
@@ -48,6 +49,11 @@ namespace RodnaPamet.Views
         private void Records_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new RecordingsPage();
+        }
+
+        void ImageButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
         }
     }
 }

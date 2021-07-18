@@ -7,12 +7,26 @@
 
   <ItemGroup>
     <Compile Remove="AppShell.xaml.cs" />
+    <Compile Remove="CustomShell.cs" />
+    <Compile Remove="GeneralDevicesStyle - Copy.xaml.cs" />
+    <Compile Remove="GeneralDevicesStyle.xaml.cs" />
+    <Compile Remove="LoaderPage.xaml.cs" />
+    <Compile Remove="LoginPage.xaml.cs" />
+    <Compile Remove="OnScreenSize.cs" />
+    <Compile Remove="SmallDevicesStyle.xaml.cs" />
     <Compile Remove="Views\CameraView.cs" />
+    <Compile Remove="Views\LoaderPage.xaml.cs" />
     <Compile Remove="Views\NewItemPage.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="AppShell.xaml" />
+    <EmbeddedResource Remove="GeneralDevicesStyle.xaml" />
+    <EmbeddedResource Remove="GeneralDevicesStyle1.xaml" />
+    <EmbeddedResource Remove="GeneralDevicesStyle2.xaml" />
+    <EmbeddedResource Remove="LargeDevicesStyle.xaml" />
+    <EmbeddedResource Remove="SmallDevicesStyle.xaml" />
+    <EmbeddedResource Remove="Views\LoaderPage.xaml" />
     <EmbeddedResource Remove="Views\NewItemPage.xaml" />
   </ItemGroup>
 
@@ -20,11 +34,11 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
-    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />  
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
-    <PackageReference Include="Xam.Plugin.TabView" Version="1.1.1" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />  
     <PackageReference Include="Xamarin.Controls.TabView" Version="1.0.4.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +53,9 @@
     </Compile>
     <Compile Update="Views\CameraChooserPage.xaml.cs">
       <DependentUpon>CameraChooserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\TermsPage.xaml.cs">
       <DependentUpon>TermsPage.xaml</DependentUpon>
@@ -69,6 +86,9 @@
     <EmbeddedResource Update="Views\CameraPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\RecorderPage - Copy.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -83,10 +103,19 @@
     <None Remove="Mesta.json" />
     <None Remove="Oblasti.json" />
     <None Remove="Obstini.json" />
+    <None Remove="Xamarin.Essentials" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">
       <HintPath>..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="GeneralDevicesStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SmallDevicesStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

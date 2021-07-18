@@ -4,7 +4,6 @@
              x:Class="RodnaPamet.Views.TermsPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
              xmlns:rp="clr-namespace:RodnaPamet"
-             BackgroundImageSource="background.jpg"
              Title="Родна паметъ">
     
     <ContentPage.Resources>
@@ -17,7 +16,16 @@
     </ContentPage.Resources>
 
     <AbsoluteLayout>
-        <ScrollView
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>        <ScrollView
             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             AbsoluteLayout.LayoutFlags="All">
             <StackLayout
@@ -75,7 +83,7 @@ RodnaPamet има право да събира и съхранява добро�
 С приемането на настоящите Общи Условия, потребител, доброволно предоставил личните си данни през страниците на RodnaPamet, изрично се съгласява RodnaPamet да показва, изпраща, зарежда и др. всякакви адресирани до потребителя рекламни материали."></Label>
 
 
-            <Label FontSize="16" Padding="0,24,0,0">
+            <Label FontSize="Medium" Padding="0,24,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="RodnaPametLink_Tapped"></TapGestureRecognizer>
                 </Label.GestureRecognizers>
@@ -115,7 +123,7 @@ RodnaPamet има право да събира и съхранява добро�
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -124,6 +132,14 @@ RodnaPamet има право да събира и съхранява добро�
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
+                    <ImageButton
+                    Clicked="ImageButton_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
             </Grid>
             <Image
                 VerticalOptions="Start"
@@ -153,32 +169,6 @@ RodnaPamet има право да събира и съхранява добро�
                 <Image 
                     Aspect="AspectFill"
                     Source="tabbar.jpg"></Image>
-                <StackLayout
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="CenterAndExpand"
-                    Orientation="Horizontal">
-                    <ImageButton
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
-                        BackgroundColor="Transparent"
-                        Clicked="Home_Clicked"
-                        Source="home.png"></ImageButton>
-                    <ImageButton
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
-                        BackgroundColor="Transparent"
-                        Clicked="Record_Clicked"
-                        Source="record.png"></ImageButton>
-                    <ImageButton
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
-                        BackgroundColor="Transparent"
-                        Clicked="Records_Clicked"
-                        Source="records.png"></ImageButton>
-                </StackLayout>
             </Grid>
         </StackLayout>
     </AbsoluteLayout>

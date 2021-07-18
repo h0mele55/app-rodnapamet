@@ -6,7 +6,6 @@
              xmlns:cameraView="clr-namespace:RodnaPamet.Views"
              xmlns:rp="clr-namespace:RodnaPamet"
              Title="{Binding Title}"
-             BackgroundImageSource="background.jpg"
              x:Class="RodnaPamet.Views.RecordingsPage">
 
     <ContentPage.Resources>
@@ -15,41 +14,56 @@
     </ContentPage.Resources>
 
     <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="BackgroundGrid">
+            <Image
+                Aspect="AspectFill"
+                Source="background.jpg"></Image>
+        </Grid>
         <ScrollView
-            x:Name="ContentStack"
+            x:Name="ListContainer"
             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             AbsoluteLayout.LayoutFlags="All">
             <StackLayout
-            x:DataType="local:ItemsViewModel"
-            Spacing="0"
-            Padding="0, 0, 0, 10">
+                x:Name="ContentStack"
+                Spacing="0"
+                Padding="0, 0, 0, 0">
+                <Grid
+                    MinimumHeightRequest="1"
+                    BackgroundColor="Transparent">
+                    <Frame
+                        HasShadow="False"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="{StaticResource HoverBackground}"
+                        Opacity="{StaticResource HoverOpacity}"></Frame>
                 <StackLayout
+                    x:DataType="local:ItemsViewModel"
                     x:Name="ItemsListView"
                     Spacing="0"
                     BackgroundColor="Transparent"
                     BindableLayout.ItemsSource="{Binding Items}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <SwipeView
+<!--                            <SwipeView
+                                    x:DataType="model:Item"
                             BackgroundColor="Transparent">
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Text="Delete"
                                         BackgroundColor="{StaticResource Secondary}"
-                                        StyleClass="DeleteButton"
+                                        StyleId="DeleteButton"
+                                        ClassId="DeleteButton"
                                         Invoked="SwipeItem_Invoked" />
                                     </SwipeItems>
-                                </SwipeView.LeftItems>
-                                <Grid
-                                    x:DataType="model:Item"
-                                    BackgroundColor="Transparent">
-                                    <Frame
-                                        HasShadow="False"
-                                        BackgroundColor="{StaticResource HoverBackground}"
-                                        Opacity="{StaticResource HoverOpacity}"></Frame>
+                                </SwipeView.LeftItems> -->
                                     <StackLayout 
-                                Margin="5"
-                                Padding="5"
+                                        Margin="5"
+                                        Padding="5"
+                                    x:DataType="model:Item"
                                         Spacing="0"
                                         BackgroundColor="Transparent"
                                 HorizontalOptions="FillAndExpand">
@@ -131,30 +145,30 @@
                                 IsVisible="{Binding Uploading}"
                                 Text="Записът се изпраща на Родна памет!" 
                                 ></Label>
-                                    </StackLayout>
-                                    <Grid.GestureRecognizers>
+                                    <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer 
                                     NumberOfTapsRequired="1"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
                                     CommandParameter="{Binding }">
                                         </TapGestureRecognizer>
-                                    </Grid.GestureRecognizers>
-                                </Grid>
-                            </SwipeView>
+                                    </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+<!--                            </SwipeView> -->
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
+                                </Grid>
 
                 <Grid
                     x:Name="NoRecordsLabel"
                     BackgroundColor="Transparent">
                     <Frame
                         HasShadow="False"
-                    BackgroundColor="{StaticResource HoverBackground}"
-                    Opacity="{StaticResource HoverOpacity}"></Frame>
-                    <StackLayout
-                        Margin="10, 20, 10, 0">
+                        BackgroundColor="{StaticResource HoverBackground}"
+                        Opacity="{StaticResource HoverOpacity}"></Frame>
+                    <StackLayout>
                         <Label
+                            Margin="10, 0, 10, 0"
                             StyleClass="WarningMessageTitle"
                             Text="Нямате направени записи"></Label>
                     </StackLayout>
@@ -183,7 +197,7 @@
                     Aspect="AspectFill"
                     Source="statusbar.jpg"></Image>
                 <Label
-                    StyleClass="PageTitle"
+                    Style="{DynamicResource DPageTitle}"
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
@@ -228,14 +242,14 @@
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Home_Clicked"
                         Source="home.png"></ImageButton>
                     <ImageButton
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Record_Clicked"
                         Source="record.png"></ImageButton>
@@ -243,7 +257,7 @@
                         StyleClass="Selected"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand"
-                        HeightRequest="35"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
                         BackgroundColor="Transparent"
                         Clicked="Records_Clicked"
                         Source="records.png"></ImageButton>
