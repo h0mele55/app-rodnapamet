@@ -4,7 +4,7 @@
              x:Class="RodnaPamet.Views.TermsPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
              xmlns:rp="clr-namespace:RodnaPamet"
-             Title="Родна паметъ">
+             Title="Родна паметь">
     
     <ContentPage.Resources>
         <ResourceDictionary>

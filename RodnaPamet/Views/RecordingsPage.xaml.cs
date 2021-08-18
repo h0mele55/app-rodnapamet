@@ -37,6 +37,11 @@ namespace RodnaPamet.Views
             NoRecordsLabel.IsVisible = _viewModel.Items.Count == 0;
             ItemsListView.IsVisible = _viewModel.Items.Count != 0;
         }
+        protected override bool OnBackButtonPressed()
+        {
+            App.Current.MainPage = new AboutPage();
+            return true;
+        }
 
         private void SwipeItem_Invoked(object sender, EventArgs e)
         {

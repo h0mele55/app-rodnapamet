@@ -31,6 +31,11 @@ namespace RodnaPamet.Views
         {
             base.OnAppearing();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            App.Current.MainPage = new AdvisorPage();
+            return true;
+        }
         private void Home_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new AboutPage();

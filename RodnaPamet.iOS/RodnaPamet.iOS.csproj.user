@@ -25,6 +25,6 @@
     <DevelopmentTeamId>
     </DevelopmentTeamId>
     <ActiveDebugProfile>Local Device</ActiveDebugProfile>
-    <DefaultDevice>iPhone 12 iOS 14.4</DefaultDevice>
+    <DefaultDevice>iPhone 12 iOS 14.5</DefaultDevice>
   </PropertyGroup>
 </Project>

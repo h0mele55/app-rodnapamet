@@ -19,7 +19,7 @@ namespace RodnaPamet.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new CameraChooserViewModel(this);
-            ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
+            ContentStack.Padding = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
         public CameraChooserPage(string type)
@@ -32,6 +32,11 @@ namespace RodnaPamet.Views
             base.OnAppearing();
             ((App)App.Current).GetAllPermissions();
             viewModel.OnAppearing();
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            App.Current.MainPage = new AboutPage();
+            return true;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, string> query)

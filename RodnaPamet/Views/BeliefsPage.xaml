@@ -4,7 +4,7 @@
              x:Class="RodnaPamet.Views.BeliefsPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
              xmlns:rp="clr-namespace:RodnaPamet"
-             Title="Родна паметъ">
+             Title="{Binding Title}">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -35,11 +35,13 @@
                 Padding="30,24,30,24"
                 VerticalOptions="StartAndExpand"
                 HorizontalOptions="FillAndExpand">
+                <!--
                 <Label Text="Вѣрую" Style="{StaticResource PageInnerTitle}">
                     <Label.Effects>
 				        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
 			        </Label.Effects>
                 </Label>
+                -->
                 <!--
                 <Label
                     IsVisible="False"
@@ -56,7 +58,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Родна Паметъ "></Span>
+                                <Span Text="Родна паметь "></Span>
                                 <Span Text="и"></Span>
                                 <Span Text="ма за цѣль да обѣдини и запази за бѫдещитѣ поколения на България:"></Span>
                             </FormattedString.Spans>
@@ -224,7 +226,7 @@
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
-                    Text="Родна паметъ">
+                    Text="{Binding Title}">
                     <Label.Effects>
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>

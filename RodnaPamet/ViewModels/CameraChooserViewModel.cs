@@ -15,7 +15,7 @@ namespace RodnaPamet.ViewModels
         public CameraChooserViewModel(IAnimatable cont) : base(cont)
         {
 
-            Title = "Записъ";
+            Title = "Новъ Записъ";
             SelectStoryCommand = new Command(async () => await ExecuteStoryCommand());
             SelectValuesCommand = new Command(async () => await ExecuteValuesCommand());
         }

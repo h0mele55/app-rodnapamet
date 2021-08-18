@@ -33,7 +33,7 @@ namespace RodnaPamet.Views
                         (context.IsStory == false || context.TypeDescription.Trim() != ""))
                 {
                     context.SaveItemToDB();
-                    UploadHelper.AddFileToUpload(this, context.Item);
+                    UploadHelper.DoFileToUpload(this, context.Item);
                     App.Current.MainPage = new RecordingsPage();
                 }
                 else

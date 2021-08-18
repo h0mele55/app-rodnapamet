@@ -11,7 +11,9 @@ namespace RodnaPamet.Views
         public BeliefsPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new AboutViewModel(this);
+            viewModel = new AboutViewModel(this);
+            viewModel.Title = "Верую";
+            BindingContext = viewModel;
             ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
@@ -19,6 +21,12 @@ namespace RodnaPamet.Views
         {
             base.OnAppearing();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            App.Current.MainPage = new AboutPage();
+            return true;
+        }
+
         private void Home_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new AboutPage();

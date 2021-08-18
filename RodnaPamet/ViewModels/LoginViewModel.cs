@@ -169,9 +169,8 @@ namespace RodnaPamet.ViewModels
                     else
                     {
                         // todo: fire event for no luck message
-                        ErrorHandler?.Invoke(this, null);
+                        Error?.Invoke(this, "Грѣшно потрѣбителско име или тайна дума!");
                     }
-
                 }
                 catch (System.OperationCanceledException ex)
                 {
@@ -278,7 +277,7 @@ namespace RodnaPamet.ViewModels
                 Password.Any(char.IsLower) == false ||
                 Password.Any(char.IsNumber) == false)
             {
-                Error?.Invoke(this, "Тайната дума трѣбва да съдържа главни, малки букви, поне една цифра и да е съ дължина оп-голѣма отъ 6 знака!");
+                Error?.Invoke(this, "Тайната дума трѣбва да съдържа главни, малки букви, поне една цифра и да е съ дължина по-голѣма отъ 6 знака!");
                 return;
             }
             if (Password != Password2)

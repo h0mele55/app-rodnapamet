@@ -37,6 +37,8 @@ namespace RodnaPamet
         public static double HeaderSizeNoFix = 30;
         public static double HeaderSizeFix = 30;
 
+        public static bool IsStartup = true;
+
         public enum AppLifecycle
         { 
             Sleep,
@@ -78,7 +80,7 @@ namespace RodnaPamet
             double targetWidth = DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density;
 
             Label Measured = new Label();
-            Measured.Text = "Родна паметъ";
+            Measured.Text = "Родна паметь";
             Measured.Style = ((List<Style>)Application.Current.Resources["Xamarin.Forms.StyleClass.PageTitle"])[0];
 
             App.HeaderFontSize = DependencyService.Get<ITextSize>().GetFontSize("РоднаРпаметъ", Measured.FontFamily, 0.7 * targetWidth, 0.6 * targetWidth * StatusBarSize.Height / StatusBarSize.Width);
@@ -102,7 +104,7 @@ namespace RodnaPamet
             ((Style)Resources["DBigButton"]).Setters.Add(new Setter()
             {   
                 Property = Label.FontSizeProperty,
-                Value = (int)App.BigButtonSize
+                Value = (int)App.HeaderFontSize//BigButtonSize
             });
             Resources["DSmallButton"] = ((List<Style>)Application.Current.Resources["Xamarin.Forms.StyleClass.Button"])[0];
             ((Style)Resources["DSmallButton"]).Setters.Add(new Setter()

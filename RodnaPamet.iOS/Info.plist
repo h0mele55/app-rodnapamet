@@ -18,7 +18,7 @@
 	<key>MinimumOSVersion</key>
 	<string>10.2</string>
 	<key>CFBundleDisplayName</key>
-	<string>Родна Паметъ</string>
+	<string>Родна паметь</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.rodnapamet.app</string>
 	<key>CFBundleVersion</key>
@@ -26,7 +26,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
-	<string>Родна Паметъ</string>
+	<string>Родна паметь</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSCameraUsageDescription</key>
@@ -54,5 +54,7 @@
 	<string>Record video</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Record video</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 </dict>
 </plist>

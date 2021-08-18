@@ -153,7 +153,7 @@ namespace RodnaPamet.ViewModels
         {
             camPreview = cameraPreview;
 
-            Title = "Записъ";
+            Title = "Новъ Записъ";
             RecordControlLabel = "Запись";
             RecordStopLabel = "Спри";
             RecLabel = "";

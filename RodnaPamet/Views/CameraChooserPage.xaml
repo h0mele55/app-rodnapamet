@@ -31,6 +31,12 @@
                                 AbsoluteLayout.LayoutFlags="All"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                 Spacing="0">
+                <Label 
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="End"
+                    StyleClass="Text" 
+                    Text="Запишетѣ видео (по вѫзможность срѣдъ природата, въ красива местность отъ селото), съ дължина от около 5 минути, въ което задаватѣ слѣднитѣ въпроси:"/>
+
                 <Grid
                         VerticalOptions="FillAndExpand">
                     <Image Source="redbuttonback.png"></Image>
@@ -45,8 +51,15 @@
                         </Label.Effects>
                     </Label>
                 </Grid>
+
+                <Label 
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="Center"
+                    StyleClass="Text" 
+                    Text="Използвайте дадените въпроси за видео съ дължина от около 5 минути"/>
+                
                 <Grid
-                        VerticalOptions="FillAndExpand">
+                    VerticalOptions="FillAndExpand">
                     <Image Source="redbuttonback.png"></Image>
                     <Label
                         Text="Приказка"
@@ -59,6 +72,11 @@
                         </Label.Effects>
                     </Label>
                 </Grid>
+                <Label 
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="Start"
+                    StyleClass="Text" 
+                    Text="Запишете приказка от 1 - 5 минути"/>
                 <StackLayout
                         IsVisible="False"
                         Spacing="0">
@@ -124,7 +142,7 @@
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
-                    Text="Записъ">
+                    Text="{Binding Title}">
                         <Label.Effects>
                             <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                         </Label.Effects>

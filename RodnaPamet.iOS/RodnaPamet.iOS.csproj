@@ -94,7 +94,6 @@
     <Compile Include="iOSNotificationReceiver.cs" />
     <Compile Include="LabelShadowEffect.cs" />
     <BundleResource Include="Resources\Roboto-Medium.ttf" />
-    <BundleResource Include="Resources\splash2.jpg" />
     <BundleResource Include="Resources\shevica.png" />
     <Compile Include="ImageResource.cs" />
     <Compile Include="TextSize.cs" />
@@ -155,7 +154,6 @@
     <BundleResource Include="Resources\icon_video.png" />
     <BundleResource Include="Resources\icon_video%402x.png" />
     <BundleResource Include="Resources\icon_video%403x.png" />
-    <BundleResource Include="Resources\splash.jpg" />
     <BundleResource Include="Entitlements.develop.plist" />
     <BundleResource Include="Resources\tabbar.jpg" />
     <BundleResource Include="Resources\statusbar.jpg" />
@@ -233,9 +231,18 @@
     <BundleResource Include="Resources\whitebottom.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\splash3.jpg" />
+    <BundleResource Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\back.png" />
+    <BundleResource Include="Resources\splash.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\whitebuttonback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\largegreenbuttonback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\largewhitebuttonback.png" />
   </ItemGroup>
 </Project>

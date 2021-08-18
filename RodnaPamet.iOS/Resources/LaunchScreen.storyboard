@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="132" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pLf-Bh-wja">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="132" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pLf-Bh-wja">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash3.jpg" width="107.73067474365234" height="191.5810546875"/>
+        <image name="splash.jpg" width="107.73067474365234" height="191.5810546875"/>
     </resources>
 </document>

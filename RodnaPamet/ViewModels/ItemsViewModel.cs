@@ -19,7 +19,7 @@ namespace RodnaPamet.ViewModels
 
         public ItemsViewModel(IAnimatable cont) : base(cont)
         {
-            Title = "Записи";
+            Title = "Сборникъ";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

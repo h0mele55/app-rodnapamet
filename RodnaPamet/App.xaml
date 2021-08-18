@@ -244,6 +244,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="Label" Class="WhiteButton">
+                <Setter Property="TextColor" Value="Black"></Setter>
+            </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>

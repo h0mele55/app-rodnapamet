@@ -80,6 +80,11 @@ namespace RodnaPamet.Views
         {
             base.OnAppearing();
 		}
+		protected override bool OnBackButtonPressed()
+		{
+			App.Current.MainPage = new CameraChooserPage();
+			return true;
+		}
 
 		private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {

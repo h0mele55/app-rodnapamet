@@ -42,32 +42,32 @@
                     <Label IsVisible="false" StyleClass="SubTitleText" Text="Съхрани го като следваш стъпките за улеснение."/>
                     <Label IsVisible="false" StyleClass="StrongText" Text="За да направите нов запис"/>
                 </StackLayout>
-                <Grid
-                    VerticalOptions="FillAndExpand">
-                    <Image Source="redbuttonback.png" Opacity="0.8"></Image>
-                    <Label
-                        Text="Запись"
-                        Style="{DynamicResource DBigButton}">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenWebCommand}"></TapGestureRecognizer>
-                        </Label.GestureRecognizers>
-                        <Label.Effects>
-				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
-			            </Label.Effects>
-                    </Label>
-                </Grid>
                 <Label
                     IsVisible="false"
                     Margin="0,20,0,0"
                     StyleClass="Text"
                     VerticalOptions="FillAndExpand"
                     Text="За да почерпите мъдрост"/>
-                <Grid
-                    VerticalOptions="FillAndExpand">
-                    <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
+            <StackLayout VerticalOptions="CenterAndExpand">
+            <Grid>
+                <Image Source="largewhitebuttonback.png" Opacity="0.8"></Image>
+                <Label
+                    Text="Верую"
+                    Style="{DynamicResource DBigButton}"
+                    TextColor="{StaticResource Secondary}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenBeliefsCommand}"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
+            <Grid>
+                    <Image Source="largegreenbuttonback.png" Opacity="0.8"></Image>
                     <Label
-                        Text="Архивъ"
-                        Style="{DynamicResource DSmallButton}">
+                        Text="Сборникъ"
+                        Style="{DynamicResource DBigButton}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenRecordsCommand}"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
@@ -82,30 +82,18 @@
                     Style="{DynamicResource DSmallButton}"
                     Text="За да разберете смисъла"
                     VerticalOptions="FillAndExpand"/>
-                <Grid>
-                    <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
-                    <Label
-                        Text="Верую"
-                        StyleClass="Button">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenBeliefsCommand}"></TapGestureRecognizer>
-                        </Label.GestureRecognizers>
-                        <Label.Effects>
-				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
-			            </Label.Effects>
-                    </Label>
-                </Grid>
                 <Label
                     IsVisible="false"
                     Margin="0,20,0,0"
                     Style="{DynamicResource DSmallButton}"
                     Text="За да получите просветление"
                     VerticalOptions="FillAndExpand"/>
+                <!--
                 <Grid
                     VerticalOptions="FillAndExpand">
                     <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
                     <Label
-                        Text="Съветник"
+                        Text="Съветникь"
                         StyleClass="Button">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenAdvisorCommand}"></TapGestureRecognizer>
@@ -115,7 +103,22 @@
 			            </Label.Effects>
                     </Label>
                 </Grid>
+                -->
+            <Grid>
+                <Image Source="redbuttonback.png" Opacity="0.8"></Image>
+                <Label
+                        Text="Новъ Записъ"
+                        Style="{DynamicResource DBigButton}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenWebCommand}"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                    <Label.Effects>
+                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                    </Label.Effects>
+                </Label>
+            </Grid>
             </StackLayout>
+        </StackLayout>
     <!--    
     </ScrollView>
         -->
@@ -141,7 +144,7 @@
                     Margin="0, 30, 0, 0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="CenterAndExpand"
-                    Text="Родна паметъ">
+                    Text="Родна паметь">
                     <Label.Effects>
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>

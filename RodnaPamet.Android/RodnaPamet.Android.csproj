@@ -77,6 +77,7 @@
     <Compile Include="Camera2\CameraCaptureStateSessionListener.cs" />
     <Compile Include="Camera2\ImageAvailableListener.cs" />
     <Compile Include="ImageResource.cs" />
+    <Compile Include="IntentHelper.cs" />
     <Compile Include="LabelShadowEffect.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="DroidNotificationManager.cs" />
@@ -203,6 +204,17 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\whitebuttonback.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\largegreenbuttonback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\largewhitebuttonback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
