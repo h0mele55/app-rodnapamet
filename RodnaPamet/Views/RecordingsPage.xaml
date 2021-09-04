@@ -206,6 +206,14 @@
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
+                <ImageButton
+                    Clicked="Back_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
             </Grid>
             <Image
                 VerticalOptions="Start"

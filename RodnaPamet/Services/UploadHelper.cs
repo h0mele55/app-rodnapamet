@@ -26,19 +26,24 @@ namespace RodnaPamet.Services
 		private static IDataStore<Item> store = DependencyService.Get<IDataStore<Item>>();
 
 		private static WebClient client = new WebClient();
-
-		public async static void AddFileToUpload(Page page, Item item)
+		public async static void AppendFileToUpload(Page page, Item item)
+		{
+			// Call interface to execute AddFileToUpload
+			IUploadService UploadService = DependencyService.Get<IUploadService>();
+            _ = UploadService.UploadFile(page, item);
+		}
+		public async static void DoFileToUpload(Item item)
 		{
 			var access = Connectivity.NetworkAccess;
 			if (access != NetworkAccess.Internet)
 			{
-				await page.DisplayAlert("Родна памет - достъп до internet", "Приложението не може да качи видео файла, защото няма достъп до internet!", "Добре");
+				await App.Current.MainPage.DisplayAlert("Родна памет - достъп до internet", "Приложението не може да качи видео файла, защото няма достъп до internet!", "Добре");
 				return;
 			}
 			var profiles = Connectivity.ConnectionProfiles;
 			if (!profiles.Contains(ConnectionProfile.WiFi))
 			{
-				if (!await page.DisplayAlert("Родна памет - достъп до internet", "Няма засечена WIFi връзка на Вашето устройство! Качването на видео файлове през мобилната мрежа може да доведе до увеличение на сметката Ви за мобилни услуги!", "Използвай мобилни данни", "Изчакай WiFi достъп"))
+				if (!await App.Current.MainPage.DisplayAlert("Родна памет - достъп до internet", "Няма засечена WIFi връзка на Вашето устройство! Качването на видео файлове през мобилната мрежа може да доведе до увеличение на сметката Ви за мобилни услуги!", "Използвай мобилни данни", "Изчакай WiFi достъп"))
 				{
 					return;
 				}
@@ -64,6 +69,11 @@ namespace RodnaPamet.Services
 			multipart.AddField("SubType", item.TypeDescription);
 
 			var finfo = new FileInfo(item.Filename);
+			if (finfo.Exists == false)
+			{
+				App.Current.MainPage.DisplayAlert("Грешка", "Записът е изтрит извън приложението!", "Добре");
+				return;
+			}
 			uploadFileSize = finfo.Length;
 			multipart.AddFile("file", finfo);
 
@@ -141,22 +151,6 @@ namespace RodnaPamet.Services
 			}
 		}
 
-        /*
-private async static Task<bool> SaveVideoMetadata(Item item)
-{
-    NameValueCollection data = new NameValueCollection();
-    data.Add("UserID", "0");
-    data.Add("VideoType", item.Type.ToString());
-    data.Add("Subject", item.Subject);
-    data.Add("Age", item.Age.ToString());
-    data.Add("Description", item.Description);
-    data.Add("Village", item.Village);
-    data.Add("Operator", item.Cameraman);
-    data.Add("SubType", item.SubDescription);
-    var responseMessage = await client.UploadValuesTaskAsync(new Uri(Constants.UploadUrl), data);
-    return true;
-}
-*/
         private static void Progress_ProgressChanged(object sender, UploadBytesProgress e)
 		{
 			Task.Run(() => {

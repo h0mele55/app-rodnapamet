@@ -35,10 +35,11 @@
                     VerticalOptions="FillAndExpand"
                     VerticalTextAlignment="End"
                     StyleClass="Text" 
+                    IsVisible="false"
                     Text="Запишетѣ видео (по вѫзможность срѣдъ природата, въ красива местность отъ селото), съ дължина от около 5 минути, въ което задаватѣ слѣднитѣ въпроси:"/>
 
                 <Grid
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="EndAndExpand">
                     <Image Source="redbuttonback.png"></Image>
                     <Label
                         Text="Цѣнности"
@@ -52,14 +53,22 @@
                     </Label>
                 </Grid>
 
-                <Label 
-                    VerticalOptions="FillAndExpand"
-                    VerticalTextAlignment="Center"
-                    StyleClass="Text" 
-                    Text="Използвайте дадените въпроси за видео съ дължина от около 5 минути"/>
-                
+                <StackLayout
+                        VerticalOptions="CenterAndExpand">
+                    <Label 
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        StyleClass="Text" 
+                        Text="Използвайте дадените въпроси за видео съ дължина от около 5 минути."/>
+                    <Label 
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        StyleClass="Text" 
+                        Text="Запишете приказка от 1 - 5 минути."/>
+                </StackLayout>
+
                 <Grid
-                    VerticalOptions="FillAndExpand">
+                    VerticalOptions="StartAndExpand">
                     <Image Source="redbuttonback.png"></Image>
                     <Label
                         Text="Приказка"
@@ -75,7 +84,8 @@
                 <Label 
                     VerticalOptions="FillAndExpand"
                     VerticalTextAlignment="Start"
-                    StyleClass="Text" 
+                    StyleClass="Text"
+                    IsVisible="false"
                     Text="Запишете приказка от 1 - 5 минути"/>
                 <StackLayout
                         IsVisible="False"
@@ -147,6 +157,14 @@
                             <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                         </Label.Effects>
                     </Label>
+                    <ImageButton
+                    Clicked="Back_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
                 </Grid>
                 <Image
                 VerticalOptions="Start"

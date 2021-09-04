@@ -63,5 +63,10 @@ namespace RodnaPamet.Views
             viewModel.IsBusy = true;
             App.Current.MainPage = new RecordingsPage();
         }
+        private void Back_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new AboutPage();
+        }
+
     }
 }

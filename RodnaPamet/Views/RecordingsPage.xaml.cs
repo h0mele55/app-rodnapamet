@@ -60,5 +60,9 @@ namespace RodnaPamet.Views
         {
             App.Current.MainPage = new RecordingsPage();
         }
+        private void Back_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new AboutPage();
+        }
     }
 }

@@ -31,23 +31,9 @@
                 Spacing="0" 
                 Padding="0"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                 AbsoluteLayout.LayoutFlags="All">
-                <StackLayout
-                    Padding="30,24,30,24"
-                    Spacing="10"
-                    VerticalOptions="Start">
-                    <Label IsVisible="false" StyleClass="SmallTitleText" Text="Наследство от мъдри слова!"/>
-                    <Label IsVisible="false" StyleClass="SubTitleText" Text="Съхрани го като следваш стъпките за улеснение."/>
-                    <Label IsVisible="false" StyleClass="StrongText" Text="За да направите нов запис"/>
-                </StackLayout>
-                <Label
-                    IsVisible="false"
-                    Margin="0,20,0,0"
-                    StyleClass="Text"
-                    VerticalOptions="FillAndExpand"
-                    Text="За да почерпите мъдрост"/>
             <StackLayout VerticalOptions="CenterAndExpand">
             <Grid>
                 <Image Source="largewhitebuttonback.png" Opacity="0.8"></Image>
@@ -76,47 +62,19 @@
                         </Label.Effects>
                     </Label>
                 </Grid>
-                <Label
-                    IsVisible="false"
-                    Margin="0,20,0,0"
-                    Style="{DynamicResource DSmallButton}"
-                    Text="За да разберете смисъла"
-                    VerticalOptions="FillAndExpand"/>
-                <Label
-                    IsVisible="false"
-                    Margin="0,20,0,0"
-                    Style="{DynamicResource DSmallButton}"
-                    Text="За да получите просветление"
-                    VerticalOptions="FillAndExpand"/>
-                <!--
-                <Grid
-                    VerticalOptions="FillAndExpand">
-                    <Image Source="greenbuttonback.png" Opacity="0.8"></Image>
+                <Grid>
+                    <Image Source="redbuttonback.png" Opacity="0.8"></Image>
                     <Label
-                        Text="Съветникь"
-                        StyleClass="Button">
+                            Text="Новъ Записъ"
+                            Style="{DynamicResource DBigButton}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenAdvisorCommand}"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding OpenWebCommand}"></TapGestureRecognizer>
                         </Label.GestureRecognizers>
                         <Label.Effects>
-				            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
-			            </Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
                     </Label>
                 </Grid>
-                -->
-            <Grid>
-                <Image Source="redbuttonback.png" Opacity="0.8"></Image>
-                <Label
-                        Text="Новъ Записъ"
-                        Style="{DynamicResource DBigButton}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenWebCommand}"></TapGestureRecognizer>
-                    </Label.GestureRecognizers>
-                    <Label.Effects>
-                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
-                    </Label.Effects>
-                </Label>
-            </Grid>
             </StackLayout>
         </StackLayout>
     <!--    
@@ -149,6 +107,14 @@
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
+                <ImageButton
+                    Clicked="Back_Clicked"
+                    Margin="10, 30, 0, 0"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    HeightRequest="25"
+                    VerticalOptions="CenterAndExpand"
+                    Source="back.png"></ImageButton>
             </Grid>
             <Image
                 VerticalOptions="Start"

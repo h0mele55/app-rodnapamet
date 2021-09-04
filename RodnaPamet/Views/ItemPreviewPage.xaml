@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:RodnaPamet.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
-             xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer" xmlns:rp="clr-namespace:RodnaPamet"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer" xmlns:rp="clr-namespace:RodnaPamet" xmlns:xamarians="clr-namespace:Xamarians.MediaPlayer;assembly=Xamarians.MediaPlayer"
              x:Class="RodnaPamet.Views.ItemPreviewPage"
              Title="{Binding Subject}">
     <ContentPage.Resources>
@@ -30,16 +31,15 @@
                 x:Name="ContentStack"
                 Spacing="0" 
                 Padding="0">
-
-                <videoplayer:VideoPlayer
-                    DisplayControls="True"
+                <xamarians:VideoPlayer
                     AutoPlay="True"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="Fill"
-                    FillMode="ResizeAspectFill"
+                    VerticalOptions="FillAndExpand"
+                    HeightRequest="300"
+                    WidthRequest="200"
                     BackgroundColor="Black"
                     Margin="15"
-                    Source="{Binding Filename}"></videoplayer:VideoPlayer>
+                    Source="{Binding Filename}"></xamarians:VideoPlayer>
                 <Label Text="{Binding Description}" 
                     LineBreakMode="NoWrap"
                     StyleClass="ListDescription">

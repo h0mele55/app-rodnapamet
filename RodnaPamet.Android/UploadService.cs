@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
+using Plugin.CurrentActivity;
+using RodnaPamet.Models;
 using RodnaPamet.Services;
 using System;
 using System.Collections.Generic;
@@ -17,45 +19,15 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(RodnaPamet.Droid.UploadService))]
 namespace RodnaPamet.Droid
 {
+    //[Service(IsolatedProcess = true)]
+    //[IntentFilter(new String[] { "com.rodnapamet.UploadService" })]
     class UploadService : IUploadService
     {
-        public bool UploadFile()
+        public bool UploadFile(Page Page, Item Item)
         {
-            INotificationManager NotificationManager = DependencyService.Get<INotificationManager>();
-            NotificationManager.SendNotification("Send", "Send body", null, true);
-
-            int max = 100;
-            int current = 0;
-
-            //FileUpload
-
-            /*
-            Device.StartTimer(TimeSpan.FromSeconds(1), () => {
-                // call your method to check for notifications here
-                NotificationManager.UpdateNotification(max, current);
-                if (current == max)
-                {
-                    NotificationManager.UpdateNotification(0, 0);
-                }
-                current += 10;
-
-                // Returning true means you want to repeat this timer
-                return current < max;
-            });
-            */
-
-            // Do the job here that tracks the progress.
-            // Usually, this should be in a 
-            // worker thread 
-            // To show progress, update PROGRESS_CURRENT and update the notification with:
-            // builder.setProgress(PROGRESS_MAX, PROGRESS_CURRENT, false);
-            // notificationManager.notify(notificationId, builder.build());
-
-
-
-            // When done, update the notification one more time to remove the progress bar
-
-
+            Intent downloadIntent = new Intent(Android.App.Application.Context, typeof(IntentHelper));
+            downloadIntent.PutExtra("UploadId", Item.Id.ToString());
+            ComponentName name = Android.App.Application.Context.StartService(downloadIntent);
             return true;
         }
     }

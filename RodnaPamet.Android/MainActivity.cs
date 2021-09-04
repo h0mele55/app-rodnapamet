@@ -42,6 +42,7 @@ namespace RodnaPamet.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CrossCurrentActivity.Current.Activity = this;
+            Xamarians.MediaPlayer.Droid.VideoPlayerRenderer.Init(this);
 
             CachedImageRenderer.Init(true);
 

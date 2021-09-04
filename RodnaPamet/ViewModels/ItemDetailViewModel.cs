@@ -1,11 +1,7 @@
 ﻿using Octane.Xamarin.Forms.VideoPlayer;
 using RodnaPamet.Models;
-using RodnaPamet.Views;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 

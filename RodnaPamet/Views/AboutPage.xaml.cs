@@ -44,16 +44,23 @@ namespace RodnaPamet.Views
                 IEnumerable<Item> items = DataStore.GetItemsAsync(null).Result;
                 foreach (Item item in items)
                 {
-                    if (item.InfoComplete && !item.Uploaded && !item.Uploading)
+                    if (item.InfoComplete && !item.Uploaded && (!item.Uploading || App.IsStartup))
                     {
-                        UploadHelper.AddFileToUpload(this, item);
+                        //TODO: debug commented next line
+                        UploadHelper.AppendFileToUpload(this, item);
                     }
                 }
             }
-
-//            foreach (String family in UIFont.FamilyNames)
-//                foreach (String font in UIFont.FontNamesForFamilyName(family))
-//                    Debug.WriteLine(font);
+            App.IsStartup = false;
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            DisplayAlert("Изходъ", "Желаете ли да затворите приложението Родна паметь?", "Да", "Не").ContinueWith(task => { if(task.Result == true) System.Diagnostics.Process.GetCurrentProcess().Kill(); }, TaskScheduler.FromCurrentSynchronizationContext());
+            return true;
+        }
+        private void Back_Clicked(object sender, EventArgs e)
+        {
+            OnBackButtonPressed();
         }
 
         private void RodnaPametLink_Tapped(object sender, EventArgs e)
