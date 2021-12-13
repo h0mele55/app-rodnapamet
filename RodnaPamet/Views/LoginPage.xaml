@@ -48,7 +48,7 @@
                         </Label>
                         <StackLayout
                             Spacing="0"
-                            Padding="0"
+                            Padding="0, 10, 5, 0"
                             IsVisible="{Binding ShowInitial}">
                             <Label 
                                 Text="e-mail" 
@@ -59,6 +59,19 @@
                                 FontSize="Medium"
                                 Keyboard="Email">
                             </Entry>
+                        </StackLayout>
+                        <StackLayout
+                            Spacing="0"
+                            Padding="0, 10, 5, 0"
+                            IsVisible="{Binding ShowiOSTransparency}">
+                            <Label 
+                                Text="За да можете да правите записи, трѣбва да се запишете съ Вашиятъ e-mail! Натиснете тукъ, за да разрешите връзката съ приложението Родна Паметъ." 
+                                StyleClass="EntryLabel"
+                                Margin="10, 0, 10, 0">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Settings"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
                         <Label 
                     Text="Тайна дума" 
@@ -71,7 +84,15 @@
                     IsVisible="{Binding ShowPassword}"
                     IsPassword="True">
                         </Entry>
-
+                        <Label 
+                    Text="Ако сте забравили Вашата тайна дума, натиснете тукъ." 
+                    IsVisible="{Binding ShowPassword}"
+                    Margin="10, 20, 10, 10">
+                            
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
                     <Grid
                     IsVisible="{Binding ShowPassword}"
@@ -174,6 +195,7 @@
 
                     <StackLayout
                         IsVisible="{Binding ShowPassword, Converter={StaticResource BinaryInvertConverter}}"
+                        Margin="10, 10, 5, 0"
                         Orientation="Horizontal">
                         <Switch
                             OnColor="{StaticResource Secondary}"

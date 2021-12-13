@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RodnaPamet.ViewModels
@@ -31,6 +32,7 @@ namespace RodnaPamet.ViewModels
         private string password2;
         private string verificationCode;
         public bool TermsAccepted = false;
+        private bool iOSTransparency = false;
 
         public event EventHandler<string> Error;
         public LoginViewModel(IAnimatable cont) : base(cont)
@@ -52,6 +54,11 @@ namespace RodnaPamet.ViewModels
             {
                 SetProperty(ref showInitial, value);
             }
+        }
+        public bool ShowiOSTransparency
+        {
+            get { return iOSTransparency; }
+            set { SetProperty(ref iOSTransparency, value); }
         }
         public bool ShowPassword
         {
@@ -346,7 +353,8 @@ namespace RodnaPamet.ViewModels
 
         private async void OnTermsClicked(object obj)
         {
-            App.Current.MainPage = new TermsPage();
+            Browser.OpenAsync("https://rodnapamet.bg/terms", BrowserLaunchMode.SystemPreferred);
+            //App.Current.MainPage = new TermsPage();
         }
 
         private async void OnBackClicked(object obj)
@@ -360,8 +368,8 @@ namespace RodnaPamet.ViewModels
         private async void OnConfirmClicked(object obj)
         {
             if (VerificationCode.Trim() == "" ||
-    VerificationCode.IndexOf(" ") > -1 ||
-    VerificationCode.Length != 4)
+                VerificationCode.IndexOf(" ") > -1 ||
+                VerificationCode.Length != 4)
             {
                 Error?.Invoke(this, "Числото за потвърждение трѣбва да съдържа 4 цифри!");
                 return;

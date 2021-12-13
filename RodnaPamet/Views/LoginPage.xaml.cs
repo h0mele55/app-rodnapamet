@@ -39,7 +39,29 @@ namespace RodnaPamet.Views
             base.OnAppearing();
             viewModel.LoginSuccess += ViewModel_LoginSuccess;
             viewModel.Error += ViewModel_Error;
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                RequestTrackingPermission();
+            }
         }
+
+        private async void RequestTrackingPermission()
+        {
+            var appTrackingTransparencyPermission = DependencyService.Get<IAppTrackingTransparencyPermission>();
+            var status = await appTrackingTransparencyPermission.CheckStatusAsync();
+
+            if (status != PermissionStatus.Granted)
+            {
+                viewModel.ShowiOSTransparency = true;
+                appTrackingTransparencyPermission.RequestAsync((s) =>
+                {
+                    if(s == PermissionStatus.Granted)
+                        viewModel.ShowiOSTransparency = false;
+                });
+            }
+        }
+
 
         private void ViewModel_Error(object sender, string e)
         {
@@ -100,6 +122,17 @@ namespace RodnaPamet.Views
             object propertyValue = triggerProperty.GetValue(e);
             InvalidationTrigger actualTrigger = (InvalidationTrigger)propertyValue;
             return actualTrigger;
+        }
+
+        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            Browser.OpenAsync("https://rodnapamet.bg/remind", BrowserLaunchMode.SystemPreferred);
+        }
+
+        void TapGestureRecognizer_Settings(System.Object sender, System.EventArgs e)
+        {
+            ISettings sets = DependencyService.Get<ISettings>();
+            sets.Open();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace RodnaPamet.ViewModels
         public AboutViewModel(IAnimatable cont) : base(cont)
         {
             Title = "Родна паметь";
-            OpenWebCommand = new Command(async () => App.Current.MainPage = new CameraChooserPage());
+            OpenWebCommand = new Command(async () => App.Current.MainPage = new AudioChooserPage());
             OpenRecordsCommand = new Command(async () => App.Current.MainPage = new RecordingsPage());
             OpenBeliefsCommand = new Command(async () => App.Current.MainPage = new BeliefsPage());
             OpenAdvisorCommand = new Command(async () =>
