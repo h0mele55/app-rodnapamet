@@ -27,7 +27,10 @@ namespace RodnaPamet.Droid
         {
             Intent downloadIntent = new Intent(Android.App.Application.Context, typeof(IntentHelper));
             downloadIntent.PutExtra("UploadId", Item.Id.ToString());
-            ComponentName name = Android.App.Application.Context.StartService(downloadIntent);
+            //TODO this must be invoked on the main thread probably...
+            Device.BeginInvokeOnMainThread(() => {
+                ComponentName name = Android.App.Application.Context.StartService(downloadIntent);
+            });
             return true;
         }
     }

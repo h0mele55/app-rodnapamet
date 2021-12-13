@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RodnaPamet.Views.AboutPage"
              xmlns:vm="clr-namespace:RodnaPamet.ViewModels"
-             xmlns:rp="clr-namespace:RodnaPamet"
+             xmlns:rp="clr-namespace:RodnaPamet" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
     
     <ContentPage.Resources>
@@ -107,14 +107,18 @@
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
-                <ImageButton
-                    Clicked="Back_Clicked"
-                    Margin="10, 30, 0, 0"
-                    HorizontalOptions="Start"
-                    BackgroundColor="Transparent"
-                    HeightRequest="25"
-                    VerticalOptions="CenterAndExpand"
-                    Source="back.png"></ImageButton>
+                <StackLayout
+                    Padding="10, 30, 0, 0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Back_Clicked"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                    <forms:CachedImage
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        HeightRequest="25"
+                        VerticalOptions="CenterAndExpand"
+                        Source="back.png"></forms:CachedImage>
+                </StackLayout>
             </Grid>
             <Image
                 VerticalOptions="Start"
