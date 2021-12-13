@@ -46,8 +46,11 @@ namespace RodnaPamet.Views
                 {
                     if (item.InfoComplete && !item.Uploaded && (!item.Uploading || App.IsStartup))
                     {
-                        //TODO: debug commented next line
-                        UploadHelper.AppendFileToUpload(this, item);
+                        var res = File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), item.Filename));
+                        if(res)
+                            UploadHelper.AppendFileToUpload(this, item);
+                        else
+                            DisplayAlert("Грешка", "Записътъ е изтритъ!", "Добре");
                     }
                 }
             }
@@ -75,7 +78,7 @@ namespace RodnaPamet.Views
 
         private void Record_Clicked(object sender, EventArgs e)
         {
-            App.Current.MainPage = new CameraChooserPage();
+            App.Current.MainPage = new AudioChooserPage();
         }
 
         private void Records_Clicked(object sender, EventArgs e)

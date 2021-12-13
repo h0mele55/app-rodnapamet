@@ -21,8 +21,10 @@ namespace RodnaPamet.Services
 		public static readonly string FileToUpload;
 		public static readonly int BufferSize = 4096;
 		private static INotificationManager NotificationManager;
-		private static long uploadFileSize;
+		private static long combinedUploadFileSize;
 		private static Item lastItem;
+		private static List<Item> uploadItems = new List<Item>();
+		private static bool isUploading;
 		private static IDataStore<Item> store = DependencyService.Get<IDataStore<Item>>();
 
 		private static WebClient client = new WebClient();
@@ -37,7 +39,9 @@ namespace RodnaPamet.Services
 			var access = Connectivity.NetworkAccess;
 			if (access != NetworkAccess.Internet)
 			{
-				await App.Current.MainPage.DisplayAlert("Родна памет - достъп до internet", "Приложението не може да качи видео файла, защото няма достъп до internet!", "Добре");
+				Device.BeginInvokeOnMainThread(() => {
+					App.Current.MainPage.DisplayAlert("Родна памет - достъп до internet", "Приложението не може да качи видео файла, защото няма достъп до internet!", "Добре");
+				});
 				return;
 			}
 			var profiles = Connectivity.ConnectionProfiles;
@@ -49,40 +53,7 @@ namespace RodnaPamet.Services
 				}
 			}
 
-			NotificationManager = DependencyService.Get<INotificationManager>();
-			NotificationManager.Initialize();
-			NotificationManager.SendNotification("Видео файл", "Записва се...", null, true, 0.1f);
-
-			item.Uploading = true;
-			await store.UpdateItemAsync(item);
-			lastItem = item;
-
-			var multipart = new MultipartFormBuilder();
-
-			multipart.AddField("UserID", App.UserService.SubscribersList[0].Id);
-			multipart.AddField("VideoType", item.Type.ToString());
-			multipart.AddField("Subject", item.Subject);
-			multipart.AddField("Age", item.Age.ToString());
-			multipart.AddField("Description", item.Description);
-			multipart.AddField("Village", item.Village);
-			multipart.AddField("Operator", item.Cameraman);
-			multipart.AddField("SubType", item.TypeDescription);
-
-			var finfo = new FileInfo(item.Filename);
-			if (finfo.Exists == false)
-			{
-				App.Current.MainPage.DisplayAlert("Грешка", "Записът е изтрит извън приложението!", "Добре");
-				return;
-			}
-			uploadFileSize = finfo.Length;
-			multipart.AddFile("file", finfo);
-
-			client.UploadProgressChanged += Client_UploadProgressChanged;
-            client.UploadDataCompleted += Client_UploadDataCompleted;
-			//client.UploadFileCompleted += Client_UploadFileCompleted;
-
-			client.UploadMultipartAsync(new Uri(Constants.UploadUrl), "POST", multipart);
-
+			InitiateUpload(item);
 			/*
 
 
@@ -113,7 +84,147 @@ namespace RodnaPamet.Services
 			*/
 		}
 
-        private static void Client_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
+		private static async void InitiateUpload(Item item)
+		{
+			// upload metadata, get file key
+			// split file into chunks;
+			// queue chunks to upload;
+			NotificationManager = DependencyService.Get<INotificationManager>();
+			NotificationManager.Initialize();
+			NotificationManager.SendNotification("Видео файл", "Записва се...", null, true, 0.1f);
+
+			item.Uploading = true;
+			await store.UpdateItemAsync(item);
+			lastItem = item;
+
+			var multipart = new MultipartFormBuilder();
+
+			multipart.AddField("UserID", App.UserService.SubscribersList[0].Id);
+			multipart.AddField("VideoType", item.Type.ToString());
+			multipart.AddField("Subject", item.Subject);
+			multipart.AddField("Age", item.Age.ToString());
+			multipart.AddField("Description", item.Description);
+			multipart.AddField("Village", item.Village);
+			multipart.AddField("Operator", item.Cameraman);
+			multipart.AddField("SubType", item.TypeDescription);
+
+			client.UploadProgressChanged += Client_UploadProgressChanged;
+			client.UploadDataCompleted += Client_UploadDataCompleted;
+
+			client.UploadMultipartAsync(new Uri(Constants.UploadUrl), "POST", multipart);
+			uploadItems.Add(item);
+			foreach (Item upload in uploadItems)
+			{
+				if(upload.Uploaded == false)
+				{
+					string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), upload.Filename);
+					var finfo = new FileInfo(filePath);
+					combinedUploadFileSize += finfo.Length;
+				}
+			}
+			FindAndUploadFile();
+		}
+
+		private static async void FindAndUploadFile()
+		{
+			if (isUploading)
+				return;
+			Item foundItem = null;
+			int foundChunk = -1;
+			foreach (Item item in uploadItems)
+			{
+				if (item.Uploaded == false)
+					foundItem = item;
+			}
+
+			if (foundItem == null)
+				return;
+
+			isUploading = true;
+
+			string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), foundItem.Filename);
+			var finfo = new FileInfo(filePath);
+			if (finfo.Exists == false)
+			{
+				App.Current.MainPage.DisplayAlert("Грешка", "Записът е изтрит извън приложението!", "Добре");
+				return;
+			}
+			long uploadFileSize = finfo.Length;
+			var multipart = new MultipartFormBuilder();
+			multipart.AddFile("file", finfo);
+			client.UploadProgressChanged += Client_UploadProgressChanged;
+			client.UploadDataCompleted += Client_UploadDataCompleted;
+
+			client.UploadMultipartAsync(new Uri(Constants.AudioUrl), "POST", multipart);
+		}
+
+		private static async void FindAndUploadChunk()
+		{
+			if (isUploading)
+				return;
+			Item foundItem = null;
+			int foundChunk = -1;
+			foreach (Item item in uploadItems)
+			{
+				for (int i = 0; i < item.Chunks.Length; i++)
+				{
+					Item.Chunk chunk = item.Chunks[i];
+					if (chunk == Item.Chunk.NotStarted)
+					{
+						foundItem = item;
+						foundChunk = i;
+					}
+				}
+			}
+
+			if (foundItem == null)
+				return;
+
+			isUploading = true;
+
+			string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), foundItem.Filename);
+			var finfo = new FileInfo(filePath);
+			if (finfo.Exists == false)
+			{
+				App.Current.MainPage.DisplayAlert("Грешка", "Записът е изтрит извън приложението!", "Добре");
+				return;
+			}
+			long uploadFileSize = finfo.Length;
+			int uploadChunks = (int) uploadFileSize / Constants.ChunkSize;
+
+			if (uploadFileSize > uploadChunks * Constants.ChunkSize)
+				uploadChunks++;
+
+			long sendChunkSize = uploadChunks > foundChunk ? Constants.ChunkSize : uploadFileSize % Constants.ChunkSize;
+
+			try
+			{
+				// Create the file, or overwrite if the file exists.
+				using (FileStream ws = File.Create("tmp"))
+				{
+					using (FileStream rs = File.OpenRead(filePath))
+					{
+						byte[] chunk = new byte[sendChunkSize];
+						rs.Read(chunk, foundChunk * Constants.ChunkSize, (int) sendChunkSize);
+						ws.Write(chunk, 0, (int) sendChunkSize);
+					}
+				}
+			}
+			catch (Exception ex)
+			{ 
+			
+			}
+
+			finfo = new FileInfo("tmp");
+			var multipart = new MultipartFormBuilder();
+			multipart.AddFile("file", finfo);
+			client.UploadProgressChanged += Client_UploadProgressChanged;
+			client.UploadDataCompleted += Client_UploadDataCompleted;
+
+			client.UploadMultipartAsync(new Uri(Constants.AudioUrl + "/" + foundItem.Id + "/" + foundChunk + "_" + uploadChunks), "POST", multipart);
+		}
+
+		private static void Client_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
         {
 			try
 			{
@@ -160,7 +271,7 @@ namespace RodnaPamet.Services
 					NotificationManager.UpdateNotification(0, 0);
 			});
 		}
-
+		/*
 		public static async Task<int> CreateUploadTask(string fileName, string urlToUpload)//, IProgress<UploadBytesProgress> progessReporter
 		{
 			uploadFileSize = new FileInfo(fileName).Length;
@@ -185,7 +296,7 @@ namespace RodnaPamet.Services
 
 			//urlToUpload
 			return 1;
-			/*
+			/ *
 			using (var stream = await client.OpenWriteTaskAsync(urlToUpload))
 			{
 				var inStream = File.OpenRead(fileName);
@@ -241,9 +352,9 @@ namespace RodnaPamet.Services
 				}
 			}
 			return sentBytes;
-			*/
+			* /
 		}
-
+		*/
 		private static void Client_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
 		{
 			try
@@ -284,8 +395,8 @@ namespace RodnaPamet.Services
 
 		private static void Client_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
-			if (uploadFileSize > e.BytesSent)
-				NotificationManager.UpdateNotification(uploadFileSize, e.BytesSent);
+			if (combinedUploadFileSize > e.BytesSent)
+				NotificationManager.UpdateNotification(combinedUploadFileSize, e.BytesSent);
 			else
 				NotificationManager.UpdateNotification(0, 0);
 		}

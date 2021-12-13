@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:RodnaPamet.ViewModels"
              xmlns:model="clr-namespace:RodnaPamet.Models"
              xmlns:cameraView="clr-namespace:RodnaPamet.Views"
-             xmlns:rp="clr-namespace:RodnaPamet"
+             xmlns:rp="clr-namespace:RodnaPamet" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}"
              x:Class="RodnaPamet.Views.RecordingsPage">
 
@@ -206,14 +206,18 @@
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
-                <ImageButton
-                    Clicked="Back_Clicked"
-                    Margin="10, 30, 0, 0"
-                    HorizontalOptions="Start"
-                    BackgroundColor="Transparent"
-                    HeightRequest="25"
-                    VerticalOptions="CenterAndExpand"
-                    Source="back.png"></ImageButton>
+                <StackLayout
+                    Padding="10, 30, 0, 0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Back_Clicked"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                    <forms:CachedImage
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        HeightRequest="25"
+                        VerticalOptions="CenterAndExpand"
+                        Source="back.png"></forms:CachedImage>
+                </StackLayout>
             </Grid>
             <Image
                 VerticalOptions="Start"

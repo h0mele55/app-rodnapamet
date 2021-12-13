@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:RodnaPamet.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer" xmlns:rp="clr-namespace:RodnaPamet" xmlns:xamarians="clr-namespace:Xamarians.MediaPlayer;assembly=Xamarians.MediaPlayer"
+             xmlns:views="clr-namespace:RodnaPamet.Views" xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer" xmlns:rp="clr-namespace:RodnaPamet" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="RodnaPamet.Views.ItemPreviewPage"
              Title="{Binding Subject}">
     <ContentPage.Resources>
         <views:FilenameConverter x:Key="FilenameConverter"/>
         <views:BinaryInvertConverter x:Key="BinaryInvertConverter"/>
         <views:VisibilityConverter x:Key="VisibilityConverter"/>
+        <views:NullableIntConverter x:Key="NullableIntConverter" />
     </ContentPage.Resources>
 
     <AbsoluteLayout>
@@ -31,6 +32,7 @@
                 x:Name="ContentStack"
                 Spacing="0" 
                 Padding="0">
+                <!--
                 <xamarians:VideoPlayer
                     AutoPlay="True"
                     HorizontalOptions="FillAndExpand"
@@ -39,15 +41,17 @@
                     WidthRequest="200"
                     BackgroundColor="Black"
                     Margin="15"
-                    Source="{Binding Filename}"></xamarians:VideoPlayer>
+                    Source="{Binding Filename}"></xamarians:VideoPlayer>-->
                 <Label Text="{Binding Description}" 
                     LineBreakMode="NoWrap"
+                       VerticalOptions="Start"
                     StyleClass="ListDescription">
                     <Label.Effects>
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
                 <Label Text="{Binding TypeDescription}" 
+                       VerticalOptions="Start"
                     LineBreakMode="NoWrap"
                     StyleClass="ListDescription">
                     <Label.Effects>
@@ -56,6 +60,7 @@
                 </Label>
                 <Label Text="{Binding Subject}" 
                     StyleClass="ListSubject"
+                       VerticalOptions="Start"
                     HorizontalOptions="FillAndExpand"
                     LineBreakMode="NoWrap" 
                     FontSize="16">
@@ -65,6 +70,7 @@
                 </Label>
                 <Label 
                     LineBreakMode="NoWrap"
+                       VerticalOptions="Start"
                     StyleClass="ListOperator"
                     FontSize="Small">
                     <Label.FormattedText>
@@ -86,7 +92,55 @@
                     HorizontalOptions="End"
                     LineBreakMode="NoWrap" 
                     StyleClass="ListVillage" 
+                       Margin="0, 0, 10, 10"
                     FontSize="Small" />
+
+                <Slider
+                    Margin="10, 0, 10, 0"
+                    HorizontalOptions="FillAndExpand"
+                    Maximum="{Binding SoundDuration}"
+                    DragCompleted="Slider_DragCompleted"
+                    Value="{Binding PlayProgress}"></Slider>
+                <StackLayout 
+                    Orientation="Horizontal"
+                    Margin="0, 0, 0, 20">
+                    <ImageButton
+                        WidthRequest="30"
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        Source="Play.png"
+                        Margin="10, 0, 0, 0"
+                        Clicked="Play_Clicked"
+                        ></ImageButton>
+                    <ImageButton
+                        WidthRequest="30"
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        Source="PauseB.png"
+                        Clicked="Pause_Clicked"
+                        ></ImageButton>
+                    <ImageButton
+                        WidthRequest="30"
+                        HorizontalOptions="StartAndExpand"
+                        BackgroundColor="Transparent"
+                        Source="Stop.png"
+                        Clicked="Stop_Clicked"
+                        ></ImageButton>
+                    <Label
+                        HorizontalOptions="End"
+                        Text="{Binding PlayProgress, Converter={StaticResource NullableIntConverter}}"></Label>
+                    <Label
+                        HorizontalOptions="End"
+                        Text="/"></Label>
+                    <Label
+                        HorizontalOptions="End"
+                        Text="{Binding SoundDuration, Converter={StaticResource NullableIntConverter}}"></Label>
+                    <Label
+                        Margin="0, 0, 10, 0"
+                        HorizontalOptions="End"
+                        Text="с."></Label>
+                </StackLayout>
+
                 <StackLayout
                     IsVisible="{Binding Uploading, Converter={StaticResource BinaryInvertConverter}}"
                     Spacing="0">
@@ -105,7 +159,7 @@
                     Text="Записът се изпраща на Родна памет!"></Label>
                 <StackLayout>
                 <Grid
-                    Margin="10, 0, 10, 0"
+                    Margin="0, 20, 0, 10"
                     VerticalOptions="FillAndExpand">
                     <Image Source="redbuttonback.png"></Image>
                     <Label
@@ -117,7 +171,7 @@
                     </Label>
                 </Grid>
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        <TapGestureRecognizer Tapped="Remove_Tapped"></TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
             </StackLayout>
@@ -149,14 +203,18 @@
                         <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
                     </Label.Effects>
                 </Label>
-                <ImageButton
-                    Clicked="Back_Clicked"
-                    Margin="10, 30, 0, 0"
-                    HorizontalOptions="Start"
-                    BackgroundColor="Transparent"
-                    HeightRequest="25"
-                    VerticalOptions="CenterAndExpand"
-                    Source="back.png"></ImageButton>
+                <StackLayout
+                    Padding="10, 30, 0, 0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Back_Clicked"></TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                    <forms:CachedImage
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        HeightRequest="25"
+                        VerticalOptions="CenterAndExpand"
+                        Source="back.png"></forms:CachedImage>
+                </StackLayout>
             </Grid>
             <Image
                 VerticalOptions="Start"

@@ -1,5 +1,4 @@
-﻿using Octane.Xamarin.Forms.VideoPlayer;
-using RodnaPamet.Models;
+﻿using RodnaPamet.Models;
 using System;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -21,12 +20,48 @@ namespace RodnaPamet.ViewModels
         private bool uploaded;
         private Item item;
         public ICommand VillageTapped { get; set; }
+        public ICommand PlayCommand { get; set; }
+        public ICommand PlayAtPositionCommand { get; set; }
+        public ICommand PauseCommand { get; set; }
+        public ICommand StopCommand { get; set; }
 
         public event EventHandler<string> Error;
-
+        private IAudio AudioPlayer = DependencyService.Get<IAudio>();
+        public double SoundDuration { get; set; } = 1;
         public ItemDetailViewModel(IAnimatable cont) : base(cont)
         {
+            PlayCommand = new Command(execute: () =>
+            {
+                AudioPlayer.PlayAudioFile();
+            });
+            PlayAtPositionCommand = new Command<double>(execute: (double position) =>
+            {
+                AudioPlayer.PlayAtPosition(position);
+            });
+            PauseCommand = new Command(execute: () =>
+            {
+                AudioPlayer.PauseAudioFile();
+            });
+            StopCommand = new Command(execute: () =>
+            {
+                AudioPlayer.StopAudioFile();
+            });
         }
+        public void SetAudioFile(string fn)
+        {
+            AudioPlayer.SetAudioFile(fn);
+            SoundDuration = AudioPlayer.GetDuration();
+            if (SoundDuration == 0)
+                SoundDuration = 1f;
+            AudioPlayer.ProgressChanged += AudioPlayer_ProgressChanged;
+        }
+
+        private void AudioPlayer_ProgressChanged(object sender, EventArgs e)
+        {
+            PlayProgress = AudioPlayer.GetPosition();
+            Debug.WriteLine(PlayProgress);
+        }
+
         public string Id { get; set; }
         private int age;
 
@@ -41,9 +76,17 @@ namespace RodnaPamet.ViewModels
         public ICommand SaveCommand { get; set; }
         public Item Item { get => item; }
 
-        private VideoSource videoSource;
+/*        private VideoSource videoSource;*/
         private string typeDescription = "";
-
+        private double pp = 0;
+        public double PlayProgress
+        {
+            get => pp;
+            set
+            {
+                SetProperty(ref pp, value);
+            }
+        }
         public string Filename
         {
             get => filename;
@@ -149,18 +192,19 @@ namespace RodnaPamet.ViewModels
                 LoadItemId(value.ToString());
             }
         }
-
-        public VideoSource VideoSource
-        {
-            get
-            {
-                return videoSource;
-            }
-            set
-            {
-                SetProperty(ref videoSource, value);
-            }
-        }
+        /*
+                public VideoSource VideoSource
+                {
+                    get
+                    {
+                        return videoSource;
+                    }
+                    set
+                    {
+                        SetProperty(ref videoSource, value);
+                    }
+                }
+        */
 
         public async void SaveItemToDB()
         {
@@ -189,7 +233,7 @@ namespace RodnaPamet.ViewModels
                 Age = item.Age;
                 Subject = item.Subject;
                 Filename = item.Filename;
-                VideoSource = VideoSource.FromFile(item.Filename);
+                //VideoSource = VideoSource.FromFile(item.Filename);
                 CameraMan = item.Cameraman;
                 Created = item.Created;
                 Description = item.Description;

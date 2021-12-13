@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cameraView="clr-namespace:RodnaPamet.Views" xmlns:rp="clr-namespace:RodnaPamet" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="{Binding Title}"
+             x:Class="RodnaPamet.Views.AudioPage">
+    <ContentPage.Resources>
+        <cameraView:BinaryInvertConverter x:Key="BinaryInvertConverter"/>
+        <cameraView:VisibilityConverter x:Key="VisibilityConverter"/>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>
+            <cameraView:AudioPreview  
+                    x:Name="AudioPreview"           
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+            </cameraView:AudioPreview>
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="1, 0, -1, -1"
+                x:Name="RecNotification"
+                Padding="5, 15, 10, 5">
+                    <Image 
+                        Source="rec.png"
+                        IsVisible="{Binding IsRecording}"
+                        WidthRequest="20"
+                        HeightRequest="20" />
+                    <Image 
+                        Source="pause.png"
+                        IsVisible="{Binding IsRecording, Converter={StaticResource BinaryInvertConverter}}"
+                        WidthRequest="20"
+                        HeightRequest="20" />
+                    <Label
+                        StyleClass="Timer"
+                        Text="{Binding RecLabel}"></Label>
+            </StackLayout>
+            <StackLayout
+                IsVisible="{Binding InTransition}"
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Style="{StaticResource PageInnerTitle}"
+                    Text="Моля, изчакайте"></Label>
+                
+            </StackLayout>
+            <StackLayout
+                IsVisible="{Binding InTransition, Converter={StaticResource BinaryInvertConverter}}"
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+                <StackLayout
+                    x:Name="ContentStack"
+                    IsVisible="{Binding SelectedVideoType}"
+                    VerticalOptions="EndAndExpand"
+                    Spacing="0">
+                    <StackLayout
+                    IsVisible="{Binding SelectedStoryType}"
+                    VerticalOptions="EndAndExpand"
+                    Spacing="0">
+                        <StackLayout
+                        Spacing="0"
+                        VerticalOptions="EndAndExpand"
+                        IsVisible="{Binding IsRecording}">
+                            <Image
+                            Source="whitebottom.png"
+                            Aspect="AspectFill"></Image>
+                            <Grid
+                            IsVisible="{Binding IsRecording}"
+                            IsClippedToBounds="True"
+                            VerticalOptions="EndAndExpand">
+                                <Frame
+                                    BackgroundColor="{StaticResource HoverBackground}"
+                                    HasShadow="False"
+                                    Opacity="{StaticResource HoverOpacity}"
+                                    CornerRadius="0"
+                                    Padding="0">
+                                </Frame>
+                                <Label
+                                VerticalOptions="EndAndExpand"
+                                    Margin="10"
+                                Text="Имате достатъчно време, разкажете спокойно всичко!"></Label>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout
+                    IsVisible="{Binding SelectedValuesType}"
+                    VerticalOptions="EndAndExpand"
+                    Spacing="0">
+                        <StackLayout
+                        Spacing="0"
+                        VerticalOptions="EndAndExpand"
+                        IsVisible="{Binding IsRecording}">
+                            <Image
+                                Aspect="AspectFill"
+                                Source="whitebottom.png"></Image>
+                            <Grid
+                            IsClippedToBounds="True"
+                            VerticalOptions="EndAndExpand">
+                                <Frame
+                                        CornerRadius="0"
+                                        BackgroundColor="{StaticResource HoverBackground}"
+                                        HasShadow="False"
+                                        Opacity="{StaticResource HoverOpacity}"
+                                        Padding="0">
+                                </Frame>
+                                <StackLayout
+                                Spacing="0"
+                                HorizontalOptions="End">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding QuestionsCommand}"></TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                    <Label
+                                    Text="Довършетѣ изречението:"></Label>
+
+                                    <CarouselView
+                                        HorizontalOptions="FillAndExpand"
+                                        x:Name="QuestionsCarousel"
+                                        VerticalOptions="End"
+                                        HeightRequest="60"
+                                        Position="{Binding CurrentQuestion}"
+                                        ItemsSource="{Binding Questions}">
+                                        <CarouselView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label
+                                                    x:Name="ShownItem"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    Text="{Binding}"
+                                                    StyleClass="Current">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                                                    </Label.GestureRecognizers>
+                                                    <Label.Effects>
+                                                        <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="White"></rp:ShadowEffect>
+                                                    </Label.Effects>
+                                                </Label>
+                                            </DataTemplate>
+                                        </CarouselView.ItemTemplate>
+                                    </CarouselView>
+
+                                    <StackLayout
+                                        Spacing="0"
+                                        IsVisible="False">
+                                    <Label
+                                    IsVisible="{Binding Question1Number, Converter={StaticResource VisibilityConverter}}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span 
+                                        Text="{Binding Question1Number}"
+                                        FontSize="12"></Span>
+                                                    <Span 
+                                        Text="/"
+                                        FontSize="12"></Span>
+                                                    <Span 
+                                        Text="{Binding QuestionNumbers}"
+                                        FontSize="12"></Span>
+                                                    <Span Text=" "></Span>
+                                                    <Span Text="{Binding Question1}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                    StyleClass="Current">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span 
+                                        Text="{Binding Question2Number}"
+                                        FontSize="12"></Span>
+                                                    <Span 
+                                        Text="/"
+                                        FontSize="12"></Span>
+                                                    <Span 
+                                        Text="{Binding QuestionNumbers}"
+                                        FontSize="12"></Span>
+                                                    <Span Text=" "></Span>
+                                                    <Span Text="{Binding Question2}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                    IsVisible="{Binding Question3Number, Converter={StaticResource VisibilityConverter}}"
+                                    StyleClass="Pending">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span 
+                                        Text="{Binding Question3Number}"
+                                        FontSize="12"></Span>
+                                                    <Span 
+                                        Text="/"
+                                        FontSize="12"></Span>
+                                                    <Span 
+                                        Text="{Binding QuestionNumbers}"
+                                        FontSize="12"></Span>
+                                                    <Span Text=" "></Span>
+                                                    <Span Text="{Binding Question3}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                        </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout
+                    Spacing="0"
+                    IsVisible="{Binding IsRecording, Converter={StaticResource BinaryInvertConverter}}"
+                    HorizontalOptions="FillAndExpand">
+                        <StackLayout
+                            Padding="0"
+                            Spacing="0"
+                            IsVisible="{Binding SelectedValuesType}">
+                            <Image
+                                Aspect="AspectFill"
+                                Source="whitebottom.png"></Image>
+                            <Grid>
+                                <Frame
+                                    CornerRadius="0"
+                                    BackgroundColor="{StaticResource HoverBackground}"
+                                    Opacity="{StaticResource HoverOpacity}"
+                                    HasShadow="False"
+                                    Padding="0">
+                                </Frame>
+                                <StackLayout>
+                                <Label
+                                    Text="Натиснете бутона, за да започнетѣ новъ записъ. Ограничението е пет минути. Можете да спрете видеото по всѣко врѣме. ">
+                                </Label>
+                                <Label
+                            Text="Докато тече записътъ, тукъ ще се появяви първиятъ въпросъ. Натиснете върху него, за да се появи слѣдващия. "></Label>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                        <StackLayout
+                            Padding="0"
+                            Spacing="0"
+                            VerticalOptions="EndAndExpand"
+                            IsVisible="{Binding SelectedStoryType}">
+                            <Image
+                                Aspect="AspectFill"
+                                Source="whitebottom.png"></Image>
+                            <Grid VerticalOptions="FillAndExpand">
+                                <Frame
+                                    CornerRadius="0"
+                                    BackgroundColor="{StaticResource HoverBackground}"
+                                    Opacity="{StaticResource HoverOpacity}"
+                                    HasShadow="False"
+                                    Padding="0">
+                                </Frame>
+                                <Label
+                                    Margin="3"
+                                    Text="Натиснете бутона, за да започнетѣ новъ записъ. Ограничението е пет минути. Можете да спрете видеото по всѣко врѣме.">
+                                </Label>
+                            </Grid>
+                            <Grid>
+                                <Frame
+                                    CornerRadius="0"
+                                    BackgroundColor="{StaticResource HoverBackground}"
+                                    Opacity="{StaticResource HoverOpacity}"
+                                    HasShadow="False"
+                                    Padding="0">
+                                </Frame>
+                                <Label
+                                    Margin="3"
+                                    Text="Нека изложението на разказа да е гладко, съ прѣдистория, сѫщина и заключение."></Label>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                    <Grid VerticalOptions="FillAndExpand">
+                        <Frame
+                                    CornerRadius="0"
+                                    BackgroundColor="{StaticResource HoverBackground}"
+                                    Opacity="{StaticResource HoverOpacity}"
+                                    HasShadow="False"
+                                    Padding="0">
+                        </Frame>
+                        <Grid
+                        Margin="0, 0, 0, 10"
+                        VerticalOptions="FillAndExpand">
+                            <Image Source="redbuttonback.png"></Image>
+                            <Label
+                                Text="{Binding RecordControlLabel}"
+                                IsVisible="{Binding IsRecording, Converter={StaticResource BinaryInvertConverter}}"
+                                Style="{DynamicResource DBigButton}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RecordCommand}"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                                <Label.Effects>
+				                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+			                    </Label.Effects>
+                            </Label>
+                            <Label
+                                Text="{Binding RecordStopLabel}"
+                                IsVisible="{Binding IsRecording}"
+                                Style="{DynamicResource DBigButton}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding StopCommand}"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                                <Label.Effects>
+				                    <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+			                    </Label.Effects>
+                            </Label>
+                            <Button
+                            StyleClass="Back"
+                            HorizontalOptions="End"
+                            IsVisible="false" 
+                            Command="{Binding BackCommand}"
+                            Text="Назад"></Button>
+                            <!-- {Binding IsRecording, Converter={StaticResource BinaryInvertConverter}} -->
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+                <Grid
+                    x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                    <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                    <Label
+                    Style="{DynamicResource DPageTitle}"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="{Binding Title}">
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                    <StackLayout
+                        Padding="10, 30, 0, 0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_Clicked"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <forms:CachedImage
+                            HorizontalOptions="Start"
+                            BackgroundColor="Transparent"
+                            HeightRequest="25"
+                            VerticalOptions="CenterAndExpand"
+                            Source="back.png"></forms:CachedImage>
+                    </StackLayout>
+                </Grid>
+                <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+            </StackLayout>
+            <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+                <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.2"></Image>
+                <Grid
+                    x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                    <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                    <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                        <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{DynamicResource DBottomMenuButton}"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                        <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                        <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{DynamicResource DBottomMenuButton}"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

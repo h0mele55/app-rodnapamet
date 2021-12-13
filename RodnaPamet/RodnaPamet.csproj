@@ -34,7 +34,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Octane.Xam.VideoPlayer" Version="3.1.0" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xamarians.MediaPlayer" Version="1.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -53,8 +52,14 @@
     <Compile Update="Views\AdvisorPage.xaml.cs">
       <DependentUpon>AdvisorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AudioChooserPage.xaml.cs">
+      <DependentUpon>AudioChooserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\CameraChooserPage.xaml.cs">
       <DependentUpon>CameraChooserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AudioPage.xaml.cs">
+      <DependentUpon>AudioPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -85,6 +90,9 @@
     <EmbeddedResource Update="Views\CameraChooserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\AudioPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\CameraPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -106,6 +114,7 @@
     <None Remove="Oblasti.json" />
     <None Remove="Obstini.json" />
     <None Remove="Xamarin.Essentials" />
+    <None Remove="Plugin.MediaManager" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">

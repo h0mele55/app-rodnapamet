@@ -18,27 +18,21 @@
 	<key>MinimumOSVersion</key>
 	<string>10.2</string>
 	<key>CFBundleDisplayName</key>
-	<string>Родна паметь</string>
+	<string>Родна Паметь</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.rodnapamet.app</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>3</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
-	<string>Родна паметь</string>
+	<string>RodnaPamet</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Record video</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Record audio</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Record video</string>
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.com.rodnapamet.app</string>
-	</array>
+	<string>Record audio</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Alegreya-Bold.ttf</string>
@@ -50,11 +44,17 @@
 		<string>Alegreya-MediumItalic.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Record video</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Record video</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>The app allows you to make audio recordings and publish them online</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiresFullScreen</key>
+	<string>Yes</string>
 </dict>
 </plist>

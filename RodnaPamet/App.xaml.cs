@@ -236,7 +236,7 @@ namespace RodnaPamet
                 var status = await CrossPermissions.Current.RequestPermissionsAsync(
                     new Permission[]
                     {
-                        Plugin.Permissions.Abstractions.Permission.Camera,
+//                        Plugin.Permissions.Abstractions.Permission.Camera,
                         Plugin.Permissions.Abstractions.Permission.Microphone,
                         Plugin.Permissions.Abstractions.Permission.Storage,
                         Plugin.Permissions.Abstractions.Permission.MediaLibrary

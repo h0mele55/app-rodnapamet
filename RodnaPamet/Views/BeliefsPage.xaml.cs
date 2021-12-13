@@ -34,7 +34,7 @@ namespace RodnaPamet.Views
 
         private void Record_Clicked(object sender, EventArgs e)
         {
-            App.Current.MainPage = new CameraChooserPage();
+            App.Current.MainPage = new AudioChooserPage();
         }
 
         private void Records_Clicked(object sender, EventArgs e)

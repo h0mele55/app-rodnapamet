@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cameraView="clr-namespace:RodnaPamet.Views" xmlns:rp="clr-namespace:RodnaPamet" xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="RodnaPamet.Views.AudioChooserPage">
+
+    <ContentPage.Resources>
+        <cameraView:BinaryInvertConverter x:Key="BinaryInvertConverter"/>
+        <cameraView:VisibilityConverter x:Key="VisibilityConverter"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+            <Grid
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                IsVisible="{Binding IsPreviewing, Converter={StaticResource BinaryInvertConverter}}"
+                x:Name="BackgroundGrid">
+                <Image
+                    Aspect="AspectFill"
+                    Source="background.jpg"></Image>
+            </Grid>
+
+            <StackLayout
+                x:Name="ContentStack"
+                HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                Spacing="0">
+                <Label 
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="End"
+                    StyleClass="Text" 
+                    IsVisible="false"
+                    Text="Запишетѣ видео (по вѫзможность срѣдъ природата, въ красива местность отъ селото), съ дължина от около 5 минути, въ което задаватѣ слѣднитѣ въпроси:"/>
+
+                <Grid
+                        VerticalOptions="EndAndExpand">
+                    <Image Source="redbuttonback.png"></Image>
+                    <Label
+                        Text="Цѣнности"
+                        Style="{DynamicResource DBigButton}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectValuesCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+
+                <StackLayout
+                        VerticalOptions="CenterAndExpand">
+                    <Label 
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        StyleClass="Text" 
+                        Text="Използвайте дадените въпроси за записъ съ дължина от около 5 минути."/>
+                    <Label 
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        StyleClass="Text" 
+                        Text="Запишете приказка от 1 - 5 минути."/>
+                </StackLayout>
+
+                <Grid
+                    VerticalOptions="StartAndExpand">
+                    <Image Source="redbuttonback.png"></Image>
+                    <Label
+                        Text="Приказка"
+                        Style="{DynamicResource DBigButton}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectStoryCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                </Grid>
+                <Label 
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="Start"
+                    StyleClass="Text"
+                    IsVisible="false"
+                    Text="Запишете приказка от 1 - 5 минути"/>
+                <StackLayout
+                        IsVisible="False"
+                        Spacing="0">
+                    <Image
+                            Aspect="AspectFill"
+                            Source="whitebottom.png"></Image>
+                    <Grid
+                            IsClippedToBounds="True"
+                            VerticalOptions="FillAndExpand">
+                        <Frame
+                                BackgroundColor="{StaticResource HoverBackground}"
+                                HasShadow="False"
+                                Opacity="{StaticResource HoverOpacity}"
+                                Padding="0">
+                        </Frame>
+                        <Label
+                                VerticalOptions="EndAndExpand"
+                                Margin="0, 5, 0, 15"
+                                Text="Прѣди да направите записъ, моля изберете вида на посланието си."></Label>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout
+            IsVisible="{Binding IsBusy}"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All">
+                <Grid
+                Margin="0"
+                VerticalOptions="FillAndExpand">
+                    <Frame
+                    BackgroundColor="{StaticResource LoaderBackground}"></Frame>
+                    <Image
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Aspect="AspectFit"
+                    WidthRequest="200"
+                    Scale="{Binding BusyScale}"
+                    Opacity="{Binding BusyOpacity}"
+                    Source="shevica.png"></Image>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+                <Grid
+                    x:Name="StatusBar"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                    <Image 
+                    Aspect="AspectFill"
+                    Source="statusbar.jpg"></Image>
+                    <Label
+                    Style="{DynamicResource DPageTitle}"
+                    Margin="0, 30, 0, 0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="{Binding Title}">
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                    <StackLayout
+                        Padding="10, 30, 0, 0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_Clicked"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                        <forms:CachedImage
+                            HorizontalOptions="Start"
+                            BackgroundColor="Transparent"
+                            HeightRequest="25"
+                            VerticalOptions="CenterAndExpand"
+                            Source="back.png"></forms:CachedImage>
+                    </StackLayout>
+                </Grid>
+                <Image
+                VerticalOptions="Start"
+                Aspect="AspectFill"
+                Source="topbackfix.png"></Image>
+            </StackLayout>
+            <StackLayout
+            Spacing="0"
+            Margin="0"
+            Padding="0"
+            VerticalOptions="Start"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, -1"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional">
+                <Image
+                Aspect="AspectFill"
+                Source="bottombackfix.png"
+                Margin="0"
+                VerticalOptions="EndAndExpand"
+                TranslationY="0.1"></Image>
+                <Grid
+                    x:Name="BottomNav"
+                VerticalOptions="Start"
+                ColumnSpacing="0"
+                RowSpacing="0"
+                Margin="0"
+                Padding="0">
+                    <Image 
+                    Aspect="AspectFill"
+                    Source="tabbar.jpg"></Image>
+                    <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+                        <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{DynamicResource DBottomMenuButton}"
+                        BackgroundColor="Transparent"
+                        Clicked="Home_Clicked"
+                        Source="home.png"></ImageButton>
+                        <ImageButton
+                        StyleClass="Selected"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{DynamicResource DSelectedBottomMenuButton}"
+                        BackgroundColor="Transparent"
+                        Clicked="Record_Clicked"
+                        Source="record.png"></ImageButton>
+                        <ImageButton
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{DynamicResource DBottomMenuButton}"
+                        BackgroundColor="Transparent"
+                        Clicked="Records_Clicked"
+                        Source="records.png"></ImageButton>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

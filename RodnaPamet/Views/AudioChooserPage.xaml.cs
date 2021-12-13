@@ -1,8 +1,6 @@
-﻿using RodnaPamet.Models;
-using RodnaPamet.ViewModels;
+﻿using RodnaPamet.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,29 +11,27 @@ using Xamarin.Forms.Xaml;
 namespace RodnaPamet.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RecordingsPage : ContentPage
+    [QueryProperty(nameof(type), "type")]
+    public partial class AudioChooserPage : ContentPage, IQueryAttributable
     {
-        ItemsViewModel _viewModel;
-        public RecordingsPage()
+        AudioChooserViewModel viewModel;
+        public AudioChooserPage()
         {
             InitializeComponent();
+            BindingContext = viewModel = new AudioChooserViewModel(this);
+            ContentStack.Padding = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
+        }
 
-            BindingContext = _viewModel = new ItemsViewModel(this);
-            NoRecordsLabel.IsVisible = false;
-
-            ListContainer.Padding = new Thickness(0, App.HeaderSizeNoFix, 0, App.FooterSize);
+        public AudioChooserPage(string type)
+        {
+            InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
-            if (BindingContext == null)
-            {
-                BindingContext = _viewModel = new ItemsViewModel(this);
-            }
             base.OnAppearing();
-            _viewModel.OnAppearing();
-            NoRecordsLabel.IsVisible = _viewModel.Items.Count == 0;
-            ItemsListView.IsVisible = _viewModel.Items.Count != 0;
+            ((App)App.Current).GetAllPermissions();
+            viewModel.OnAppearing();
         }
         protected override bool OnBackButtonPressed()
         {
@@ -43,26 +39,34 @@ namespace RodnaPamet.Views
             return true;
         }
 
-        private void SwipeItem_Invoked(object sender, EventArgs e)
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
         {
+            if(query.ContainsKey("type"))
+                type = query["type"];
         }
+
+        public string type { get; set; }
         private void Home_Clicked(object sender, EventArgs e)
         {
+            viewModel.IsBusy = true;
             App.Current.MainPage = new AboutPage();
         }
 
         private void Record_Clicked(object sender, EventArgs e)
         {
+            viewModel.IsBusy = true;
             App.Current.MainPage = new AudioChooserPage();
         }
 
         private void Records_Clicked(object sender, EventArgs e)
         {
+            viewModel.IsBusy = true;
             App.Current.MainPage = new RecordingsPage();
         }
         private void Back_Clicked(object sender, EventArgs e)
         {
             App.Current.MainPage = new AboutPage();
         }
+
     }
 }

@@ -1,4 +1,7 @@
-﻿using CoreGraphics;
+﻿using System.ComponentModel;
+using CoreAnimation;
+using CoreGraphics;
+using Foundation;
 using RodnaPamet.iOS;
 using UIKit;
 using Xamarin.Forms;
@@ -9,20 +12,69 @@ namespace RodnaPamet.iOS
 {
     public class CustomEntryRenderer : EntryRenderer
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
-        {
-            base.OnElementChanged(e);
+		protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+		{
+			base.OnElementChanged(e);
 
-            if (Control != null)
-            {
-                // do whatever you want to the UITextField here!
-                Control.BackgroundColor = UIColor.FromRGBA(251, 197, 93, 200);
-                Control.BorderStyle = UITextBorderStyle.Line;
-                Control.Layer.BorderColor = CGColor.CreateSrgb(0, 0, 0, 255);
-                Control.Layer.BorderWidth = 1;
-                Control.TextColor = UIColor.Black;
-                Control.TintColor = UIColor.Black;
-            }
-        }
-    }
+			if (Control != null)
+			{
+				Control.BorderStyle = UITextBorderStyle.None;
+
+				var view = (Element as Entry);
+				if (view != null)
+				{
+					DrawBorder(view);
+					SetFontSize(view);
+					SetPlaceholderTextColor(view);
+				}
+			}
+		}
+
+		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged(sender, e);
+
+			var view = (Entry)Element;
+
+			//			if (e.PropertyName.Equals(view.BorderColor))
+			if (e.PropertyName.Equals(view.FontSize))
+			{
+				DrawBorder(view);
+				SetFontSize(view);
+			}
+			if (e.PropertyName.Equals(view.PlaceholderColor))
+				SetPlaceholderTextColor(view);
+		}
+
+		void DrawBorder(Entry view)
+		{
+			var borderLayer = new CALayer();
+			borderLayer.MasksToBounds = true;
+			borderLayer.Frame = new CoreGraphics.CGRect(0f, Frame.Height / 2, Frame.Width, 1f);
+			borderLayer.BorderColor = Color.Black.ToCGColor();
+			borderLayer.BorderWidth = 1.0f;
+
+			Control.Layer.AddSublayer(borderLayer);
+			Control.BorderStyle = UITextBorderStyle.None;
+		}
+
+		void SetFontSize(Entry view)
+		{
+			if (view.FontSize != Font.Default.FontSize)
+				Control.Font = UIFont.SystemFontOfSize((System.nfloat)view.FontSize);
+			else if (view.FontSize == Font.Default.FontSize)
+				Control.Font = UIFont.SystemFontOfSize(17f);
+			Control.TextColor = Color.Black.ToUIColor();
+		}
+
+		void SetPlaceholderTextColor(Entry view)
+		{
+			if (string.IsNullOrEmpty(view.Placeholder) == false && view.PlaceholderColor != Color.Default)
+			{
+				var placeholderString = new NSAttributedString(view.Placeholder,
+											new UIStringAttributes { ForegroundColor = view.PlaceholderColor.ToUIColor() });
+				Control.AttributedPlaceholder = placeholderString;
+			}
+		}
+	}
 }

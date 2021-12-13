@@ -23,7 +23,7 @@ namespace RodnaPamet.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new AboutViewModel(this);
-            viewModel.OpenWebCommand = new Command(async () => App.Current.MainPage = new CameraChooserPage("story"));
+            viewModel.OpenWebCommand = new Command(async () => App.Current.MainPage = new AudioChooserPage("story"));
             ContentStack.Margin = new Thickness(0, App.HeaderSize, 0, App.FooterSize);
         }
 
@@ -43,7 +43,7 @@ namespace RodnaPamet.Views
 
         private void Record_Clicked(object sender, EventArgs e)
         {
-            App.Current.MainPage = new CameraChooserPage();
+            App.Current.MainPage = new AudioChooserPage();
         }
 
         private void Records_Clicked(object sender, EventArgs e)

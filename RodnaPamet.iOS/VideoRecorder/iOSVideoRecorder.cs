@@ -193,8 +193,8 @@ namespace RodnaPamet.iOS
 			}
 
 			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			var library = System.IO.Path.Combine(documents, "..", "Library");
-			FileName = System.IO.Path.Combine(library, DateTime.Now.ToString("yymmdd-hhmmss") + ".mov");
+			//var library = System.IO.Path.Combine(documents, "..", "Library");
+			FileName = System.IO.Path.Combine(documents, DateTime.Now.ToString("yymmdd-hhmmss") + ".mov");
 
 			NSUrl url = new NSUrl(FileName, false);
 
@@ -237,10 +237,13 @@ namespace RodnaPamet.iOS
 			{
 				var fileSize = NSFileManager.DefaultManager.GetAttributes(FileName).Size;
 				System.Diagnostics.Debug.WriteLine("Video Recorded: {0} ({1} bytes)", FileName, fileSize);
+				XamRecorder.VideoTaken(FileName);
+				/*
 				UIVideo.SaveToPhotosAlbum(FileName, (fileName, saveStatus) => {
 					System.Diagnostics.Debug.WriteLine("Video Copied to Photos: {0}", fileName, fileSize);
 					XamRecorder.VideoTaken(fileName);
 				});
+				*/
 			}
 			catch (Exception ex)
 			{

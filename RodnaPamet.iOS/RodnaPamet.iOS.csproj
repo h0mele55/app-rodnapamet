@@ -59,7 +59,8 @@
     <MtouchFloat32>true</MtouchFloat32>
     <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
-    <CodesignProvision>RodnaPamet</CodesignProvision>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <MtouchFastDev>false</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -68,9 +69,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>Apple Development: Ivaylo Ivanov (9974W899FC)</CodesignKey>
+    <CodesignKey>Apple Distribution: Ivaylo Ivanov (9423GKWL67)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignProvision>RodnaPametDistribution</CodesignProvision>
     <MtouchLink>SdkOnly</MtouchLink>
     <BuildIpa>true</BuildIpa>
     <IpaMetadata>Info.plist</IpaMetadata>
@@ -80,6 +81,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RodnaPamet.iOS.Application</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -100,6 +104,16 @@
     <BundleResource Include="Resources\rec.png" />
     <BundleResource Include="Resources\pause.png" />
     <Compile Include="CustomPickerRenderer.cs" />
+    <Compile Include="iOSAudioRecorder.cs" />
+    <Compile Include="iOSAudioRecorderRenderer.cs" />
+    <Compile Include="iOSUploadService.cs" />
+    <Compile Include="iOSAudio.cs" />
+    <BundleResource Include="Resources\Play.png" />
+    <BundleResource Include="Resources\Stop.png" />
+    <BundleResource Include="Resources\PauseB.png" />
+    <Compile Include="CustomEntryRenderer.cs" />
+    <Compile Include="AppTrackingTransparencyPermission.cs" />
+    <Compile Include="iOSSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -244,5 +258,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\largewhitebuttonback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\snimkakushta.png" />
   </ItemGroup>
 </Project>
