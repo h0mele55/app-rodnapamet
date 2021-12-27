@@ -18,7 +18,7 @@
 	<key>MinimumOSVersion</key>
 	<string>10.2</string>
 	<key>CFBundleDisplayName</key>
-	<string>Родна Паметь</string>
+	<string>РАБОТНА Паметь</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.rodnapamet.beta</string>
 	<key>CFBundleVersion</key>
