@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace RodnaPamet
@@ -13,7 +14,7 @@ namespace RodnaPamet
 
         public static string UploadUrl = BaseAddress + "/fileUpload";
         public static string VideoUrl = BaseAddress + "/video";
-        public static string AudioUrl = BaseAddress + "/audio";
+        public static string AudioUrl = BaseAddress.Replace("https://", "http://") + "/audio";
 
         public static string CheckUrl = BaseAddress + "/check";
         public static string ConfirmUrl = BaseAddress + "/confirm";
@@ -21,5 +22,7 @@ namespace RodnaPamet
         public static string ErrorUrl = BaseAddress + "/errors";
 
         public static int ChunkSize = 5242880;
+
+        public static string RemoveUrl = BaseAddress + "/remove";
     }
 }

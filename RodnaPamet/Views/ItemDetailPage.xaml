@@ -107,6 +107,22 @@
                         </Label.Effects>
                     </Label>
                 </Grid>
+
+                <Grid
+                    Margin="0, 20, 0, 15"
+                        VerticalOptions="FillAndExpand">
+                    <Image Source="redbuttonback.png"></Image>
+                    <Label 
+                        Style="{DynamicResource DSmallButton}"
+                        Text="Изтрий">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Delete_Tapped"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                        <Label.Effects>
+                            <rp:ShadowEffect Radius="1" DistanceX="1" DistanceY="1" Color="{StaticResource HoverBackground}"></rp:ShadowEffect>
+                        </Label.Effects>
+                    </Label>
+                </Grid>
             </StackLayout>
     </ScrollView>
         <views:VillagePicker

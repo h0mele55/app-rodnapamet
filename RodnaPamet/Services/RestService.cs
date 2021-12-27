@@ -138,7 +138,7 @@ namespace RodnaPamet.Services
             var uri = new Uri(string.Format(apiEndPoint));
             Console.WriteLine(uri.ToString());
 
-                HttpContent content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
 
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             _client.DefaultRequestHeaders.Add("User-Agent", "RodnaPamet Mobile App");
@@ -147,7 +147,7 @@ namespace RodnaPamet.Services
 
 
 
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, uri);
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, uri);
             requestMessage.Content = content;
             HttpResponseMessage response = await _client.SendAsync(requestMessage);
 

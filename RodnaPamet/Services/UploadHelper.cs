@@ -47,13 +47,16 @@ namespace RodnaPamet.Services
 			var profiles = Connectivity.ConnectionProfiles;
 			if (!profiles.Contains(ConnectionProfile.WiFi))
 			{
-				if (!await App.Current.MainPage.DisplayAlert("Родна памет - достъп до internet", "Няма засечена WIFi връзка на Вашето устройство! Качването на видео файлове през мобилната мрежа може да доведе до увеличение на сметката Ви за мобилни услуги!", "Използвай мобилни данни", "Изчакай WiFi достъп"))
-				{
-					return;
-				}
+				Device.BeginInvokeOnMainThread(async () => {
+					if (await App.Current.MainPage.DisplayAlert("Родна памет - достъп до internet", "Няма засечена WIFi връзка на Вашето устройство! Качването на видео файлове през мобилната мрежа може да доведе до увеличение на сметката Ви за мобилни услуги!", "Използвай мобилни данни", "Изчакай WiFi достъп"))
+					{
+						InitiateUpload(item);
+						return;
+					}
+				});
 			}
-
-			InitiateUpload(item);
+			else
+				InitiateUpload(item);
 			/*
 
 
@@ -84,6 +87,12 @@ namespace RodnaPamet.Services
 			*/
 		}
 
+		public static async Task<bool> RemoveFile(Item item)
+		{
+			RestService arest = new RestService(Constants.RemoveUrl);
+			return await arest.UpdateItemAsync(item);
+		}
+
 		private static async void InitiateUpload(Item item)
 		{
 			// upload metadata, get file key
@@ -111,7 +120,7 @@ namespace RodnaPamet.Services
 			client.UploadProgressChanged += Client_UploadProgressChanged;
 			client.UploadDataCompleted += Client_UploadDataCompleted;
 
-			client.UploadMultipartAsync(new Uri(Constants.UploadUrl), "POST", multipart);
+			//client.UploadMultipartAsync(new Uri(Constants.UploadUrl), "POST", multipart);
 			uploadItems.Add(item);
 			foreach (Item upload in uploadItems)
 			{
@@ -152,12 +161,22 @@ namespace RodnaPamet.Services
 			long uploadFileSize = finfo.Length;
 			var multipart = new MultipartFormBuilder();
 			multipart.AddFile("file", finfo);
+
+			multipart.AddField("UserID", App.UserService.SubscribersList[0].Id);
+			multipart.AddField("VideoType", foundItem.Type.ToString());
+			multipart.AddField("Subject", foundItem.Subject);
+			multipart.AddField("Age", foundItem.Age.ToString());
+			multipart.AddField("Description", foundItem.Description);
+			multipart.AddField("Village", foundItem.Village);
+			multipart.AddField("Operator", foundItem.Cameraman);
+			multipart.AddField("SubType", foundItem.TypeDescription);
+
 			client.UploadProgressChanged += Client_UploadProgressChanged;
 			client.UploadDataCompleted += Client_UploadDataCompleted;
 
 			client.UploadMultipartAsync(new Uri(Constants.AudioUrl), "POST", multipart);
 		}
-
+		/*
 		private static async void FindAndUploadChunk()
 		{
 			if (isUploading)
@@ -223,6 +242,7 @@ namespace RodnaPamet.Services
 
 			client.UploadMultipartAsync(new Uri(Constants.AudioUrl + "/" + foundItem.Id + "/" + foundChunk + "_" + uploadChunks), "POST", multipart);
 		}
+		*/
 
 		private static void Client_UploadDataCompleted(object sender, UploadDataCompletedEventArgs e)
         {
@@ -236,6 +256,7 @@ namespace RodnaPamet.Services
 				{
 					NotificationManager.SendNotification("Видео файл", "Вашият запис е успешно качен!");
 
+					lastItem.Id = resp.RecordId.ToString();
 					lastItem.Uploading = false;
 					lastItem.Uploaded = true;
 					//await

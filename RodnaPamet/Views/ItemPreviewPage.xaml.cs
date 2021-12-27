@@ -57,6 +57,7 @@ namespace RodnaPamet.Views
             }
             if (File.Exists(context.Filename))
                 File.Delete(context.Filename);
+            await UploadHelper.RemoveFile(context.Item);
             await context.DataStore.DeleteItemAsync(context.Id);
             App.Current.MainPage = new RecordingsPage();
         }

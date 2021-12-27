@@ -197,6 +197,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="Label" Class="Larger">
+                <Setter Property="FontSize" Value="Large"></Setter>
+            </Style>
             <Style TargetType="Label" Class="WarningMessageTitle" BasedOn="{StaticResource PageInnerSubTitle}">
                 <Setter Property="TextColor" Value="{StaticResource Secondary}"></Setter>
             </Style>

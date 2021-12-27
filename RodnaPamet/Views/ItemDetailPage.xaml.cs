@@ -2,6 +2,7 @@
 using RodnaPamet.ViewModels;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -86,6 +87,19 @@ namespace RodnaPamet.Views
 
         private void Records_Clicked(object sender, EventArgs e)
         {
+            App.Current.MainPage = new RecordingsPage();
+        }
+
+        private async void Delete_Tapped(object sender, EventArgs e)
+        {
+            if (!await DisplayAlert("Потвърждение", "Сигурни ли сте, че желаете да изтриете този записъ?\r\nТова дѣйствие е необратимо!", "Да", "Не"))
+            {
+                return;
+            }
+            if (File.Exists(context.Filename))
+                File.Delete(context.Filename);
+            await UploadHelper.RemoveFile(context.Item);
+            await context.DataStore.DeleteItemAsync(context.Id);
             App.Current.MainPage = new RecordingsPage();
         }
     }

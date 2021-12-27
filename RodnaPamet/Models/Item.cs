@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace RodnaPamet.Models
 {
-    [Serializable, DataContract]
+    [Serializable, DataContract, KnownTypeAttribute(typeof(Item))]
     public class Item : RestItem
     {
         [DataMember]

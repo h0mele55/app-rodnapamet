@@ -170,17 +170,18 @@
 
 
 
-                <Label StyleClass="Text" Text="И рекоха Българитѣ..." HorizontalTextAlignment="Center"/>
-                <Label StyleClass="Text" Text="Разбери за какво тѣ Бива!" HorizontalTextAlignment="Center"/>
-                <Label StyleClass="Text" Text="Слѣдвай само собствѣния си Дъхъ!" HorizontalTextAlignment="Center"/>
-                <Label StyleClass="Text" Text="Помни, че само вървящиятъ има пѫть!" HorizontalTextAlignment="Center"/>
-                <Label StyleClass="Text" Text="И ще Бѫдешъ!" Margin="0, 0, 0, 10" HorizontalTextAlignment="Center"/>
+                <Label StyleClass="Text, Larger" Text="И рекоха Българитѣ..." Margin="0, 10, 0, 0" HorizontalTextAlignment="Center"/>
+                <Label StyleClass="Text, Larger" Text="Разбери за какво тѣ Бива!" HorizontalTextAlignment="Center"/>
+                <Label StyleClass="Text, Larger" Text="Слѣдвай само собствѣния си Дъхъ!" HorizontalTextAlignment="Center"/>
+                <Label StyleClass="Text, Larger" Text="Помни, че само вървящиятъ има пѫть!" HorizontalTextAlignment="Center"/>
+                <Label StyleClass="Text, Larger" Text="И ще Бѫдешъ!" Margin="0, 0, 0, 10" HorizontalTextAlignment="Center"/>
 
-                <Label StyleClass="Text" Text="Вѣрваме, че любовьта къмъ собствения родъ е разковничето, което ни обединява и въплъщава силата на духа, така нужна за вѣрата въ бѫдещето на България."  Margin="0, 0, 0, 10" HorizontalTextAlignment="Center"/>
+                <Label StyleClass="Text" Text="Вѣрваме, че любовьта къмъ собствения родъ е разковничето, което ни обединява и въплъщава силата на духа, така нужна за вѣрата въ бѫдещето на България." Margin="0, 0, 0, 10" HorizontalTextAlignment="Center"/>
 
+                <Label StyleClass="Text" Text="Съ твоя помощь можемъ да съхранимъ съкровенитѣ спомѣни за своите прѣдци, такива каквито сѫ - скромни, но житейско мѫдри, съ красиви, загрубѣли отъ труда рѫцѣ, и съ голѣмо, туптящо за България сърдце." Margin="0, 0, 0, 10" HorizontalTextAlignment="Center"/>
 
-                <Label StyleClass="Text" Text="Съ твоя помощь можемъ да съхранимъ съкровенитѣ спомѣни за своите прѣдци, такива каквито сѫ - скромни, но житейско мѫдри, съ красиви, загрубѣли отъ труда рѫцѣ, и съ голѣмо, туптящо за България сърдце." HorizontalTextAlignment="Center"/>
-
+                <Label StyleClass="Text, Larger" Text="Това е само началото..." Margin="0, 10, 0, 0" HorizontalTextAlignment="Center"/>
+                
                 <Image
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="FillAndExpand"

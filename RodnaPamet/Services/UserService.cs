@@ -66,7 +66,7 @@ namespace RodnaPamet.Services
             RestService arest = new RestService(Constants.CheckUrl);
             User item = new User();
             item.EMail = mail;
-            bool res = await arest.UpdateItemAsync(item);
+            bool res = await arest.AddItemAsync(item);
             SubscribersList.Clear();
             if (res)
             { 
