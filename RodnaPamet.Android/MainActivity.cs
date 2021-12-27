@@ -17,10 +17,11 @@ using FFImageLoading.Forms.Platform;
 using Plugin.CurrentActivity;
 using System.Threading.Tasks;
 using System.IO;
+using System.Net;
 
 namespace RodnaPamet.Droid
 {
-    [Activity(Label = "Родна паметь", Icon = "@mipmap/icon", Theme = "@style/Theme.Loader", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "РАБОТНА паметь", Icon = "@mipmap/icon", Theme = "@style/Theme.Loader", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static int StatusBarHeight;
@@ -28,6 +29,12 @@ namespace RodnaPamet.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            ServicePointManager.ServerCertificateValidationCallback +=
+            (sender, cert, chain, sslPolicyErrors) => 
+            { 
+                return true; 
+            };
 
             //this.Window.AddFlags(WindowManagerFlags.TranslucentStatus); 
             base.OnCreate(savedInstanceState);

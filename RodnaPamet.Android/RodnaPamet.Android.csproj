@@ -36,9 +36,11 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>false</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
@@ -51,6 +53,19 @@
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\kosta\AppData\Local\Xamarin\Mono for Android\release.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>midalidare</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>keystore.midalidare</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>midalidare</AndroidSigningKeyPass>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <Debugger>Native</Debugger>
+    <MandroidI18n />
+    <AndroidSupportedAbis />
+    <AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -233,7 +248,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Stop.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\network_security_config.xml" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\splash3.jpg">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>

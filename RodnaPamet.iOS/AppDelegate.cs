@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,10 @@ namespace RodnaPamet.iOS
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            ServicePointManager
+                .ServerCertificateValidationCallback +=
+                (sender, cert, chain, sslPolicyErrors) => true;
+
             Forms.SetFlags("CarouselView_Experimental");
             Forms.SetFlags("Shell_Experimental");
             Forms.SetFlags("SwipeView_Experimental");

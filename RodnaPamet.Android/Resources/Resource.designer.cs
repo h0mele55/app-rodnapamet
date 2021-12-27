@@ -10470,7 +10470,10 @@ namespace RodnaPamet.Droid
 		{
 			
 			// aapt resource value: 0x7F0F0000
-			public const int xamarin_essentials_fileprovider_file_paths = 2131689472;
+			public const int network_security_config = 2131689472;
+			
+			// aapt resource value: 0x7F0F0001
+			public const int xamarin_essentials_fileprovider_file_paths = 2131689473;
 			
 			static Xml()
 			{
