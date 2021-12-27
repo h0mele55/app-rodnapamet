@@ -20,7 +20,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Родна Паметь</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.rodnapamet.beta</string>
+	<string>com.rodnapamet.app</string>
 	<key>CFBundleVersion</key>
 	<string>3</string>
 	<key>UILaunchStoryboardName</key>
