@@ -254,7 +254,7 @@ namespace RodnaPamet.Services
 
 				if (resp.Success == 1)
 				{
-					NotificationManager.SendNotification("Видео файл", "Вашият запис е успешно качен!");
+					NotificationManager.SendNotification("Увѣдомление", "Вашиятъ записъ е успѣшно каченъ!");
 
 					lastItem.Id = resp.RecordId.ToString();
 					lastItem.Uploading = false;
@@ -264,7 +264,7 @@ namespace RodnaPamet.Services
 				}
 				else
 				{
-					NotificationManager.SendNotification("Видео файл", "Качването е неуспешно. Приложението ще опита отново...");
+					NotificationManager.SendNotification("Увѣдомление", "Качването е неуспѣшно. Приложението ще опита отново...");
 
 					lastItem.Uploading = false;
 					lastItem.Uploaded = true;
@@ -274,7 +274,7 @@ namespace RodnaPamet.Services
 			}
 			catch (Exception ex)
 			{
-				NotificationManager.SendNotification("Видео файл", "Качването е неуспешно. Приложението ще опита отново...");
+				NotificationManager.SendNotification("Увѣдомление", "Качването е неуспѣшно. Приложението ще опита отново...");
 
 				lastItem.Uploading = false;
 				lastItem.Uploaded = false;
@@ -386,7 +386,7 @@ namespace RodnaPamet.Services
 
 				if (resp.Success == 1)
 				{
-					NotificationManager.SendNotification("Видео файл", "Вашият запис е успешно качен!");
+					NotificationManager.SendNotification("Увѣдомление", "Вашиятъ записъ е успѣшно каченъ!");
 
 					lastItem.Uploading = false;
 					lastItem.Uploaded = true;
@@ -395,7 +395,7 @@ namespace RodnaPamet.Services
 				}
 				else
 				{
-					NotificationManager.SendNotification("Видео файл", "Качването е неуспешно. Приложението ще опита отново...");
+					NotificationManager.SendNotification("Увѣдомление", "Качването е неуспѣшно. Приложението ще опита отново...");
 
 					lastItem.Uploading = false;
 					lastItem.Uploaded = true;
@@ -405,7 +405,7 @@ namespace RodnaPamet.Services
 			}
 			catch (Exception ex)
 			{
-				NotificationManager.SendNotification("Видео файл", "Качването е неуспешно. Приложението ще опита отново...");
+				NotificationManager.SendNotification("Увѣдомление", "Качването е неуспѣшно. Приложението ще опита отново...");
 
 				lastItem.Uploading = false;
 				lastItem.Uploaded = false;

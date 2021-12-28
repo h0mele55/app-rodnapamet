@@ -129,21 +129,21 @@
                                                 <Label
                                                     StyleClass="ListStatus"
                                             IsVisible="{Binding Uploaded}"
-                                            Text="Записът е успешно изпратен на Родна памет!"></Label>
+                                            Text="Записътъ е успѣшно изпратенъ на Родна паметь!"></Label>
                                                 <Label
                                                     StyleClass="ListStatus"
                                             IsVisible="{Binding Uploaded, Converter={StaticResource BinaryInvertConverter}}"
-                                            Text="Записът не е изпратен на Родна памет! Когато имате наличен достъп до internet, приложението ще изпрати само записа."></Label>
+                                            Text="Записътъ не е изпратенъ на Родна паметь! Когато имате наличенъ достѫпъ до internet, приложението ще изпрати самó записа."></Label>
                                             </StackLayout>
                                             <Label
                                                     StyleClass="ListStatus"
                                         IsVisible="{Binding InfoComplete, Converter={StaticResource BinaryInvertConverter}}"
-                                        Text="Не сте попълнили подробности за записа! Натиснете тук..."></Label>
+                                        Text="Не сте попълнили подробности за записа! Натиснете тукъ..."></Label>
                                         </StackLayout>
                                         <Label
                                                     StyleClass="ListStatus"
                                 IsVisible="{Binding Uploading}"
-                                Text="Записът се изпраща на Родна памет!" 
+                                Text="Записътъ се изпраща на Родна паметь!" 
                                 ></Label>
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer 
@@ -170,7 +170,7 @@
                         <Label
                             Margin="10, 0, 10, 0"
                             StyleClass="WarningMessageTitle"
-                            Text="Нямате направени записи"></Label>
+                            Text="Нѣмате направени записи"></Label>
                     </StackLayout>
                 </Grid>
 

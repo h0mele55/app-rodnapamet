@@ -69,10 +69,15 @@ namespace RodnaPamet.Services
             bool res = await arest.AddItemAsync(item);
             SubscribersList.Clear();
             if (res)
-            { 
-                SubscribersList.Add(new List<User>((User[])JsonConvert.DeserializeObject<User[]>(arest.LastItems.ToString()))[0]);
+            {
+                var a = new List<User>((User[])JsonConvert.DeserializeObject<User[]>(arest.LastItems.ToString()));
+                if (a.Count > 0)
+                { 
+                    SubscribersList.Add(a[0]);
+                    return true;
+                }
             }
-            return res;
+            return false;
         }
 
         public bool Persist()

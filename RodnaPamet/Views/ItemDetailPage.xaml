@@ -51,7 +51,7 @@
                     <Entry Text="{Binding Description}" FontSize="Medium" Focused="TapGestureRecognizer_Tapped">
                     </Entry>
                     <Label 
-                        Text="Вид:" 
+                        Text="Видъ:" 
                         IsVisible="{Binding IsStory}"
                         StyleClass="EntryLabel"
                         Margin="10, 0, 10, 0" />
@@ -61,11 +61,11 @@
                         FontSize="Medium">
                         <Picker.Items>
                             <x:String>История на рода</x:String>
-                            <x:String>Предание</x:String>
-                            <x:String>Местен празник или обичай</x:String>
-                            <x:String>Пътеводител на красиви местности</x:String>
-                            <x:String>Любим спомен от детството</x:String>
-                            <x:String>Любим спомен от живота</x:String>
+                            <x:String>Прѣдание</x:String>
+                            <x:String>Мѣстенъ праздникъ или обичай</x:String>
+                            <x:String>Пѫтеводитель на красиви мѣстности</x:String>
+                            <x:String>Любимъ спомѣнъ отъ детството</x:String>
+                            <x:String>Любимъ спомѣнъ отъ живота</x:String>
                         </Picker.Items>
                     </Picker>
                     <Label 

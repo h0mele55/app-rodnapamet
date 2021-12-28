@@ -147,16 +147,16 @@
                     <Label
                         IsVisible="{Binding Uploaded}"
                         StyleClass="ListStatus"
-                        Text="Записът е успешно изпратен на Родна памет!"></Label>
+                        Text="Записътъ е успѣшно изпратенъ на Родна паметь!"></Label>
                     <Label
                         IsVisible="{Binding Uploaded, Converter={StaticResource BinaryInvertConverter}}"
                         StyleClass="ListStatus"
-                        Text="Записът не е изпратен на Родна памет! Когато имате наличен достъп до internet, приложението ще изпрати само записа."></Label>
+                        Text="Записътъ не е изпратенъ на Родна паметь! Когато имате наличенъ достѫпъ до internet, приложението ще изпрати самó записа."></Label>
                 </StackLayout>
                 <Label
                     IsVisible="{Binding Uploading}"
                     StyleClass="ListStatus"
-                    Text="Записът се изпраща на Родна памет!"></Label>
+                    Text="Записътъ се изпраща на Родна паметь!"></Label>
                 <StackLayout>
                 <Grid
                     Margin="0, 20, 0, 10"
