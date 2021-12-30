@@ -25,6 +25,11 @@
                     Aspect="AspectFill"
                     Source="background.jpg"></Image>
             </Grid>
+        <AbsoluteLayout
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand">
             <StackLayout 
                 x:Name="ContentStack"
                 Margin="0" 
@@ -76,8 +81,15 @@
                     </Label>
                 </Grid>
             </StackLayout>
+                <Label
+                    Margin="10"
+                    HorizontalTextAlignment="End"
+                    VerticalTextAlignment="End"
+                    VerticalOptions="EndAndExpand"
+                    Text="{Binding VersionCode}"></Label>
         </StackLayout>
-    <!--    
+        </AbsoluteLayout>
+        <!--    
     </ScrollView>
         -->
         <StackLayout
