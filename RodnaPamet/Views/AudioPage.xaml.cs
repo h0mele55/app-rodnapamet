@@ -50,9 +50,22 @@ namespace RodnaPamet.Views
 			viewModel.ItemHeightChanged = QuestionCarouselItemSizeChanged;
 
 			AudioPreview.AudioFinished += OnVideoFinished;
+
+            MessagingCenter.Subscribe<App>(this, App.AppLifecycle.Sleep.ToString(), (o) =>
+            {
+				if (viewModel.IsRecording)
+					viewModel.StopCommand.Execute(null);
+			});
 		}
 
-		public bool QuestionCarouselItemSizeChanged(double h1, double h2)
+        protected override void OnDisappearing()
+        {
+			if (viewModel.IsRecording)
+				viewModel.StopCommand.Execute(null);
+            base.OnDisappearing();
+        }
+
+        public bool QuestionCarouselItemSizeChanged(double h1, double h2)
 		{
 			QuestionsCarousel.HeightRequest = h1 + h2 + 10;
 			return true;
