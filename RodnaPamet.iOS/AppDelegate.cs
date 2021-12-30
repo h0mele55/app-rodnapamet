@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 using FFImageLoading.Forms.Platform;
 using Foundation;
-using Octane.Xamarin.Forms.VideoPlayer.iOS;
 using RodnaPamet.Models;
 using RodnaPamet.Services;
 using UIKit;
 using UserNotifications;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RodnaPamet.iOS
@@ -35,7 +30,7 @@ namespace RodnaPamet.iOS
         //
 
         private List<Item> UploadFiles = new List<Item>();
-        private List<SerializableKeyValuePair<int, Item>> UploadTasks = new List<SerializableKeyValuePair<int, Item>>();
+        private List<KeyValuePair<int, Item>> UploadTasks = new List<KeyValuePair<int, Item>>();
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -115,7 +110,7 @@ namespace RodnaPamet.iOS
                         
                         for(int i = 0; i < UploadTasks.Count; i++)
                         {
-                            SerializableKeyValuePair<int, Item> kvp = UploadTasks[i];
+                            KeyValuePair<int, Item> kvp = UploadTasks[i];
                             if (kvp.Key == (int)sessionTask.TaskIdentifier)
                             {
                                 int pos = UploadTasks.IndexOf(kvp);
@@ -250,7 +245,7 @@ namespace RodnaPamet.iOS
             }
                 if (UploadFiles.Count == 0)
                 {
-                    UploadTasks = new List<SerializableKeyValuePair<int, Item>>();
+                    UploadTasks = new List<KeyValuePair<int, Item>>();
                     return;
                 }
                 Item item = UploadFiles[0];
@@ -315,7 +310,7 @@ namespace RodnaPamet.iOS
                 // Creating upload task
                 var uploadTask = session.CreateUploadTask(request, NSUrl.FromFilename(bodyPath));
                 Console.WriteLine("New TaskID: {0}", uploadTask.TaskIdentifier);
-                    UploadTasks.Add(new SerializableKeyValuePair<int, Item>((int) uploadTask.TaskIdentifier, item));
+                    UploadTasks.Add(new KeyValuePair<int, Item>((int) uploadTask.TaskIdentifier, item));
 
                     // Start task
                     uploadTask.Resume();
