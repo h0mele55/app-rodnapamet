@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Foundation;
 using UserNotifications;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using static RodnaPamet.App;
 
@@ -66,6 +63,7 @@ namespace RodnaPamet.iOS
             isProgress = hasProgress;
 
             UNNotificationTrigger trigger;
+            /*
             if (notifyTime != null)
             {
                 // Create a calendar-based trigger.
@@ -73,9 +71,10 @@ namespace RodnaPamet.iOS
             }
             else
             {
+            */
                 // Create a time-based trigger, interval is in seconds and must be greater than 0.
                 trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(0.25, false);
-            }
+            //}
 
             var request = UNNotificationRequest.FromIdentifier("notification.rodna", content, trigger);
             UNUserNotificationCenter.Current.AddNotificationRequest(request, (err) =>

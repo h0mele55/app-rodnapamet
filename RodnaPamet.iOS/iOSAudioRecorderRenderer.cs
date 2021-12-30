@@ -3,7 +3,6 @@ using RodnaPamet.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using RodnaPamet.iOS;
-using UIKit;
 
 [assembly: ExportRenderer(typeof(AudioPreview), typeof(iOSAudioRecorderRenderer))]
 namespace RodnaPamet.iOS

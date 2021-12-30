@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
 using UIKit;
 using AVFoundation;
 using CoreMedia;
-using System.IO;
 using RodnaPamet.Views;
 
 namespace RodnaPamet.iOS
 {
-	public class iOSVideoRecorder: UIView
+    public class iOSVideoRecorder: UIView
 	{
 		CameraOptions CameraOption;
 		OrientationOptions OrientationOption;

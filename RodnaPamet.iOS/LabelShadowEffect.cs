@@ -5,7 +5,6 @@ using CoreGraphics;
 using RodnaPamet.iOS;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using static Xamarin.Forms.PlatformConfiguration.iOSSpecific.VisualElement;
 
 [assembly: ResolutionGroupName("RodnaPamet")]
 [assembly: ExportEffect(typeof(LabelShadowEffect), "LabelShadowEffect")]

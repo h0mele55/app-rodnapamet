@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using AVFoundation;
 using Foundation;
 using RodnaPamet.Views;

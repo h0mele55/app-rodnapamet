@@ -1,15 +1,9 @@
-﻿using System;
-using CoreGraphics;
-using Foundation;
-using UIKit;
+﻿using Foundation;
 using AVFoundation;
-using CoreVideo;
-using CoreMedia;
-using System.IO;
 
 namespace RodnaPamet.iOS
 {
-	public class iOSVideoRecorderDelegate: AVCaptureFileOutputRecordingDelegate
+    public class iOSVideoRecorderDelegate: AVCaptureFileOutputRecordingDelegate
 	{
 		public iOSVideoRecorderDelegate()
 		{
