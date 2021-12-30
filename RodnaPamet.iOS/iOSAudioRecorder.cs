@@ -122,6 +122,7 @@ namespace RodnaPamet.iOS
                                 stopwatch.Start();
                                 Status = Status.Recording;
                                 XamRecorder.IsRecording = true;
+                                UIApplication.SharedApplication.IdleTimerDisabled = true;
                             }
                             else
                             {
@@ -163,6 +164,7 @@ namespace RodnaPamet.iOS
                     System.Diagnostics.Debug.WriteLine("Audio Recorded: {0} ({1} bytes)", FileName, fileSize);
                     //                    UIVideo.SaveToPhotosAlbum(FileName, (fileName, saveStatus) => {
                     //                        System.Diagnostics.Debug.WriteLine("Audio Copied to Photos: {0}", fileName, fileSize);
+                    UIApplication.SharedApplication.IdleTimerDisabled = false;
 
                     var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     //var library = System.IO.Path.Combine(documents, "..", "Library");

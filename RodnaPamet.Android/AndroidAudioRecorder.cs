@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Plugin.CurrentActivity;
 using RodnaPamet.Views;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,7 @@ namespace RodnaPamet.Droid
                 stopwatch.Start();
                 Status = Status.Recording;
                 XamRecorder.IsRecording = true;
+                CrossCurrentActivity.Current.Activity.Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
             }
             else
             {
@@ -59,6 +61,7 @@ namespace RodnaPamet.Droid
                 }
                 catch (Exception ex) { }
                 stopwatch?.Stop();
+                CrossCurrentActivity.Current.Activity.Window.SetFlags(WindowManagerFlags.AllowLockWhileScreenOn, WindowManagerFlags.AllowLockWhileScreenOn);
 
                 Status = Status.Recorded;
 
