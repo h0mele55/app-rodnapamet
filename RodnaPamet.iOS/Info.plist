@@ -56,5 +56,11 @@
 	<string>LaunchScreen</string>
 	<key>UIRequiresFullScreen</key>
 	<string>Yes</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>Not using</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Not using</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Not using</string>
 </dict>
 </plist>
