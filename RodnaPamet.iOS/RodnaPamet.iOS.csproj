@@ -112,7 +112,6 @@
     <BundleResource Include="Resources\Stop.png" />
     <BundleResource Include="Resources\PauseB.png" />
     <Compile Include="CustomEntryRenderer.cs" />
-    <Compile Include="AppTrackingTransparencyPermission.cs" />
     <Compile Include="iOSSettings.cs" />
   </ItemGroup>
   <ItemGroup>

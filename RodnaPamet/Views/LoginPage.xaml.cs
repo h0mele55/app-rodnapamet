@@ -39,13 +39,15 @@ namespace RodnaPamet.Views
             base.OnAppearing();
             viewModel.LoginSuccess += ViewModel_LoginSuccess;
             viewModel.Error += ViewModel_Error;
-
+            /*
             if (Device.RuntimePlatform == Device.iOS)
             {
                 RequestTrackingPermission();
             }
+            */
         }
 
+        /*
         private async void RequestTrackingPermission()
         {
             var appTrackingTransparencyPermission = DependencyService.Get<IAppTrackingTransparencyPermission>();
@@ -61,6 +63,7 @@ namespace RodnaPamet.Views
                 });
             }
         }
+        */
 
 
         private void ViewModel_Error(object sender, string e)

@@ -43,11 +43,11 @@ namespace RodnaPamet.iOS
             Forms.SetFlags("SwipeView_Experimental");
             Forms.Init();
 
-            DependencyService.Register<IAppTrackingTransparencyPermission, AppTrackingTransparencyPermission>();
+            // DependencyService.Register<IAppTrackingTransparencyPermission, AppTrackingTransparencyPermission>();
 
             CachedImageRenderer.Init();
 
-            try
+            //try
             {
 
                 //FormsVideoPlayer.Init();
@@ -59,9 +59,9 @@ namespace RodnaPamet.iOS
 //                App.HeaderSize -= UIKit.UIApplication.SharedApplication.StatusBarFrame.Height;
                 App.HeaderSizeNoFix -= UIKit.UIApplication.SharedApplication.StatusBarFrame.Height;
             }
-            catch (Exception ex)
-            {
-            }
+            //catch (Exception ex)
+            //{
+            //}
 
             var settings = UIApplication.SharedApplication.CurrentUserNotificationSettings.Types;
             if (settings == UIUserNotificationType.None)

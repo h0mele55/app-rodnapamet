@@ -48,19 +48,17 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>The app allows you to make audio recordings and publish them online</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiresFullScreen</key>
 	<string>Yes</string>
-  <key>NSCalendarsUsageDescription</key>
-  <string>Not using</string>
-  <key>NSLocationAlwaysUsageDescription</key>
-  <string>Not using</string>
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string>Not using</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Not using</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Not using</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Not using</string>
 </dict>
 </plist>

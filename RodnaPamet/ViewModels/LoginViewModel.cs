@@ -207,6 +207,13 @@ namespace RodnaPamet.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
+            if(EMail == null ||
+                EMail.Trim() == "")
+            { 
+                Error?.Invoke(this, "Трябва да въведете e-mail адрес!");
+                return;
+            }
+
             if (!TermsAccepted)
             {
                 Error?.Invoke(this, "Трябва да приемете условията за употреба!");
@@ -277,7 +284,8 @@ namespace RodnaPamet.ViewModels
 
         private async void OnRegisterClicked(object obj)
         {
-            if (Password.Trim() == "" ||
+            if (Password == null ||
+                Password.Trim() == "" ||
                 Password.IndexOf(" ") > -1 ||
                 Password.Length < 6 ||
                 Password.Any(char.IsUpper) == false ||
@@ -287,7 +295,7 @@ namespace RodnaPamet.ViewModels
                 Error?.Invoke(this, "Тайната дума трѣбва да съдържа главни, малки букви, поне една цифра и да е съ дължина по-голѣма отъ 6 знака!");
                 return;
             }
-            if (Password != Password2)
+            if (Password2 == null || Password != Password2)
             {
                 Error?.Invoke(this, "Тайната дума и потвърждението не съвпадатъ!");
                 return;
@@ -367,7 +375,8 @@ namespace RodnaPamet.ViewModels
 
         private async void OnConfirmClicked(object obj)
         {
-            if (VerificationCode.Trim() == "" ||
+            if (VerificationCode == null ||
+                VerificationCode.Trim() == "" ||
                 VerificationCode.IndexOf(" ") > -1 ||
                 VerificationCode.Length != 4)
             {
