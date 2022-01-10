@@ -30,9 +30,9 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Record audio</string>
+	<string>The app is used to record our elders' stories and way of speaking in order to preserve their heritage</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Record audio</string>
+	<string>The app is used to record our elders' stories and way of speaking in order to preserve their heritage</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Alegreya-Bold.ttf</string>
