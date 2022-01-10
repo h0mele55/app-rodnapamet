@@ -21,7 +21,7 @@ using System.Net;
 
 namespace RodnaPamet.Droid
 {
-    [Activity(Label = "РАБОТНА паметь", Icon = "@mipmap/icon", Theme = "@style/Theme.Loader", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Родна паметь", Icon = "@mipmap/icon", Theme = "@style/Theme.Loader", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static int StatusBarHeight;
